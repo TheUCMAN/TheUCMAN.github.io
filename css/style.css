@@ -1,6 +1,6 @@
 /* =====================
-   GLOBAL RESET
-   ===================== */
+   RESET & BASE
+===================== */
 * {
   box-sizing: border-box;
   margin: 0;
@@ -20,13 +20,13 @@ body {
 }
 
 /* =====================
-   NAV BAR
-   ===================== */
+   NAVIGATION
+===================== */
 .nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 16px 24px;
+  padding: 18px 28px;
 }
 
 .nav-left {
@@ -36,15 +36,15 @@ body {
 }
 
 .logo {
-  width: 40px;
-  height: 40px;
-  background: linear-gradient(135deg, #6dd5ed, #2193b0);
+  width: 42px;
+  height: 42px;
   border-radius: 10px;
+  background: linear-gradient(135deg, #6dd5ed, #2193b0);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-weight: bold;
   color: #000;
+  font-weight: 700;
 }
 
 .brand .name {
@@ -57,7 +57,7 @@ body {
 }
 
 .nav-right a {
-  margin-left: 16px;
+  margin-left: 18px;
   text-decoration: none;
   color: #cfd8e3;
   font-size: 0.9rem;
@@ -69,29 +69,26 @@ body {
 }
 
 /* =====================
-   PAGE CONTAINER
-   ===================== */
+   PAGE LAYOUT
+===================== */
 .page {
   max-width: 1100px;
   margin: 0 auto;
-  padding: 32px 20px 80px;
+  padding: 40px 24px 80px;
 }
 
-/* =====================
-   SECTIONS
-   ===================== */
 .section {
-  margin-top: 48px;
+  margin-top: 56px;
 }
 
-.section h1 {
-  font-size: 2.2rem;
-  margin-bottom: 8px;
-}
-
-.section h2 {
-  font-size: 1.6rem;
+h1 {
+  font-size: 2.4rem;
   margin-bottom: 12px;
+}
+
+h2 {
+  font-size: 1.6rem;
+  margin-bottom: 14px;
 }
 
 .muted {
@@ -100,16 +97,16 @@ body {
 
 /* =====================
    PILLS & TABS
-   ===================== */
+===================== */
 .pill-row {
-  margin-top: 16px;
   display: flex;
   gap: 10px;
   flex-wrap: wrap;
+  margin-top: 14px;
 }
 
 .pill {
-  padding: 6px 12px;
+  padding: 6px 14px;
   border-radius: 999px;
   background: rgba(255,255,255,0.08);
   font-size: 0.8rem;
@@ -118,14 +115,15 @@ body {
 .tabs {
   display: flex;
   gap: 12px;
+  margin-top: 16px;
 }
 
 .tab {
   background: rgba(255,255,255,0.08);
   border: none;
+  padding: 8px 16px;
+  border-radius: 12px;
   color: #fff;
-  padding: 8px 14px;
-  border-radius: 10px;
   cursor: pointer;
 }
 
@@ -137,21 +135,21 @@ body {
 
 /* =====================
    MATCH LIST (Kalshi-style)
-   ===================== */
+===================== */
 .match-list {
   display: flex;
   flex-direction: column;
   gap: 14px;
-  margin-top: 16px;
+  margin-top: 18px;
 }
 
 .match-row {
   display: grid;
   grid-template-columns: 1fr auto;
   align-items: center;
-  padding: 16px 18px;
-  background: rgba(255,255,255,0.05);
+  padding: 18px 20px;
   border-radius: 14px;
+  background: rgba(255,255,255,0.05);
 }
 
 .match-row:hover {
@@ -168,27 +166,27 @@ body {
 }
 
 .arbscore {
-  background: linear-gradient(135deg, #f5c542, #d49b1e);
-  color: #000;
+  min-width: 46px;
+  text-align: center;
   font-weight: 700;
   padding: 8px 12px;
   border-radius: 10px;
-  min-width: 44px;
-  text-align: center;
+  background: linear-gradient(135deg, #f5c542, #d49b1e);
+  color: #000;
 }
 
 /* =====================
-   ARBCARD PREVIEW (ONLY ONE)
-   ===================== */
+   ARBCARD PREVIEW
+===================== */
 .arbcard-preview {
   display: flex;
   justify-content: center;
-  margin-top: 24px;
+  margin-top: 26px;
 }
 
 .arbcard-preview img {
-  max-width: 420px;
   width: 100%;
+  max-width: 420px;
   height: auto;
   border-radius: 18px;
   box-shadow: 0 24px 50px rgba(0,0,0,0.45);
@@ -196,7 +194,7 @@ body {
 
 /* =====================
    FOOTER
-   ===================== */
+===================== */
 .footer {
   display: flex;
   justify-content: space-between;
