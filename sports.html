@@ -2,147 +2,151 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Arbstack – Sports</title>
-  <link rel="stylesheet" href="css/style.css" />
+  <title>Arbstack · Sports</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Main stylesheet -->
+  <link rel="stylesheet" href="style.css" />
 </head>
+
 <body>
-  <header class="topbar">
-    <div class="brand">
+
+  <!-- =====================
+       Top Navigation
+       ===================== -->
+  <header class="nav">
+    <div class="nav-left">
       <div class="logo">A</div>
-      <div>
-        <div class="brand-title">Arbstack</div>
-        <div class="brand-subtitle">Sports edges (demo)</div>
+      <div class="brand">
+        <div class="name">Arbstack</div>
+        <div class="tagline">Sports edges (demo)</div>
       </div>
     </div>
 
-    <nav class="nav">
-      <a class="nav-link" href="index.html">Home</a>
-      <a class="nav-link active" href="sports.html">Sports</a>
-      <a class="nav-link disabled" href="#" aria-disabled="true" title="Coming soon">Politics</a>
-      <a class="nav-link disabled" href="#" aria-disabled="true" title="Coming soon">Climate</a>
-      <a class="nav-link" href="premium.html">Premium</a>
-      <a class="nav-link" href="about.html">About</a>
+    <nav class="nav-right">
+      <a href="index.html">Home</a>
+      <a href="sports.html" class="active">Sports</a>
+      <a href="#">Politics</a>
+      <a href="#">Climate</a>
+      <a href="premium.html">Premium</a>
+      <a href="about.html">About</a>
     </nav>
   </header>
 
-  <main class="container">
-    <section class="page-head">
+  <!-- =====================
+       Page Container
+       ===================== -->
+  <main class="page">
+
+    <!-- =====================
+         Header
+         ===================== -->
+    <section class="page-header">
       <h1>Sports</h1>
-      <p class="muted">Pick a sport. Cards are ranked by ArbScore. Premium items are teased but locked.</p>
-      <div class="page-meta">
+      <p class="subtitle">
+        Pick a sport. Cards are ranked by ArbScore.
+        Premium items are teased but locked.
+      </p>
+
+      <div class="pill-row">
         <span class="pill">AFCON + EPL</span>
         <span class="pill">Cricket tournaments</span>
         <span class="pill">NFL weekly slate</span>
-        <span class="pill muted">Updated: <span id="updatedAt">—</span></span>
+        <span class="pill muted">Updated: —</span>
       </div>
     </section>
 
-    <section class="tabs" role="tablist" aria-label="Sports tabs">
-      <button class="tab active" data-tab="soccer" role="tab" aria-selected="true">Soccer</button>
-      <button class="tab" data-tab="cricket" role="tab" aria-selected="false">Cricket</button>
-      <button class="tab" data-tab="nfl" role="tab" aria-selected="false">NFL</button>
+    <!-- =====================
+         Sport Tabs
+         ===================== -->
+    <section class="tabs">
+      <button class="tab active">Soccer</button>
+      <button class="tab">Cricket</button>
+      <button class="tab">NFL</button>
     </section>
 
- <section class="demo-visuals">
-  <h3>Sample ArbCards (Concept Preview)</h3>
+    <!-- =====================
+         Soccer Section
+         ===================== -->
+    <section class="card-section">
+      <div class="section-header">
+        <h2>Soccer</h2>
+        <span class="section-meta">Tournaments: EPL, AFCON</span>
+      </div>
 
-  <p class="muted">
-    These are visual examples of how Arbstack represents ranked edges.
-    They are not live bets and do not reflect real-time odds.
-  </p>
-
-  <div class="image-grid">
-    <img
-      src="assets/sample-arbcard.png"
-      alt="Sample ArbCard"
-    />
-  </div>
-</section>
-
-<section class="demo-visuals">
-  <h3>Premium Preview: ArbGraph</h3>
-
-  <p class="muted">
-    ArbGraph shows how an edge evolves across probability, structure,
-    crowd bias, liquidity, and timing. This is a static preview.
-  </p>
-
-  <img
-    src="assets/sample-arbgraph.png"
-    alt="Sample ArbGraph"
-    class="demo-image"
-  />
-
-  <p class="muted lock-note">
-    🔒 Full ArbGraph access available to Premium users
-  </p>
-</section>
-
-
-<section class="premium-preview">
-  <h3>Premium Preview</h3>
-  <p>ArbGraph shows how the edge evolves as markets move.</p>
-
-  <img
-    src="assets/sample-arbgraph.png"
-    alt="Sample ArbGraph"
-    class="demo-graph"
-  />
-
-  <p class="locked-note">🔒 Available to Premium users</p>
-</section>
-
-    <section id="tab-cricket" class="tab-panel" role="tabpanel">
-      <div class="panel">
-        <div class="panel-head">
-          <h2>Cricket</h2>
-          <div class="muted small">Tournaments: ICC T20 WC, IPL</div>
-        </div>
-        <div class="panel-body" id="cricket-root">
-          <div class="skeleton">Loading cricket cards…</div>
-        </div>
+      <!-- This is where live cards would render later -->
+      <div class="empty-state">
+        Ranked matches will appear here when data is live.
       </div>
     </section>
 
-    <section id="tab-nfl" class="tab-panel" role="tabpanel">
-      <div class="panel">
-        <div class="panel-head">
-          <h2>NFL</h2>
-          <div class="muted small">Weekly slate (demo)</div>
-        </div>
-        <div class="panel-body" id="nfl-root">
-          <div class="skeleton">Loading NFL cards…</div>
-        </div>
-      </div>
+    <!-- =====================
+         Demo ArbCards
+         ===================== -->
+    <section class="demo-visuals">
+      <h3>Sample ArbCard (Concept Preview)</h3>
+
+      <p class="muted">
+        This is a visual example of how Arbstack represents an edge.
+        It is not a live bet and does not reflect real-time odds.
+      </p>
+
+      <img
+        src="assets/sample-arbcard.png"
+        alt="Sample ArbCard"
+        class="demo-image"
+      />
     </section>
 
-    <section class="panel">
-      <div class="panel-head">
-        <h2>How updates work</h2>
-        <div class="muted small">Edit JSON → commit → site updates</div>
-      </div>
-      <div class="panel-body">
-        <ol class="steps">
-          <li>Edit <code>data/sports/*.json</code></li>
-          <li>Commit to branch</li>
-          <li>Merge to <code>main</code> when ready</li>
-        </ol>
-        <a class="button" href="premium.html">Premium preview →</a>
-      </div>
+    <!-- =====================
+         Premium Preview
+         ===================== -->
+    <section class="demo-visuals">
+      <h3>Premium Preview · ArbGraph</h3>
+
+      <p class="muted">
+        ArbGraph breaks an edge into structure, probability,
+        crowd bias, liquidity, and timing.
+      </p>
+
+      <img
+        src="assets/sample-arbgraph.png"
+        alt="Sample ArbGraph"
+        class="demo-image"
+      />
+
+      <p class="lock-note">
+        🔒 Full ArbGraph access available to Premium users
+      </p>
     </section>
+
+    <!-- =====================
+         How Updates Work
+         ===================== -->
+    <section class="info-box">
+      <div class="info-header">
+        <h3>How updates work</h3>
+        <span class="info-meta">Edit JSON → commit → site updates</span>
+      </div>
+
+      <ol>
+        <li>Edit <code>data/sports/*.json</code></li>
+        <li>Commit to branch</li>
+        <li>Merge to <code>main</code> when ready</li>
+      </ol>
+
+      <a class="button" href="premium.html">Premium preview →</a>
+    </section>
+
   </main>
 
+  <!-- =====================
+       Footer
+       ===================== -->
   <footer class="footer">
-    <div>Arbstack · Sports demo</div>
-    <div class="muted small">No logins · No execution</div>
+    <span>Arbstack · Sports demo</span>
+    <span class="muted">No logins · No execution</span>
   </footer>
 
-  <script src="js/app.js"></script>
-  <script>
-    window.ArbApp?.initTabs();
-    window.ArbApp?.setUpdatedNow("updatedAt");
-    window.ArbApp?.loadSports();
-  </script>
 </body>
 </html>
