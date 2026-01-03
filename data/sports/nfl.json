@@ -1,0 +1,21 @@
+{
+  "week_slate": {
+    "status": "upcoming",
+    "matches": [
+      {
+        "rank": 1,
+        "match": "Chiefs vs Bills",
+        "arb_score": 77,
+        "confidence": "High",
+        "best_edge": "Chiefs ML @ 0.54"
+      },
+      {
+        "rank": 2,
+        "match": "49ers vs Cowboys",
+        "arb_score": 68,
+        "confidence": "Medium",
+        "best_edge": "Over 47.5 Points"
+      }
+    ]
+  }
+}

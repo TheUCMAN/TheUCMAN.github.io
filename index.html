@@ -2,33 +2,117 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Arbstack – Ranked Football Edges</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Arbstack – Where is my edge?</title>
+  <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
+  <header class="topbar">
+    <div class="brand">
+      <div class="logo">A</div>
+      <div>
+        <div class="brand-title">Arbstack</div>
+        <div class="brand-subtitle">Ranked edges across markets</div>
+      </div>
+    </div>
 
-  <header>
-    <h1>Arbstack</h1>
-    <p>Static demo of ranked football market edges</p>
-    <p class="updated">Last updated: <span id="lastUpdated"></span></p>
+    <nav class="nav">
+      <a class="nav-link active" href="index.html">Home</a>
+      <a class="nav-link" href="sports.html">Sports</a>
+      <a class="nav-link disabled" href="#" aria-disabled="true" title="Coming soon">Politics</a>
+      <a class="nav-link disabled" href="#" aria-disabled="true" title="Coming soon">Climate</a>
+      <a class="nav-link" href="premium.html">Premium</a>
+      <a class="nav-link" href="about.html">About</a>
+    </nav>
   </header>
 
-  <main>
-    <section>
-      <h2>AFCON – Africa Cup of Nations</h2>
-      <div id="afcon-cards" class="card-grid"></div>
+  <main class="container">
+    <section class="hero">
+      <h1>Where is my edge today?</h1>
+      <p class="muted">
+        This is a static demo. No logins. No betting. Just ranked “ArbCards” that preview what the full platform will become.
+      </p>
+      <div class="hero-meta">
+        <span class="pill">Read-only</span>
+        <span class="pill">Static JSON updates</span>
+        <span class="pill">Investor-friendly demo</span>
+      </div>
     </section>
 
-    <section>
-      <h2>EPL – English Premier League</h2>
-      <div id="epl-cards" class="card-grid"></div>
+    <section class="tiles">
+      <a class="tile tile-live" href="sports.html">
+        <div class="tile-title">Sports</div>
+        <div class="tile-desc">Soccer · Cricket · NFL</div>
+        <div class="tile-foot">
+          <span class="badge live">LIVE</span>
+          <span class="muted">View ranked matches →</span>
+        </div>
+      </a>
+
+      <div class="tile tile-soon" aria-disabled="true">
+        <div class="tile-title">Politics</div>
+        <div class="tile-desc">Election contracts · policy outcomes</div>
+        <div class="tile-foot">
+          <span class="badge soon">COMING SOON</span>
+          <span class="muted">Preview soon</span>
+        </div>
+      </div>
+
+      <div class="tile tile-soon" aria-disabled="true">
+        <div class="tile-title">Climate</div>
+        <div class="tile-desc">Weather risk · commodity signals</div>
+        <div class="tile-foot">
+          <span class="badge soon">COMING SOON</span>
+          <span class="muted">Preview soon</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="panel-head">
+        <h2>What you’re seeing</h2>
+        <div class="muted small">Last updated: <span id="lastUpdated">—</span></div>
+      </div>
+
+      <div class="panel-body">
+        <div class="grid-2">
+          <div class="info-card">
+            <h3>Free view</h3>
+            <ul>
+              <li>Ranked ArbCards</li>
+              <li>ArbScore + confidence</li>
+              <li>Best edge summary</li>
+              <li>Tournament sections</li>
+            </ul>
+          </div>
+
+          <div class="info-card">
+            <h3>Premium preview</h3>
+            <ul>
+              <li>🔒 ArbGraph (buy/sell zones)</li>
+              <li>🔒 ArbStats (drivers + liquidity risk)</li>
+              <li>🔒 Historical edge & drift</li>
+              <li>🔒 Alerts & watchlists</li>
+            </ul>
+            <a class="button" href="premium.html">See Premium →</a>
+          </div>
+        </div>
+
+        <div class="note">
+          <strong>Disclaimer:</strong> Educational demo only. No execution, no advice, no guarantees.
+        </div>
+      </div>
     </section>
   </main>
 
-  <footer>
-    <p>Educational demo · No betting · No financial advice</p>
+  <footer class="footer">
+    <div>Arbstack · Static demo</div>
+    <div class="muted small">No logins · No tracking by default</div>
   </footer>
 
-  <script src="script.js"></script>
+  <script src="js/app.js"></script>
+  <script>
+    window.ArbApp?.setUpdatedNow("lastUpdated");
+  </script>
 </body>
 </html>

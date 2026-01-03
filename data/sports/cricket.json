@@ -1,0 +1,40 @@
+{
+  "icc_t20_wc": {
+    "status": "upcoming",
+    "matches": [
+      {
+        "rank": 1,
+        "match": "India vs Pakistan",
+        "arb_score": 81,
+        "confidence": "High",
+        "best_edge": "India Win @ 0.58"
+      },
+      {
+        "rank": 2,
+        "match": "England vs Australia",
+        "arb_score": 72,
+        "confidence": "Medium",
+        "best_edge": "Total Runs Over 320.5"
+      }
+    ]
+  },
+  "ipl": {
+    "status": "upcoming",
+    "matches": [
+      {
+        "rank": 1,
+        "match": "MI vs CSK",
+        "arb_score": 76,
+        "confidence": "High",
+        "best_edge": "MI Win @ 0.56"
+      },
+      {
+        "rank": 2,
+        "match": "RCB vs KKR",
+        "arb_score": 67,
+        "confidence": "Medium",
+        "best_edge": "Match to have Super Over – Yes"
+      }
+    ]
+  }
+}
