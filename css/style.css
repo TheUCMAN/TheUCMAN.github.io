@@ -407,11 +407,14 @@ code{ background: rgba(255,255,255,.06); padding:.1rem .35rem; border-radius:6px
 }
 
 .demo-image {
-  max-width: 520px;
-  width: 100%;
-  margin-top: 16px;
+  max-width: 420px;      /* caps size on desktop */
+  width: 100%;           /* responsive on mobile */
+  height: auto;          /* preserves aspect ratio */
+  display: block;
+  margin: 16px auto;
   border-radius: 14px;
-  opacity: 0.9;
+}
+
 }
 
 /* Image polish */
