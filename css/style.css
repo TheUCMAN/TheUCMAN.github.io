@@ -227,3 +227,63 @@ h2 {
   text-align: center;
   width: 120px;
 }
+
+.arbcard {
+  display: block;
+  background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(0,0,0,0.2));
+  border-radius: 14px;
+  padding: 18px 20px;
+  margin-bottom: 16px;
+  color: inherit;
+  text-decoration: none;
+  transition: transform 0.15s ease, background 0.15s ease;
+}
+
+.arbcard:hover {
+  transform: translateY(-2px);
+  background: rgba(255,255,255,0.06);
+}
+
+.arbcard-main {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.arbcard-teams {
+  font-size: 18px;
+}
+
+.arbcard-meta {
+  font-size: 13px;
+  opacity: 0.7;
+  margin-top: 4px;
+}
+
+.arbcard-score {
+  background: #b08a1c;
+  color: #000;
+  border-radius: 12px;
+  padding: 10px 14px;
+  text-align: center;
+  min-width: 64px;
+}
+
+.arbcard-score .score {
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.arbcard-score .label {
+  font-size: 11px;
+}
+
+.arbcard-details {
+  margin-top: 12px;
+  font-size: 14px;
+  opacity: 0.85;
+}
+
+.arbcard-details ul {
+  padding-left: 18px;
+}
