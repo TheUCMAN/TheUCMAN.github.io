@@ -2,114 +2,89 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Arbstack — Premium</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Premium · Arbstack</title>
   <link rel="stylesheet" href="css/style.css" />
 </head>
-
 <body>
-  <!-- NAV -->
-  <header class="topbar">
-    <div class="brand">
-      <div class="logo">A</div>
-      <div>
-        <div class="brand-name">Arbstack</div>
-        <div class="brand-sub">Premium preview</div>
-      </div>
-    </div>
-    <nav class="nav">
-      <a href="index.html">Home</a>
-      <a href="sports.html">Sports</a>
-      <a href="#">Politics</a>
-      <a href="#">Climate</a>
-      <a class="active" href="premium.html">Premium</a>
-      <a href="about.html">About</a>
-    </nav>
-  </header>
 
-  <!-- CONTENT -->
-  <main class="container">
+<header class="header">
+  <div class="logo">
+    <span class="logo-badge">A</span>
+    <div>
+      <div class="logo-title">Arbstack</div>
+      <div class="logo-sub">Ranked edges across markets</div>
+    </div>
+  </div>
+
+  <nav class="nav">
+    <a href="index.html">Home</a>
+    <a href="sports.html">Sports</a>
+    <a href="#">Politics</a>
+    <a href="#">Climate</a>
+    <a class="active" href="premium.html">Premium</a>
+    <a href="about.html">About</a>
+  </nav>
+</header>
+
+<main class="page">
+  <section class="section">
     <h1>Premium (Preview)</h1>
-    <p class="muted">
+    <p class="lead">
       What premium users will unlock once Arbstack becomes live.
     </p>
 
-    <!-- FREE VS PREMIUM TABLE -->
-    <section class="card">
-      <h2>Free vs Premium</h2>
+    <table class="feature-table">
+      <thead>
+        <tr>
+          <th>Feature</th>
+          <th>Free</th>
+          <th>Premium</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Ranked ArbCards</td>
+          <td>✓</td>
+          <td>✓</td>
+        </tr>
+        <tr>
+          <td>ArbScore + confidence</td>
+          <td>✓</td>
+          <td>✓</td>
+        </tr>
+        <tr>
+          <td>Edge summaries</td>
+          <td>✓</td>
+          <td>✓</td>
+        </tr>
+        <tr>
+          <td>ArbGraph (buy / hold / sell)</td>
+          <td>🔒</td>
+          <td>✓</td>
+        </tr>
+        <tr>
+          <td>ArbStats (liquidity, bias)</td>
+          <td>🔒</td>
+          <td>✓</td>
+        </tr>
+        <tr>
+          <td>Alerts & watchlists</td>
+          <td>🔒</td>
+          <td>✓</td>
+        </tr>
+      </tbody>
+    </table>
 
-      <table class="compare-table">
-        <thead>
-          <tr>
-            <th>Feature</th>
-            <th>Free</th>
-            <th>Premium</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Ranked ArbCards</td>
-            <td>✓</td>
-            <td>✓</td>
-          </tr>
-          <tr>
-            <td>ArbScore + confidence</td>
-            <td>✓</td>
-            <td>✓</td>
-          </tr>
-          <tr>
-            <td>Edge summaries</td>
-            <td>✓</td>
-            <td>✓</td>
-          </tr>
-          <tr>
-            <td>ArbGraph (buy / hold / sell)</td>
-            <td>🔒</td>
-            <td>✓</td>
-          </tr>
-          <tr>
-            <td>ArbStats (liquidity, bias)</td>
-            <td>🔒</td>
-            <td>✓</td>
-          </tr>
-          <tr>
-            <td>Alerts & watchlists</td>
-            <td>🔒</td>
-            <td>✓</td>
-          </tr>
-        </tbody>
-      </table>
-    </section>
-
-    <!-- ARBGRAPH -->
-    <section class="card">
-      <h2>ArbGraph</h2>
-      <p>
-        Visualizes how edge evolves as markets move — highlighting buy zones,
-        hold regions, and exit points.
-      </p>
-      <p class="muted">Premium concept preview</p>
-    </section>
-
-    <!-- ARBSTATS -->
-    <section class="card">
-      <h2>ArbStats</h2>
-      <ul>
-        <li>Liquidity & depth risk</li>
-        <li>Fan & narrative bias</li>
-        <li>Volatility & news sensitivity</li>
-        <li>Structural consistency checks</li>
-      </ul>
-    </section>
-
-    <p class="disclaimer">
-      Educational demo only. No execution, no advice, no guarantees.
+    <p class="muted">
+      Premium is a future concept. This page is informational only.
     </p>
-  </main>
+  </section>
+</main>
 
-  <footer class="footer">
-    <span>Arbstack · Static demo</span>
-    <span>No logins · No tracking by default</span>
-  </footer>
+<footer class="footer">
+  <span>Arbstack · Static demo</span>
+  <span>No logins · No tracking</span>
+</footer>
+
 </body>
 </html>
