@@ -3,44 +3,70 @@
 <head>
   <meta charset="UTF-8" />
   <title>Arbstack · Sports</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Main stylesheet -->
   <link rel="stylesheet" href="css/style.css" />
 </head>
+
 <body>
 
-  <!-- NAV (same as index.html) -->
+  <!-- =====================
+       TOP NAVIGATION
+       ===================== -->
   <header class="nav">
     <div class="nav-left">
       <div class="logo">A</div>
-      <div>
-        <strong>Arbstack</strong><br />
-        <span class="subtitle">Sports edges (demo)</span>
+      <div class="brand">
+        <div class="name">Arbstack</div>
+        <div class="tagline">Sports edges (demo)</div>
       </div>
     </div>
+
     <nav class="nav-right">
       <a href="index.html">Home</a>
-      <a class="active" href="sports.html">Sports</a>
-      <a href="politics.html">Politics</a>
-      <a href="climate.html">Climate</a>
+      <a href="sports.html" class="active">Sports</a>
+      <a href="#">Politics</a>
+      <a href="#">Climate</a>
       <a href="premium.html">Premium</a>
       <a href="about.html">About</a>
     </nav>
   </header>
 
+  <!-- =====================
+       MAIN PAGE CONTAINER
+       ===================== -->
   <main class="page">
 
-    <!-- HEADER -->
+    <!-- PAGE HEADER -->
     <section class="section">
       <h1>Sports</h1>
-      <p>
+      <p class="muted">
         Pick a sport. Cards are ranked by <strong>ArbScore</strong>.
         Premium items are teased but locked.
       </p>
+
+      <div class="pill-row">
+        <span class="pill">AFCON + EPL</span>
+        <span class="pill">Cricket tournaments</span>
+        <span class="pill">NFL weekly slate</span>
+        <span class="pill muted">Updated: —</span>
+      </div>
     </section>
 
-    <!-- SOCCER -->
+    <!-- SPORT TABS -->
+    <section class="section">
+      <div class="tabs">
+        <button class="tab active">Soccer</button>
+        <button class="tab">Cricket</button>
+        <button class="tab">NFL</button>
+      </div>
+    </section>
+
+    <!-- SOCCER INFO -->
     <section class="section">
       <h2>Soccer</h2>
-      <p>Tournaments: EPL, AFCON</p>
+      <p class="muted">Tournaments: EPL, AFCON</p>
     </section>
 
     <!-- EPL MATCHDAY -->
@@ -79,7 +105,7 @@
     <!-- SAMPLE ARBCARD -->
     <section class="section">
       <h2>Sample ArbCard (Concept Preview)</h2>
-      <p>
+      <p class="muted">
         This is a visual example of how Arbstack represents an edge.
         It is not a live bet and does not reflect real-time odds.
       </p>
@@ -91,9 +117,10 @@
 
   </main>
 
+  <!-- FOOTER -->
   <footer class="footer">
-    Arbstack · Sports demo<br />
-    No logins · No execution
+    <span>Arbstack · Sports demo</span>
+    <span class="muted">No logins · No execution</span>
   </footer>
 
 </body>
