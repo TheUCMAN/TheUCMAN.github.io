@@ -2,118 +2,61 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Arbstack – About</title>
+  <title>About · Arbstack</title>
   <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
 
-<header class="topbar">
-  <div class="brand">
-    <div class="logo">A</div>
+<header class="header">
+  <div class="logo">
+    <span class="logo-badge">A</span>
     <div>
-      <div class="brand-title">Arbstack</div>
-      <div class="brand-subtitle">About this demo</div>
+      <div class="logo-title">Arbstack</div>
+      <div class="logo-sub">Ranked edges across markets</div>
     </div>
   </div>
 
   <nav class="nav">
-    <a class="nav-link" href="index.html">Home</a>
-    <a class="nav-link" href="sports.html">Sports</a>
-    <a class="nav-link disabled">Politics</a>
-    <a class="nav-link disabled">Climate</a>
-    <a class="nav-link" href="premium.html">Premium</a>
-    <a class="nav-link active" href="about.html">About</a>
+    <a href="index.html">Home</a>
+    <a href="sports.html">Sports</a>
+    <a href="#">Politics</a>
+    <a href="#">Climate</a>
+    <a href="premium.html">Premium</a>
+    <a class="active" href="about.html">About</a>
   </nav>
 </header>
 
-<main class="container">
-
-  <section class="page-head">
+<main class="page">
+  <section class="section">
     <h1>About Arbstack</h1>
-    <p class="muted">
+    <p class="lead">
       What this project is, what it is not, and why it exists.
     </p>
+
+    <h2>What is Arbstack?</h2>
+    <p><strong>Edges exist when markets misprice reality.</strong></p>
+    <ul>
+      <li>Rank outcomes by expected edge, not hype</li>
+      <li>Surface uncertainty instead of hiding it</li>
+      <li>Separate signal from fan bias</li>
+    </ul>
+
+    <h2>Philosophy</h2>
+    <p>
+      Inspired by probability theory, Kelly sizing, and market microstructure,
+      Arbstack treats every decision as a trade-off between risk, reward, and survival.
+    </p>
+
+    <h2>Status</h2>
+    <p class="muted">
+      Static demo. No execution. No advice. No guarantees.
+    </p>
   </section>
-
-  <section class="panel">
-    <div class="panel-head">
-      <h2>What is Arbstack?</h2>
-    </div>
-    <div class="panel-body">
-      <p><strong>Edges exist when markets misprice reality.</strong></p>
-
-      <p>
-        Most betting and prediction platforms encourage impulse decisions.
-        Arbstack does the opposite.
-      </p>
-
-      <ul>
-        <li>Rank outcomes by expected edge, not hype</li>
-        <li>Surface uncertainty instead of hiding it</li>
-        <li>Separate signal from fan bias</li>
-      </ul>
-
-      <p>
-        If a position does not have positive expected value,
-        Arbstack assumes it should not exist.
-      </p>
-    </div>
-  </section>
-
-  <section class="panel">
-    <div class="panel-head">
-      <h2>Philosophy</h2>
-    </div>
-    <div class="panel-body">
-      <p>
-        Inspired by probability theory, Kelly sizing, and market microstructure,
-        Arbstack treats every decision as a trade-off between risk, reward, and survival.
-      </p>
-      <p class="muted">
-        Static demo. No execution. No advice. No guarantees.
-      </p>
-    </div>
-  </section>
-
-  <section class="panel">
-    <div class="panel-head">
-      <h2>What’s implemented</h2>
-      <div class="muted small">Static · JSON-driven</div>
-    </div>
-    <div class="panel-body">
-      <ul>
-        <li>Unified layout across pages</li>
-        <li>Sports hub with ranked matchdays</li>
-        <li>ArbScore-based ordering</li>
-        <li>Premium features teased but locked</li>
-      </ul>
-    </div>
-  </section>
-
-  <section class="panel">
-    <div class="panel-head">
-      <h2>What’s next</h2>
-    </div>
-    <div class="panel-body">
-      <ul>
-        <li>Live odds ingestion</li>
-        <li>True ArbGraph + ArbStats</li>
-        <li>User accounts + billing</li>
-        <li>Cred & performance tracking</li>
-      </ul>
-    </div>
-  </section>
-
-  <section class="note">
-    Educational demo only. No execution, no advice, no guarantees.
-  </section>
-
 </main>
 
 <footer class="footer">
-  <div>Arbstack · About</div>
-  <div class="muted small">Static demo</div>
+  <span>Arbstack · Static demo</span>
+  <span>No logins · No tracking</span>
 </footer>
 
 </body>
