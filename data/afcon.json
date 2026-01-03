@@ -1,0 +1,16 @@
+[
+  {
+    "rank": 1,
+    "match": "Nigeria vs Ivory Coast",
+    "arb_score": 82,
+    "confidence": "High",
+    "best_edge": "Draw @ 0.21"
+  },
+  {
+    "rank": 2,
+    "match": "Senegal vs Mali",
+    "arb_score": 74,
+    "confidence": "Medium",
+    "best_edge": "Under 2.5 Goals"
+  }
+]
