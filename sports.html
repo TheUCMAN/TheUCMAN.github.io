@@ -3,145 +3,97 @@
 <head>
   <meta charset="UTF-8" />
   <title>Arbstack · Sports</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-  <!-- Correct CSS path -->
   <link rel="stylesheet" href="css/style.css" />
 </head>
-
 <body>
 
-  <!-- =====================
-       Top Navigation
-       ===================== -->
+  <!-- NAV (same as index.html) -->
   <header class="nav">
     <div class="nav-left">
       <div class="logo">A</div>
-      <div class="brand">
-        <div class="name">Arbstack</div>
-        <div class="tagline">Sports edges (demo)</div>
+      <div>
+        <strong>Arbstack</strong><br />
+        <span class="subtitle">Sports edges (demo)</span>
       </div>
     </div>
-
     <nav class="nav-right">
       <a href="index.html">Home</a>
-      <a href="sports.html" class="active">Sports</a>
-      <a href="#">Politics</a>
-      <a href="#">Climate</a>
+      <a class="active" href="sports.html">Sports</a>
+      <a href="politics.html">Politics</a>
+      <a href="climate.html">Climate</a>
       <a href="premium.html">Premium</a>
       <a href="about.html">About</a>
     </nav>
   </header>
 
-  <!-- =====================
-       Page Container
-       ===================== -->
   <main class="page">
 
-    <!-- =====================
-         Page Header
-         ===================== -->
-    <section class="page-header">
+    <!-- HEADER -->
+    <section class="section">
       <h1>Sports</h1>
-      <p class="subtitle">
-        Pick a sport. Cards are ranked by ArbScore.
+      <p>
+        Pick a sport. Cards are ranked by <strong>ArbScore</strong>.
         Premium items are teased but locked.
       </p>
+    </section>
 
-      <div class="pill-row">
-        <span class="pill">AFCON + EPL</span>
-        <span class="pill">Cricket tournaments</span>
-        <span class="pill">NFL weekly slate</span>
-        <span class="pill muted">Updated: —</span>
+    <!-- SOCCER -->
+    <section class="section">
+      <h2>Soccer</h2>
+      <p>Tournaments: EPL, AFCON</p>
+    </section>
+
+    <!-- EPL MATCHDAY -->
+    <section class="section">
+      <h2>EPL · Matchday (Jan 4)</h2>
+
+      <div class="match-list">
+
+        <div class="match-row">
+          <div>
+            <div class="match-teams">Manchester City vs Chelsea</div>
+            <div class="match-meta">Jan 4 · 12:30pm ET</div>
+          </div>
+          <div class="arbscore">82</div>
+        </div>
+
+        <div class="match-row">
+          <div>
+            <div class="match-teams">Tottenham vs Sunderland</div>
+            <div class="match-meta">Jan 4 · 10:00am ET</div>
+          </div>
+          <div class="arbscore">78</div>
+        </div>
+
+        <div class="match-row">
+          <div>
+            <div class="match-teams">Newcastle vs Crystal Palace</div>
+            <div class="match-meta">Jan 4 · 10:00am ET</div>
+          </div>
+          <div class="arbscore">74</div>
+        </div>
+
       </div>
     </section>
 
-    <!-- =====================
-         Sport Tabs
-         ===================== -->
-    <section class="tabs">
-      <button class="tab active">Soccer</button>
-      <button class="tab">Cricket</button>
-      <button class="tab">NFL</button>
-    </section>
-
-    <!-- =====================
-         Soccer Section
-         ===================== -->
+    <!-- SAMPLE ARBCARD -->
     <section class="section">
-      <h2>Soccer</h2>
-      <p class="muted">
-        Tournaments: EPL, AFCON<br />
-        Ranked matches will appear here when data is live.
-      </p>
-    </section>
-
-    <!-- =====================
-         Sample ArbCard (ONLY ONE)
-         ===================== -->
-    <section class="demo-visuals">
-      <h3>Sample ArbCard (Concept Preview)</h3>
-
-      <p class="muted">
+      <h2>Sample ArbCard (Concept Preview)</h2>
+      <p>
         This is a visual example of how Arbstack represents an edge.
         It is not a live bet and does not reflect real-time odds.
       </p>
 
-      <img
-        src="assets/sample-arbcard.png"
-        alt="Sample ArbCard"
-        class="demo-image"
-      />
-    </section>
-
-    <!-- =====================
-         Premium Preview
-         ===================== -->
-    <section class="demo-visuals">
-      <h3>Premium Preview · ArbGraph</h3>
-
-      <p class="muted">
-        ArbGraph breaks an edge into structure, probability,
-        crowd bias, liquidity, and timing.
-      </p>
-
-      <img
-        src="assets/sample-arbgraph.png"
-        alt="Sample ArbGraph"
-        class="demo-image"
-      />
-
-      <p class="lock-note">
-        🔒 Full ArbGraph access available to Premium users
-      </p>
-    </section>
-
-    <!-- =====================
-         How Updates Work
-         ===================== -->
-    <section class="info-box">
-      <div class="info-header">
-        <h3>How updates work</h3>
-        <span class="info-meta">Edit JSON → commit → site updates</span>
+      <div class="arbcard-preview">
+        <img src="assets/sample-arbcard.png" alt="Sample ArbCard" />
       </div>
-
-      <ol>
-        <li>Edit <code>data/sports/*.json</code></li>
-        <li>Commit to branch</li>
-        <li>Merge to <code>main</code> when ready</li>
-      </ol>
-
-      <a class="button" href="premium.html">Premium preview →</a>
     </section>
 
   </main>
 
-  <!-- =====================
-       Footer
-       ===================== -->
   <footer class="footer">
-    <span>Arbstack · Sports demo</span>
-    <span class="muted">No logins · No execution</span>
+    Arbstack · Sports demo<br />
+    No logins · No execution
   </footer>
 
 </body>
