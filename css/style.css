@@ -351,3 +351,43 @@ code{ background: rgba(255,255,255,.06); padding:.1rem .35rem; border-radius:6px
   background: rgba(2,6,23,.65);
 }
 
+.tournament-section {
+  margin-top: 24px;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+}
+
+.arb-card {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 12px;
+  padding: 14px;
+}
+
+.arb-rank {
+  font-weight: bold;
+  color: #ffd166;
+}
+
+.arb-score {
+  margin-top: 6px;
+  font-size: 14px;
+}
+
+.arb-locked {
+  margin-top: 8px;
+  color: #ff6b6b;
+  font-size: 12px;
+}
+
+.demo-graph {
+  width: 100%;
+  max-width: 520px;
+  opacity: 0.7;
+}
+
+
