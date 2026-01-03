@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Arbstack – Premium</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <div class="logo">A</div>
+      <div>
+        <div class="brand-title">Arbstack</div>
+        <div class="brand-subtitle">Premium preview</div>
+      </div>
+    </div>
+
+    <nav class="nav">
+      <a class="nav-link" href="index.html">Home</a>
+      <a class="nav-link" href="sports.html">Sports</a>
+      <a class="nav-link disabled" href="#" aria-disabled="true" title="Coming soon">Politics</a>
+      <a class="nav-link disabled" href="#" aria-disabled="true" title="Coming soon">Climate</a>
+      <a class="nav-link active" href="premium.html">Premium</a>
+      <a class="nav-link" href="about.html">About</a>
+    </nav>
+  </header>
+
+  <main class="container">
+    <section class="page-head">
+      <h1>Premium (Preview)</h1>
+      <p class="muted">
+        This page explains what premium users will eventually unlock. There is no login/paywall in this demo.
+      </p>
+    </section>
+
+    <section class="panel">
+      <div class="panel-head">
+        <h2>Free vs Premium</h2>
+        <div class="muted small">Feature boundary (mock)</div>
+      </div>
+      <div class="panel-body">
+        <div class="table">
+          <div class="row header">
+            <div>Feature</div><div>Free</div><div>Premium</div>
+          </div>
+          <div class="row"><div>Ranked ArbCards</div><div>✅</div><div>✅</div></div>
+          <div class="row"><div>ArbScore + confidence</div><div>✅</div><div>✅</div></div>
+          <div class="row"><div>Best edge summary</div><div>✅</div><div>✅</div></div>
+          <div class="row"><div>🔒 ArbGraph (buy/sell zones)</div><div>❌</div><div>✅</div></div>
+          <div class="row"><div>🔒 ArbStats (drivers + liquidity risk)</div><div>❌</div><div>✅</div></div>
+          <div class="row"><div>🔒 Historical edge & drift</div><div>❌</div><div>✅</div></div>
+          <div class="row"><div>🔒 Alerts & watchlists</div><div>❌</div><div>✅</div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="panel-head">
+        <h2>What is ArbGraph?</h2>
+        <div class="muted small">Premium concept</div>
+      </div>
+      <div class="panel-body">
+        <p>
+          ArbGraph visualizes <strong>buy zones</strong>, <strong>sell zones</strong>, and <strong>edge decay</strong> as odds move.
+          In the demo, ArbGraph is teased on each card with a lock icon.
+        </p>
+        <div class="mock-graph">
+          <div class="mock-line"></div>
+          <div class="mock-labels">
+            <span>Buy zone</span><span>Hold</span><span>Sell zone</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="panel-head">
+        <h2>What is ArbStats?</h2>
+        <div class="muted small">Premium concept</div>
+      </div>
+      <div class="panel-body">
+        <ul>
+          <li>Liquidity risk proxy (thin market warnings)</li>
+          <li>Bias drift (fan money, recency, narrative pressure)</li>
+          <li>Convergence risk (line snaps back vs continues)</li>
+          <li>Volatility flags (injury news, weather, late momentum)</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="note">
+      Want to keep this demo simple? Keep premium as “tease-only” until you’re ready to build auth + billing.
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div>Arbstack · Premium preview</div>
+    <div class="muted small">No login in demo</div>
+  </footer>
+</body>
+</html>
