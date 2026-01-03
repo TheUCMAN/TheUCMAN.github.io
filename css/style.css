@@ -360,25 +360,6 @@ code{ background: rgba(255,255,255,.06); padding:.1rem .35rem; border-radius:6px
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 16px;
 }
-/* ArbCard demo image */
-.arbcard-preview {
-  max-width: 420px;
-  width: 100%;
-  height: auto;
-
-  border-radius: 12px;
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.45);
-
-  display: block;
-  margin: 24px auto;
-}
-
-/* Prevent huge images on large screens */
-@media (min-width: 1200px) {
-  .arbcard-preview {
-    max-width: 380px;
-  }
-}
 
 .arb-rank {
   font-weight: bold;
