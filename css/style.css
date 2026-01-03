@@ -455,4 +455,80 @@ code{ background: rgba(255,255,255,.06); padding:.1rem .35rem; border-radius:6px
   max-width: 640px;
 }
 
+/* ===== Shared layout (matches index.html) ===== */
+
+.page {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 32px 20px;
+}
+
+.section {
+  margin-top: 48px;
+}
+
+.section h2 {
+  font-size: 1.6rem;
+  margin-bottom: 12px;
+}
+
+.section p {
+  opacity: 0.85;
+  margin-bottom: 16px;
+}
+
+/* ===== ArbCard preview ===== */
+
+.arbcard-preview {
+  display: flex;
+  justify-content: center;
+  margin-top: 24px;
+}
+
+.arbcard-preview img {
+  max-width: 420px;     /* KEY FIX */
+  width: 100%;
+  height: auto;
+  border-radius: 16px;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.45);
+}
+
+/* ===== EPL Match list (Kalshi-style) ===== */
+
+.match-list {
+  margin-top: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.match-row {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  padding: 14px 16px;
+  background: rgba(255,255,255,0.04);
+  border-radius: 10px;
+}
+
+.match-row:hover {
+  background: rgba(255,255,255,0.07);
+}
+
+.match-teams {
+  font-weight: 500;
+}
+
+.match-meta {
+  font-size: 0.85rem;
+  opacity: 0.7;
+}
+
+.arbscore {
+  font-weight: 700;
+  padding: 6px 10px;
+  border-radius: 8px;
+  background: linear-gradient(135deg,#f5c542,#d49b1e);
+  color: #000;
+}
 
