@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Arbstack – Sports</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <div class="logo">A</div>
+      <div>
+        <div class="brand-title">Arbstack</div>
+        <div class="brand-subtitle">Sports edges (demo)</div>
+      </div>
+    </div>
+
+    <nav class="nav">
+      <a class="nav-link" href="index.html">Home</a>
+      <a class="nav-link active" href="sports.html">Sports</a>
+      <a class="nav-link disabled" href="#" aria-disabled="true" title="Coming soon">Politics</a>
+      <a class="nav-link disabled" href="#" aria-disabled="true" title="Coming soon">Climate</a>
+      <a class="nav-link" href="premium.html">Premium</a>
+      <a class="nav-link" href="about.html">About</a>
+    </nav>
+  </header>
+
+  <main class="container">
+    <section class="page-head">
+      <h1>Sports</h1>
+      <p class="muted">Pick a sport. Cards are ranked by ArbScore. Premium items are teased but locked.</p>
+      <div class="page-meta">
+        <span class="pill">AFCON + EPL</span>
+        <span class="pill">Cricket tournaments</span>
+        <span class="pill">NFL weekly slate</span>
+        <span class="pill muted">Updated: <span id="updatedAt">—</span></span>
+      </div>
+    </section>
+
+    <section class="tabs" role="tablist" aria-label="Sports tabs">
+      <button class="tab active" data-tab="soccer" role="tab" aria-selected="true">Soccer</button>
+      <button class="tab" data-tab="cricket" role="tab" aria-selected="false">Cricket</button>
+      <button class="tab" data-tab="nfl" role="tab" aria-selected="false">NFL</button>
+    </section>
+
+    <section id="tab-soccer" class="tab-panel active" role="tabpanel">
+      <div class="panel">
+        <div class="panel-head">
+          <h2>Soccer</h2>
+          <div class="muted small">Tournaments: EPL, AFCON</div>
+        </div>
+        <div class="panel-body" id="soccer-root">
+          <div class="skeleton">Loading soccer cards…</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="tab-cricket" class="tab-panel" role="tabpanel">
+      <div class="panel">
+        <div class="panel-head">
+          <h2>Cricket</h2>
+          <div class="muted small">Tournaments: ICC T20 WC, IPL</div>
+        </div>
+        <div class="panel-body" id="cricket-root">
+          <div class="skeleton">Loading cricket cards…</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="tab-nfl" class="tab-panel" role="tabpanel">
+      <div class="panel">
+        <div class="panel-head">
+          <h2>NFL</h2>
+          <div class="muted small">Weekly slate (demo)</div>
+        </div>
+        <div class="panel-body" id="nfl-root">
+          <div class="skeleton">Loading NFL cards…</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="panel-head">
+        <h2>How updates work</h2>
+        <div class="muted small">Edit JSON → commit → site updates</div>
+      </div>
+      <div class="panel-body">
+        <ol class="steps">
+          <li>Edit <code>data/sports/*.json</code></li>
+          <li>Commit to branch</li>
+          <li>Merge to <code>main</code> when ready</li>
+        </ol>
+        <a class="button" href="premium.html">Premium preview →</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div>Arbstack · Sports demo</div>
+    <div class="muted small">No logins · No execution</div>
+  </footer>
+
+  <script src="js/app.js"></script>
+  <script>
+    window.ArbApp?.initTabs();
+    window.ArbApp?.setUpdatedNow("updatedAt");
+    window.ArbApp?.loadSports();
+  </script>
+</body>
+</html>
