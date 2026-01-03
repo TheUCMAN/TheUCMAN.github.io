@@ -407,15 +407,16 @@ code{ background: rgba(255,255,255,.06); padding:.1rem .35rem; border-radius:6px
 }
 
 .demo-image {
-  max-width: 420px;      /* caps size on desktop */
-  width: 100%;           /* responsive on mobile */
-  height: auto;          /* preserves aspect ratio */
+  max-width: 420px;
+  max-height: 620px;   /* 👈 this is the missing constraint */
+  width: 100%;
+  height: auto;
+  object-fit: contain;
   display: block;
   margin: 16px auto;
   border-radius: 14px;
 }
 
-}
 
 /* Image polish */
 .demo-visuals img {
