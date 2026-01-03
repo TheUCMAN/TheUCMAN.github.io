@@ -2,98 +2,114 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Arbstack – Premium</title>
+  <title>Arbstack — Premium</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="css/style.css" />
 </head>
+
 <body>
-
-<header class="topbar">
-  <div class="brand">
-    <div class="logo">A</div>
-    <div>
-      <div class="brand-title">Arbstack</div>
-      <div class="brand-subtitle">Premium preview</div>
+  <!-- NAV -->
+  <header class="topbar">
+    <div class="brand">
+      <div class="logo">A</div>
+      <div>
+        <div class="brand-name">Arbstack</div>
+        <div class="brand-sub">Premium preview</div>
+      </div>
     </div>
-  </div>
+    <nav class="nav">
+      <a href="index.html">Home</a>
+      <a href="sports.html">Sports</a>
+      <a href="#">Politics</a>
+      <a href="#">Climate</a>
+      <a class="active" href="premium.html">Premium</a>
+      <a href="about.html">About</a>
+    </nav>
+  </header>
 
-  <nav class="nav">
-    <a class="nav-link" href="index.html">Home</a>
-    <a class="nav-link" href="sports.html">Sports</a>
-    <a class="nav-link disabled">Politics</a>
-    <a class="nav-link disabled">Climate</a>
-    <a class="nav-link active" href="premium.html">Premium</a>
-    <a class="nav-link" href="about.html">About</a>
-  </nav>
-</header>
-
-<main class="container">
-
-  <section class="page-head">
+  <!-- CONTENT -->
+  <main class="container">
     <h1>Premium (Preview)</h1>
     <p class="muted">
       What premium users will unlock once Arbstack becomes live.
     </p>
-  </section>
 
-  <section class="panel">
-    <div class="panel-head">
+    <!-- FREE VS PREMIUM TABLE -->
+    <section class="card">
       <h2>Free vs Premium</h2>
-    </div>
-    <div class="panel-body">
-      <div class="table">
-        <div class="row header">
-          <div>Feature</div><div>Free</div><div>Premium</div>
-        </div>
-        <div class="row"><div>Ranked ArbCards</div><div>✓</div><div>✓</div></div>
-        <div class="row"><div>ArbScore + confidence</div><div>✓</div><div>✓</div></div>
-        <div class="row"><div>Edge summaries</div><div>✓</div><div>✓</div></div>
-        <div class="row"><div>🔒 ArbGraph</div><div>—</div><div>✓</div></div>
-        <div class="row"><div>🔒 ArbStats</div><div>—</div><div>✓</div></div>
-        <div class="row"><div>🔒 Alerts</div><div>—</div><div>✓</div></div>
-      </div>
-    </div>
-  </section>
 
-  <section class="panel">
-    <div class="panel-head">
+      <table class="compare-table">
+        <thead>
+          <tr>
+            <th>Feature</th>
+            <th>Free</th>
+            <th>Premium</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Ranked ArbCards</td>
+            <td>✓</td>
+            <td>✓</td>
+          </tr>
+          <tr>
+            <td>ArbScore + confidence</td>
+            <td>✓</td>
+            <td>✓</td>
+          </tr>
+          <tr>
+            <td>Edge summaries</td>
+            <td>✓</td>
+            <td>✓</td>
+          </tr>
+          <tr>
+            <td>ArbGraph (buy / hold / sell)</td>
+            <td>🔒</td>
+            <td>✓</td>
+          </tr>
+          <tr>
+            <td>ArbStats (liquidity, bias)</td>
+            <td>🔒</td>
+            <td>✓</td>
+          </tr>
+          <tr>
+            <td>Alerts & watchlists</td>
+            <td>🔒</td>
+            <td>✓</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- ARBGRAPH -->
+    <section class="card">
       <h2>ArbGraph</h2>
-      <div class="muted small">Premium concept</div>
-    </div>
-    <div class="panel-body">
       <p>
-        ArbGraph visualizes how edge evolves as markets move —
-        highlighting buy zones, hold regions, and exit points.
+        Visualizes how edge evolves as markets move — highlighting buy zones,
+        hold regions, and exit points.
       </p>
-      <div class="mock-graph"></div>
-    </div>
-  </section>
+      <p class="muted">Premium concept preview</p>
+    </section>
 
-  <section class="panel">
-    <div class="panel-head">
+    <!-- ARBSTATS -->
+    <section class="card">
       <h2>ArbStats</h2>
-    </div>
-    <div class="panel-body">
       <ul>
         <li>Liquidity & depth risk</li>
-        <li>Fan and narrative bias</li>
+        <li>Fan & narrative bias</li>
         <li>Volatility & news sensitivity</li>
         <li>Structural consistency checks</li>
       </ul>
-    </div>
-  </section>
+    </section>
 
-  <section class="note">
-    Premium is intentionally locked in this demo.
-    No accounts. No payments. No execution.
-  </section>
+    <p class="disclaimer">
+      Educational demo only. No execution, no advice, no guarantees.
+    </p>
+  </main>
 
-</main>
-
-<footer class="footer">
-  <div>Arbstack · Premium</div>
-  <div class="muted small">Preview only</div>
-</footer>
-
+  <footer class="footer">
+    <span>Arbstack · Static demo</span>
+    <span>No logins · No tracking by default</span>
+  </footer>
 </body>
 </html>
