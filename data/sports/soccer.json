@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-01-03T14:30:00Z",
+  "updated_at": "2026-01-03T15:00:00Z",
   "tournaments": [
     {
       "name": "English Premier League (EPL)",
@@ -18,7 +18,7 @@
           "match": "Man City vs Everton",
           "arb_score": 72,
           "confidence": "Medium",
-          "best_edge": "City Win @ 0.71",
+          "best_edge": "Man City Win @ 0.71",
           "premium": true
         }
       ]
@@ -47,3 +47,4 @@
     }
   ]
 }
+
