@@ -24,6 +24,73 @@
     </thead>
     <tbody id="match-table"></tbody>
   </table>
+<script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+  <script>
+const CSV_URL =
+  "https://docs.google.com/spreadsheets/d/1U7UEXH5NIo6tzWO4cVEzKcar6XgtwCbewmkMJLo4th8/export?format=csv&gid=2026462708";
+
+fetch(CSV_URL)
+  .then(res => res.text())
+  .then(csvText => {
+    const rows = Papa.parse(csvText, {
+      header: true,
+      dynamicTyping: true,
+      skipEmptyLines: true
+    }).data;
+
+    renderPage(rows);
+  });
+
+function renderPage(rows) {
+  // Remove empty rows
+  rows = rows.filter(r => r.home_team && r.arb_rank);
+
+  // Sort by arb rank (1 is best)
+  rows.sort((a, b) => a.arb_rank - b.arb_rank);
+
+  // Last updated
+  document.getElementById("last-updated").innerText =
+    "Last updated: " + rows[0].snapshot_time + " ET";
+
+  // Top 2 ArbCards
+  renderArbCards(rows.slice(0, 2));
+
+  // Rest of matches
+  renderTable(rows);
+}
+
+function renderArbCards(cards) {
+  const el = document.getElementById("arb-cards");
+  el.innerHTML = "";
+
+  cards.forEach(m => {
+    el.innerHTML += `
+      <div style="border:1px solid #ccc;padding:10px;margin:10px 0">
+        <strong>${m.home_team} vs ${m.away_team}</strong><br/>
+        Arb Score: ${m.arb_score_scaled.toFixed(1)}<br/>
+        Favorite: ${m.favorite_side}<br/>
+        Liquidity Score: ${m.liquidity_score}
+      </div>
+    `;
+  });
+}
+
+function renderTable(rows) {
+  const el = document.getElementById("match-table");
+  el.innerHTML = "";
+
+  rows.forEach(m => {
+    el.innerHTML += `
+      <tr>
+        <td>${m.home_team} vs ${m.away_team}</td>
+        <td>${m.arb_score_scaled.toFixed(1)}</td>
+        <td>${m.arb_rank}</td>
+        <td>${m.liquidity_score}</td>
+      </tr>
+    `;
+  });
+}
+</script>
 
 </body>
 </html>
