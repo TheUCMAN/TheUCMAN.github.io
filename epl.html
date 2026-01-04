@@ -1,19 +1,141 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Arbstack EPL</title>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
+  <title>Arbstack — EPL</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Minimal, clean Arbstack styling -->
+  <style>
+    body {
+      background: #0f1214;
+      color: #e6e6e6;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 24px;
+    }
+
+    h1 {
+      font-size: 1.8rem;
+      margin-bottom: 4px;
+    }
+
+    h2 {
+      margin-top: 36px;
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: #d6d6d6;
+    }
+
+    #last-updated {
+      color: #9aa4ad;
+      font-size: 0.9rem;
+      margin-bottom: 24px;
+    }
+
+    /* ArbCards */
+    .arb-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 16px;
+      margin-top: 16px;
+    }
+
+    .arb-card {
+      background: #151a1f;
+      border: 1px solid #222;
+      border-radius: 12px;
+      padding: 16px;
+    }
+
+    .arb-card.rank-1 {
+      border-left: 5px solid gold;
+    }
+
+    .arb-card.rank-2 {
+      border-left: 5px solid silver;
+    }
+
+    .arb-card-title {
+      font-weight: 600;
+      font-size: 1rem;
+      margin-bottom: 8px;
+    }
+
+    .arb-score {
+      font-size: 1.4rem;
+      font-weight: 700;
+      margin: 8px 0;
+    }
+
+    .arb-meta {
+      font-size: 0.9rem;
+      color: #b0b7bf;
+    }
+
+    /* Table */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 16px;
+      background: #111;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    thead {
+      background: #151a1f;
+    }
+
+    th, td {
+      padding: 12px 10px;
+      text-align: left;
+      font-size: 0.95rem;
+    }
+
+    th {
+      color: #9aa4ad;
+      font-weight: 500;
+    }
+
+    tr {
+      border-bottom: 1px solid #222;
+    }
+
+    tr:hover {
+      background: #151a1f;
+    }
+
+    tr.low-liquidity {
+      opacity: 0.45;
+    }
+
+    .rank {
+      font-weight: 600;
+    }
+
+    footer {
+      margin-top: 48px;
+      font-size: 0.85rem;
+      color: #7f8790;
+      border-top: 1px solid #222;
+      padding-top: 16px;
+    }
+  </style>
 </head>
+
 <body>
 
   <h1>Arbstack — EPL</h1>
-  <div id="last-updated"></div>
+  <div id="last-updated">Loading…</div>
 
   <h2>Top ArbCards</h2>
-  <div id="arb-cards"></div>
+  <div id="arb-cards" class="arb-cards"></div>
 
   <h2>All Matches</h2>
-  <table border="1">
+  <table>
     <thead>
       <tr>
         <th>Match</th>
@@ -24,74 +146,87 @@
     </thead>
     <tbody id="match-table"></tbody>
   </table>
-<script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+
+  <footer>
+    Arbstack is a decision-support signal, not betting advice.  
+    Data source: public prediction markets.
+  </footer>
+
+  <!-- CSV parser -->
+  <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+
   <script>
-const CSV_URL =
-  "https://docs.google.com/spreadsheets/d/1U7UEXH5NIo6tzWO4cVEzKcar6XgtwCbewmkMJLo4th8/export?format=csv&gid=2026462708";
+    const CSV_URL =
+      "https://docs.google.com/spreadsheets/d/1U7UEXH5NIo6tzWO4cVEzKcar6XgtwCbewmkMJLo4th8/export?format=csv&gid=2026462708";
 
-fetch(CSV_URL)
-  .then(res => res.text())
-  .then(csvText => {
-    const rows = Papa.parse(csvText, {
-      header: true,
-      dynamicTyping: true,
-      skipEmptyLines: true
-    }).data;
+    fetch(CSV_URL)
+      .then(res => res.text())
+      .then(csvText => {
+        const rows = Papa.parse(csvText, {
+          header: true,
+          dynamicTyping: true,
+          skipEmptyLines: true
+        }).data;
 
-    console.log("RAW ROWS:", rows);
-    renderPage(rows);
-  });
+        renderPage(rows);
+      });
 
-function renderPage(rows) {
-  // Remove empty rows
-  rows = rows.filter(r => r.home_team && r.arb_rank);
+    function renderPage(rows) {
+      rows = rows.filter(r => r.home_team && r.arb_rank !== null);
 
-  // Sort by arb rank (1 is best)
-  rows.sort((a, b) => a.arb_rank - b.arb_rank);
+      rows.sort((a, b) => a.arb_rank - b.arb_rank);
 
-  // Last updated
-  document.getElementById("last-updated").innerText =
-    "Last updated: " + rows[0].snapshot_time + " ET";
+      document.getElementById("last-updated").innerText =
+        "Last updated: " + rows[0].snapshot_time + " ET";
 
-  // Top 2 ArbCards
-  renderArbCards(rows.slice(0, 2));
+      renderArbCards(rows.slice(0, 2));
+      renderTable(rows);
+    }
 
-  // Rest of matches
-  renderTable(rows);
-}
+    function liquidityLabel(v) {
+      if (v >= 1) return "High";
+      if (v >= 0.7) return "Medium";
+      return "Low";
+    }
 
-function renderArbCards(cards) {
-  const el = document.getElementById("arb-cards");
-  el.innerHTML = "";
+    function renderArbCards(cards) {
+      const el = document.getElementById("arb-cards");
+      el.innerHTML = "";
 
-  cards.forEach(m => {
-    el.innerHTML += `
-      <div style="border:1px solid #ccc;padding:10px;margin:10px 0">
-        <strong>${m.home_team} vs ${m.away_team}</strong><br/>
-        Arb Score: ${m.arb_score_scaled.toFixed(1)}<br/>
-        Favorite: ${m.favorite_side}<br/>
-        Liquidity Score: ${m.liquidity_score}
-      </div>
-    `;
-  });
-}
+      cards.forEach(m => {
+        el.innerHTML += `
+          <div class="arb-card rank-${m.arb_rank}">
+            <div class="arb-card-title">
+              ${m.home_team} vs ${m.away_team}
+            </div>
+            <div class="arb-score">
+              ${m.arb_score_scaled.toFixed(1)}
+            </div>
+            <div class="arb-meta">
+              Favorite: ${m.favorite_side}<br/>
+              Liquidity: ${liquidityLabel(m.liquidity_score)}
+            </div>
+          </div>
+        `;
+      });
+    }
 
-function renderTable(rows) {
-  const el = document.getElementById("match-table");
-  el.innerHTML = "";
+    function renderTable(rows) {
+      const el = document.getElementById("match-table");
+      el.innerHTML = "";
 
-  rows.forEach(m => {
-    el.innerHTML += `
-      <tr>
-        <td>${m.home_team} vs ${m.away_team}</td>
-        <td>${m.arb_score_scaled.toFixed(1)}</td>
-        <td>${m.arb_rank}</td>
-        <td>${m.liquidity_score}</td>
-      </tr>
-    `;
-  });
-}
-</script>
+      rows.forEach(m => {
+        el.innerHTML += `
+          <tr class="${m.liquidity_score < 0.4 ? 'low-liquidity' : ''}">
+            <td>${m.home_team} vs ${m.away_team}</td>
+            <td>${m.arb_score_scaled.toFixed(1)}</td>
+            <td class="rank">${m.arb_rank}</td>
+            <td>${liquidityLabel(m.liquidity_score)}</td>
+          </tr>
+        `;
+      });
+    }
+  </script>
 
 </body>
 </html>
