@@ -38,6 +38,7 @@ fetch(CSV_URL)
       skipEmptyLines: true
     }).data;
 
+    console.log("RAW ROWS:", rows);
     renderPage(rows);
   });
 
