@@ -1,20 +1,18 @@
 import json
 import csv
 from pathlib import Path
-from datetime import datetime, timezone
 
 # ==========================================================
-# PATHS — REPO RELATIVE
+# PATHS
 # ==========================================================
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
-
 RAW_LATEST = REPO_ROOT / "data" / "raw" / "kalshi" / "epl" / "latest.json"
 OUT_DIR = REPO_ROOT / "data" / "computed" / "epl"
 OUT_DIR.mkdir(parents=True, exist_ok=True)
 
-LATEST_CSV = OUT_DIR / "latest.csv"
-LATEST_JSON = OUT_DIR / "latest.json"
+OUT_CSV = OUT_DIR / "latest.csv"
+OUT_JSON = OUT_DIR / "latest.json"
 
 # ==========================================================
 # HELPERS
@@ -26,8 +24,8 @@ def parse_teams(title: str):
     home, away = title.split(" vs ", 1)
     return home.strip(), away.strip()
 
-def extract_probs(event, home_team, away_team):
-    probs = {}
+def extract_prices(event, home, away):
+    prices = {}
     volume = 0
 
     for m in event.get("markets", []):
@@ -38,33 +36,30 @@ def extract_probs(event, home_team, away_team):
         if price is None:
             continue
 
-        # normalize 0–100 → 0–1 if needed
         if price > 1:
             price = price / 100
 
         volume += vol
 
-        if home_team.lower() in title:
-            probs["home"] = price
-        elif away_team.lower() in title:
-            probs["away"] = price
+        if home.lower() in title:
+            prices["home"] = price
+        elif away.lower() in title:
+            prices["away"] = price
         elif "draw" in title or "tie" in title:
-            probs["tie"] = price
+            prices["tie"] = price
 
-    return probs.get("home"), probs.get("away"), probs.get("tie"), volume
-
+    return prices, volume
 
 # ==========================================================
-# LOAD RAW DATA
+# LOAD DATA
 # ==========================================================
 
 if not RAW_LATEST.exists():
     raise SystemExit("Missing latest.json from Stage 1")
 
-with open(RAW_LATEST, "r", encoding="utf-8") as f:
-    data = json.load(f)
-
+data = json.load(open(RAW_LATEST, "r", encoding="utf-8"))
 events = data.get("events", [])
+
 rows = []
 
 # ==========================================================
@@ -72,59 +67,39 @@ rows = []
 # ==========================================================
 
 for ev in events:
-    title = ev.get("title", "")
-    home, away = parse_teams(title)
+    match = ev.get("title", "")
+    home, away = parse_teams(match)
     if not home or not away:
         continue
 
-    home_p, away_p, tie_p, volume = extract_probs(ev, home, away)
- # Require at least two prices to exist
-prices = [p for p in (home_p, away_p, tie_p) if p is not None]
-if len(prices) < 2:
-    continue
+    prices, volume = extract_prices(ev, home, away)
 
+    # Require at least TWO prices (2-way market is valid)
+    if len(prices) < 2:
+        continue
 
-    pct_spread = max(prices) - min(prices)
-    arb_score = round(pct_spread * (1 + volume / 10_000), 3)
+    price_vals = list(prices.values())
+    pct_spread = max(price_vals) - min(price_vals)
+
+    arb_score = round(pct_spread * (1 + volume / 10_000), 4)
 
     rows.append({
         "competition": "EPL",
-        "match": title,
+        "match": match,
         "home_team": home,
         "away_team": away,
-        "home_pct": home_p,
-        "away_pct": away_p,
-        "tie_pct": tie_p,
+        "home_pct": prices.get("home"),
+        "away_pct": prices.get("away"),
+        "tie_pct": prices.get("tie"),
         "volume": volume,
-        "pct_spread": pct_spread,
+        "pct_spread": round(pct_spread, 4),
         "arb_score": arb_score,
     })
 
 # ==========================================================
-# RANK
+# RANK + OUTPUT
 # ==========================================================
 
 rows.sort(key=lambda r: r["arb_score"], reverse=True)
-for i, r in enumerate(rows, start=1):
-    r["rank"] = i
 
-# ==========================================================
-# WRITE OUTPUTS
-# ==========================================================
-
-if rows:
-    fields = list(rows[0].keys())
-
-    with open(LATEST_CSV, "w", newline="", encoding="utf-8") as f:
-        writer = csv.DictWriter(f, fieldnames=fields)
-        writer.writeheader()
-        writer.writerows(rows)
-
-    with open(LATEST_JSON, "w", encoding="utf-8") as f:
-        json.dump(rows, f, indent=2)
-
-    print("Wrote:")
-    print(" -", LATEST_CSV)
-    print(" -", LATEST_JSON)
-else:
-    print("No valid EPL rows produced")
+for i, r in enumerate(rows, 1):
