@@ -1,3 +1,6 @@
+
+print(">>> RUNNING DIAGNOSTIC VERSION v999 <<<")
+
 import json
 from pathlib import Path
 
