@@ -30,25 +30,31 @@ def extract_probs(event, home_team, away_team):
     probs = {}
     volume = 0
 
-    for m in event.get("markets", []):
-        for o in m.get("outcomes", []):
-            name = o.get("name", "").lower()
-            price = o.get("price")
-            vol = o.get("volume", 0)
+    for c in event.get("contracts", []):
+        name = c.get("name", "").lower()
 
-            if price is None:
-                continue
+        # Kalshi uses yes_price (0–100 or 0–1 depending on endpoint)
+        price = c.get("yes_price")
+        vol = c.get("volume", 0)
 
-            volume += vol
+        if price is None:
+            continue
 
-            if home_team.lower() in name:
-                probs["home"] = price
-            elif away_team.lower() in name:
-                probs["away"] = price
-            elif "draw" in name or "tie" in name:
-                probs["tie"] = price
+        volume += vol
+
+        # Normalize price to probability if needed
+        if price > 1:
+            price = price / 100
+
+        if home_team.lower() in name:
+            probs["home"] = price
+        elif away_team.lower() in name:
+            probs["away"] = price
+        elif "draw" in name or "tie" in name:
+            probs["tie"] = price
 
     return probs.get("home"), probs.get("away"), probs.get("tie"), volume
+
 
 # ==========================================================
 # LOAD RAW DATA
