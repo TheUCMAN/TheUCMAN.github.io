@@ -26,13 +26,13 @@ def parse_teams(title: str):
     home, away = title.split(" vs ", 1)
     return home.strip(), away.strip()
 
-def extract_probs(event):
+def extract_probs(event, home_team, away_team):
     probs = {}
     volume = 0
 
     for m in event.get("markets", []):
         for o in m.get("outcomes", []):
-            label = o.get("name", "").lower()
+            name = o.get("name", "").lower()
             price = o.get("price")
             vol = o.get("volume", 0)
 
@@ -41,12 +41,12 @@ def extract_probs(event):
 
             volume += vol
 
-            if "draw" in label or "tie" in label:
-                probs["tie"] = price
-            elif "away" in label:
-                probs["away"] = price
-            elif "home" in label or "win" in label:
+            if home_team.lower() in name:
                 probs["home"] = price
+            elif away_team.lower() in name:
+                probs["away"] = price
+            elif "draw" in name or "tie" in name:
+                probs["tie"] = price
 
     return probs.get("home"), probs.get("away"), probs.get("tie"), volume
 
@@ -73,7 +73,7 @@ for ev in events:
     if not home or not away:
         continue
 
-    home_p, away_p, tie_p, volume = extract_probs(ev)
+    home_p, away_p, tie_p, volume = extract_probs(ev, home, away)
     if None in (home_p, away_p, tie_p):
         continue
 
