@@ -78,10 +78,13 @@ for ev in events:
         continue
 
     home_p, away_p, tie_p, volume = extract_probs(ev, home, away)
-    if None in (home_p, away_p, tie_p):
-        continue
+ # Require at least two prices to exist
+prices = [p for p in (home_p, away_p, tie_p) if p is not None]
+if len(prices) < 2:
+    continue
 
-    pct_spread = max(home_p, away_p, tie_p) - min(home_p, away_p, tie_p)
+
+    pct_spread = max(prices) - min(prices)
     arb_score = round(pct_spread * (1 + volume / 10_000), 3)
 
     rows.append({
