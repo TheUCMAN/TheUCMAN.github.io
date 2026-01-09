@@ -45,10 +45,15 @@ prev_matches = extract_matches(prev_raw)
 curr_matches = extract_matches(curr_raw)
 
 def get_match_key(m):
-    for key in ("match", "event", "event_title", "title"):
-        if key in m and m[key]:
-            return m[key]
-    raise KeyError(f"No match identifier found in record: {m.keys()}")
+  def get_numeric(m, keys, default=0.0):
+    """
+    Safely extract a numeric metric from multiple possible keys.
+    """
+    for k in keys:
+        if k in m and isinstance(m[k], (int, float)):
+            return m[k]
+    return default
+
 
 prev_map = {get_match_key(m): m for m in prev_matches}
 curr_map = {get_match_key(m): m for m in curr_matches}
@@ -63,9 +68,18 @@ for match, curr in curr_map.items():
     if not prev:
         continue
 
-    delta_volume = curr["volume"] - prev["volume"]
-    delta_oi = curr["open_interest"] - prev["open_interest"]
-    delta_conviction = curr["conviction"] - prev["conviction"]
+curr_volume = get_numeric(curr, ["volume", "total_volume", "market_volume", "recent_volume"])
+prev_volume = get_numeric(prev, ["volume", "total_volume", "market_volume", "recent_volume"])
+
+curr_oi = get_numeric(curr, ["open_interest", "oi", "openInterest"])
+prev_oi = get_numeric(prev, ["open_interest", "oi", "openInterest"])
+
+curr_conv = get_numeric(curr, ["conviction", "signal_strength", "confidence"])
+prev_conv = get_numeric(prev, ["conviction", "signal_strength", "confidence"])
+
+delta_volume = curr_volume - prev_volume
+delta_oi = curr_oi - prev_oi
+delta_conviction = curr_conv - prev_conv
 
     velocity = delta_conviction / max(abs(delta_volume), 1)
 
@@ -79,20 +93,20 @@ for match, curr in curr_map.items():
     else:
         phase = "WATCH"
 
-    deltas.append({
-        "match": match,
-        "volume_prev": prev["volume"],
-        "volume_curr": curr["volume"],
-        "delta_volume": delta_volume,
-        "open_interest_prev": prev["open_interest"],
-        "open_interest_curr": curr["open_interest"],
-        "delta_open_interest": delta_oi,
-        "conviction_prev": prev["conviction"],
-        "conviction_curr": curr["conviction"],
-        "delta_conviction": delta_conviction,
-        "velocity": round(velocity, 6),
-        "phase": phase
-    })
+  deltas.append({
+    "match": match,
+    "volume_prev": prev_volume,
+    "volume_curr": curr_volume,
+    "delta_volume": delta_volume,
+    "open_interest_prev": prev_oi,
+    "open_interest_curr": curr_oi,
+    "delta_open_interest": delta_oi,
+    "conviction_prev": prev_conv,
+    "conviction_curr": curr_conv,
+    "delta_conviction": delta_conviction,
+    "velocity": round(velocity, 6),
+    "phase": phase
+})
 
 # --------------------------------------------------
 # Write output
