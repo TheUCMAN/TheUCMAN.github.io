@@ -1,6 +1,5 @@
 """
-Stage 2C — EPL Time-Series Delta Engine (Schema-safe)
-Compares the two most recent resolution_signal files
+Stage 2C — EPL Time-Series Delta Engine (Clean & Schema-Safe)
 """
 
 import json
@@ -32,28 +31,32 @@ with open(curr_file, "r", encoding="utf-8") as f:
 print(f"Comparing:\n - {prev_file.name}\n - {curr_file.name}")
 
 # --------------------------------------------------
-# Normalize schema (list vs dict)
+# Helpers
 # --------------------------------------------------
 def extract_matches(data):
     if isinstance(data, list):
         return data
     if isinstance(data, dict) and "matches" in data:
         return data["matches"]
-    raise ValueError("Unknown resolution_signal schema")
-
-prev_matches = extract_matches(prev_raw)
-curr_matches = extract_matches(curr_raw)
+    raise ValueError("Unknown resolution schema")
 
 def get_match_key(m):
-  def get_numeric(m, keys, default=0.0):
-    """
-    Safely extract a numeric metric from multiple possible keys.
-    """
+    for k in ("match", "event", "event_title", "title"):
+        if k in m and m[k]:
+            return m[k]
+    return "UNKNOWN_MATCH"
+
+def get_number(m, keys):
     for k in keys:
         if k in m and isinstance(m[k], (int, float)):
             return m[k]
-    return default
+    return 0.0
 
+# --------------------------------------------------
+# Normalize
+# --------------------------------------------------
+prev_matches = extract_matches(prev_raw)
+curr_matches = extract_matches(curr_raw)
 
 prev_map = {get_match_key(m): m for m in prev_matches}
 curr_map = {get_match_key(m): m for m in curr_matches}
@@ -68,45 +71,44 @@ for match, curr in curr_map.items():
     if not prev:
         continue
 
-curr_volume = get_numeric(curr, ["volume", "total_volume", "market_volume", "recent_volume"])
-prev_volume = get_numeric(prev, ["volume", "total_volume", "market_volume", "recent_volume"])
+    prev_volume = get_number(prev, ["volume", "total_volume", "recent_volume"])
+    curr_volume = get_number(curr, ["volume", "total_volume", "recent_volume"])
 
-curr_oi = get_numeric(curr, ["open_interest", "oi", "openInterest"])
-prev_oi = get_numeric(prev, ["open_interest", "oi", "openInterest"])
+    prev_oi = get_number(prev, ["open_interest", "oi"])
+    curr_oi = get_number(curr, ["open_interest", "oi"])
 
-curr_conv = get_numeric(curr, ["conviction", "signal_strength", "confidence"])
-prev_conv = get_numeric(prev, ["conviction", "signal_strength", "confidence"])
+    prev_conv = get_number(prev, ["conviction", "confidence", "signal_strength"])
+    curr_conv = get_number(curr, ["conviction", "confidence", "signal_strength"])
 
-delta_volume = curr_volume - prev_volume
-delta_oi = curr_oi - prev_oi
-delta_conviction = curr_conv - prev_conv
+    delta_volume = curr_volume - prev_volume
+    delta_oi = curr_oi - prev_oi
+    delta_conv = curr_conv - prev_conv
 
-    velocity = delta_conviction / max(abs(delta_volume), 1)
+    velocity = delta_conv / max(abs(delta_volume), 1)
 
-    # Phase logic
-    if curr["conviction"] > 0.1 and delta_conviction > 0:
+    if curr_conv > 0.1 and delta_conv > 0:
         phase = "EDGE FORMING"
-    elif delta_volume > 0 and delta_conviction == 0:
+    elif delta_volume > 0 and delta_conv == 0:
         phase = "CROWDED"
     elif delta_volume > 0:
         phase = "WARMING"
     else:
         phase = "WATCH"
 
-  deltas.append({
-    "match": match,
-    "volume_prev": prev_volume,
-    "volume_curr": curr_volume,
-    "delta_volume": delta_volume,
-    "open_interest_prev": prev_oi,
-    "open_interest_curr": curr_oi,
-    "delta_open_interest": delta_oi,
-    "conviction_prev": prev_conv,
-    "conviction_curr": curr_conv,
-    "delta_conviction": delta_conviction,
-    "velocity": round(velocity, 6),
-    "phase": phase
-})
+    deltas.append({
+        "match": match,
+        "volume_prev": prev_volume,
+        "volume_curr": curr_volume,
+        "delta_volume": delta_volume,
+        "open_interest_prev": prev_oi,
+        "open_interest_curr": curr_oi,
+        "delta_open_interest": delta_oi,
+        "conviction_prev": prev_conv,
+        "conviction_curr": curr_conv,
+        "delta_conviction": delta_conv,
+        "velocity": round(velocity, 6),
+        "phase": phase
+    })
 
 # --------------------------------------------------
 # Write output
