@@ -44,8 +44,14 @@ def extract_matches(data):
 prev_matches = extract_matches(prev_raw)
 curr_matches = extract_matches(curr_raw)
 
-prev_map = {m["match"]: m for m in prev_matches}
-curr_map = {m["match"]: m for m in curr_matches}
+def get_match_key(m):
+    for key in ("match", "event", "event_title", "title"):
+        if key in m and m[key]:
+            return m[key]
+    raise KeyError(f"No match identifier found in record: {m.keys()}")
+
+prev_map = {get_match_key(m): m for m in prev_matches}
+curr_map = {get_match_key(m): m for m in curr_matches}
 
 # --------------------------------------------------
 # Delta computation
