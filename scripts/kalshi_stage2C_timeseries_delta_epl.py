@@ -1,5 +1,5 @@
 """
-Stage 2C — EPL Time-Series Delta Engine
+Stage 2C — EPL Time-Series Delta Engine (Schema-safe)
 Compares the two most recent resolution_signal files
 """
 
@@ -23,16 +23,29 @@ if len(files) < 2:
 
 prev_file, curr_file = files[-2], files[-1]
 
-with open(prev_file, "r") as f:
-    prev_data = json.load(f)
+with open(prev_file, "r", encoding="utf-8") as f:
+    prev_raw = json.load(f)
 
-with open(curr_file, "r") as f:
-    curr_data = json.load(f)
+with open(curr_file, "r", encoding="utf-8") as f:
+    curr_raw = json.load(f)
 
 print(f"Comparing:\n - {prev_file.name}\n - {curr_file.name}")
 
-prev_map = {m["match"]: m for m in prev_data["matches"]}
-curr_map = {m["match"]: m for m in curr_data["matches"]}
+# --------------------------------------------------
+# Normalize schema (list vs dict)
+# --------------------------------------------------
+def extract_matches(data):
+    if isinstance(data, list):
+        return data
+    if isinstance(data, dict) and "matches" in data:
+        return data["matches"]
+    raise ValueError("Unknown resolution_signal schema")
+
+prev_matches = extract_matches(prev_raw)
+curr_matches = extract_matches(curr_raw)
+
+prev_map = {m["match"]: m for m in prev_matches}
+curr_map = {m["match"]: m for m in curr_matches}
 
 # --------------------------------------------------
 # Delta computation
@@ -48,9 +61,7 @@ for match, curr in curr_map.items():
     delta_oi = curr["open_interest"] - prev["open_interest"]
     delta_conviction = curr["conviction"] - prev["conviction"]
 
-    velocity = (
-        delta_conviction / max(abs(delta_volume), 1)
-    )
+    velocity = delta_conviction / max(abs(delta_volume), 1)
 
     # Phase logic
     if curr["conviction"] > 0.1 and delta_conviction > 0:
@@ -64,8 +75,6 @@ for match, curr in curr_map.items():
 
     deltas.append({
         "match": match,
-        "prev_snapshot": prev_file.name,
-        "curr_snapshot": curr_file.name,
         "volume_prev": prev["volume"],
         "volume_curr": curr["volume"],
         "delta_volume": delta_volume,
@@ -85,7 +94,7 @@ for match, curr in curr_map.items():
 timestamp = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H-%M-%SZ")
 output_path = OUTPUT_DIR / f"epl_timeseries_delta_{timestamp}.json"
 
-with open(output_path, "w") as f:
+with open(output_path, "w", encoding="utf-8") as f:
     json.dump({
         "generated_at": timestamp,
         "previous_file": prev_file.name,
