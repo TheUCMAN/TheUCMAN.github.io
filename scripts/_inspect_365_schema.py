@@ -13,26 +13,41 @@ with open(raw_path, "r", encoding="utf-8") as f:
 
 print("\nTOTAL GAMES:", len(games))
 
-# Inspect first 2 games deeply
-for i, g in enumerate(games[:2]):
-    print(f"\n=== GAME {i+1} ===")
+# Inspect the first game that actually has markets
+found = False
+for idx, g in enumerate(games):
+    markets = g.get("markets", [])
+    if not markets:
+        continue
+
+    print(f"\n=== FIRST GAME WITH MARKETS (index {idx}) ===")
     print("Keys:", g.keys())
 
     print("Competition:", g.get("competitionDisplayName"))
-    print("Home:", g.get("homeCompetitor", {}).get("name"))
-    print("Away:", g.get("awayCompetitor", {}).get("name"))
+    print("HomeCompetitor:", g.get("homeCompetitor"))
+    print("AwayCompetitor:", g.get("awayCompetitor"))
+    print("StartTime:", g.get("startTime"))
 
-    markets = g.get("markets", [])
     print("Markets count:", len(markets))
 
-    for m in markets[:3]:
-        print("\n Market keys:", m.keys())
-        print(" lineType:", m.get("lineType"))
-        print(" odds type:", type(m.get("odds")))
+    # print first 2 markets and first odds object inside each
+    for mi, m in enumerate(markets[:2]):
+        print(f"\n--- MARKET {mi+1} ---")
+        print("Market keys:", m.keys())
+        print("lineType:", m.get("lineType"))
 
         odds = m.get("odds", [])
-        for o in odds[:1]:
-            print("  Odds keys:", o.keys())
-            print("  bookmakerId:", o.get("bookmakerId"))
-            pprint(o)
+        print("odds count:", len(odds))
+
+        if odds:
+            o = odds[0]
+            print("First odds keys:", o.keys())
+            print("bookmakerId:", o.get("bookmakerId"))
+            print("First odds object preview:", o)
+
+    found = True
     break
+
+if not found:
+    print("\nNo games with markets found in this file.")
+
