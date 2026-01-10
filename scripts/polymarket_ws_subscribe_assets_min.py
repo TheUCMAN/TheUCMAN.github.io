@@ -43,6 +43,9 @@ ws = websocket.WebSocketApp(
 import threading
 t = threading.Thread(target=ws.run_forever, daemon=True)
 t.start()
-time.sleep(RUN_SECONDS)
+time.sleep(600)
 ws.close()
 print("SAVED TO:", out)
+
+print("WS listening… press Ctrl+C to stop")
+
