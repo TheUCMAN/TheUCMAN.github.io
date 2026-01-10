@@ -17,7 +17,7 @@ raw_books = json.load(open(raw_path, "r", encoding="utf-8"))
 
 normalized = []
 skipped = {
-    "no_token": 0,
+    "no_asset": 0,
     "no_books": 0,
     "parse_fail": 0
 }
@@ -38,19 +38,16 @@ def parse_level(level):
     return None
 
 for book in raw_books:
-    if isinstance(book, dict) and "data" in book:
-        book = book["data"]
-
     if not isinstance(book, dict):
         skipped["parse_fail"] += 1
         continue
 
-    token_id = book.get("token_id")
+    asset_id = book.get("asset_id")
     bids = book.get("bids")
     asks = book.get("asks")
 
-    if not token_id:
-        skipped["no_token"] += 1
+    if not asset_id:
+        skipped["no_asset"] += 1
         continue
 
     if not bids or not asks:
@@ -67,15 +64,15 @@ for book in raw_books:
     bid_price, bid_size = bid
     ask_price, ask_size = ask
 
-    mid = round((bid_price + ask_price) / 2, 4)
-    spread = round(ask_price - bid_price, 4)
+    mid_price = round((bid_price + ask_price) / 2, 5)
+    spread = round(ask_price - bid_price, 5)
     liquidity = bid_size + ask_size
 
     normalized.append({
-        "token_id": token_id,
+        "market_id": asset_id,
         "best_bid": bid_price,
         "best_ask": ask_price,
-        "mid_price": mid,
+        "mid_price": mid_price,
         "spread": spread,
         "liquidity": liquidity,
         "source": "polymarket"
@@ -90,7 +87,7 @@ print("\nSTAGE P1.5 COMPLETE — POLYMARKET NORMALIZED")
 print("------------------------------------------")
 print(f"Raw books read: {len(raw_books)}")
 print(f"Normalized rows: {len(normalized)}")
-print(f"Skipped (no token): {skipped['no_token']}")
+print(f"Skipped (no asset_id): {skipped['no_asset']}")
 print(f"Skipped (no liquidity): {skipped['no_books']}")
 print(f"Skipped (parse fail): {skipped['parse_fail']}")
 print(f"Wrote: {out_path.resolve()}")
