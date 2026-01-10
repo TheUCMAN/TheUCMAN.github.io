@@ -2,7 +2,7 @@ import json
 from pathlib import Path
 from collections import Counter
 
-HAR_FILES = sorted(Path(".").glob("*.har"))
+HAR_FILES = sorted(Path(".").glob("polymarket*.har"))
 if not HAR_FILES:
     raise FileNotFoundError("No HAR files found")
 
