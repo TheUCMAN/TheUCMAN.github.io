@@ -21,15 +21,15 @@ print(f">>> Parsing Gamma outcomes from HAR: {har_path.name}")
 har = json.load(open(har_path, "r", encoding="utf-8"))
 entries = har["log"]["entries"]
 
-outcomes = {}
-matched = 0
+outcomes_index = {}
+matched_requests = 0
 
-for e in entries:
-    url = e["request"]["url"]
+for entry in entries:
+    url = entry["request"]["url"]
     if TARGET_HOST not in url or TARGET_PATH not in url:
         continue
 
-    text = e["response"]["content"].get("text")
+    text = entry["response"]["content"].get("text")
     if not text:
         continue
 
@@ -38,7 +38,7 @@ for e in entries:
     except Exception:
         continue
 
-    matched += 1
+    matched_requests += 1
 
     for event in payload.get("data", []):
         event_id = event.get("id")
@@ -49,27 +49,43 @@ for e in entries:
             market_question = market.get("question")
 
             for outcome in market.get("outcomes", []):
-                token = outcome.get("clobTokenId")
-                if not token:
-                    continue
 
-                outcomes[token] = {
-                    "event_id": event_id,
-                    "event_title": event_title,
-                    "market_id": market_id,
-                    "market_question": market_question,
-                    "outcome_id": outcome.get("id"),
-                    "outcome_name": outcome.get("name"),
-                    "side": outcome.get("side"),
-                }
+                # CASE 1: outcome is dict
+                if isinstance(outcome, dict):
+                    token = outcome.get("clobTokenId")
+                    if not token:
+                        continue
+
+                    outcomes_index[token] = {
+                        "event_id": event_id,
+                        "event_title": event_title,
+                        "market_id": market_id,
+                        "market_question": market_question,
+                        "outcome_id": outcome.get("id"),
+                        "outcome_name": outcome.get("name"),
+                        "side": outcome.get("side"),
+                    }
+
+                # CASE 2: outcome is already clobTokenId (string)
+                elif isinstance(outcome, str):
+                    outcomes_index[outcome] = {
+                        "event_id": event_id,
+                        "event_title": event_title,
+                        "market_id": market_id,
+                        "market_question": market_question,
+                        "outcome_id": None,
+                        "outcome_name": None,
+                        "side": None,
+                    }
 
 ts = datetime.now(UTC).strftime("%Y-%m-%dT%H-%M-%SZ")
 out_path = OUT_DIR / f"gamma_outcomes_{ts}.json"
 
-json.dump(outcomes, open(out_path, "w", encoding="utf-8"), indent=2)
+with open(out_path, "w", encoding="utf-8") as f:
+    json.dump(outcomes_index, f, indent=2)
 
 print("\nSTAGE P2A-3 COMPLETE — GAMMA OUTCOMES")
 print("------------------------------------")
-print(f"Gamma pages matched: {matched}")
-print(f"Outcome tokens indexed: {len(outcomes)}")
+print(f"Gamma requests matched: {matched_requests}")
+print(f"Outcome tokens indexed: {len(outcomes_index)}")
 print(f"Wrote: {out_path.resolve()}")
