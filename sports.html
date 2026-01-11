@@ -2,257 +2,523 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Arbstack | Sports</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Arbstack · EPL</title>
 
-  <!-- SAME stylesheet as index -->
-  <link rel="stylesheet" href="style.css" />
+  <style>
+    :root{
+      --bg0:#070b11;
+      --bg1:#0b1118;
+      --panel:#0f1722;
+      --panel2:#0c1420;
+      --line:#1d2a3a;
+      --text:#e7edf6;
+      --muted:#98a5b6;
+      --brand:#5aa9ff;
+      --chip:#162334;
+      --chip2:#122033;
+
+      --delta0:#2b3441; /* 0.00–0.05 */
+      --delta1:#1a2f47; /* 0.05–0.10 */
+      --delta2:#3a2a10; /* 0.10–0.15 */
+      --delta3:#4a1616; /* 0.15+ */
+      --blue:#7dbbff;
+      --amber:#ffbe55;
+      --red:#ff6b6b;
+    }
+
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      background: radial-gradient(1100px 600px at 10% -10%, #0e2a45 0%, transparent 55%),
+                  radial-gradient(900px 500px at 90% 0%, #1d1330 0%, transparent 55%),
+                  linear-gradient(180deg, var(--bg0), var(--bg1));
+      color:var(--text);
+    }
+
+    /* Header / Nav (index-ish) */
+    .topbar{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding:18px 20px;
+      border-bottom:1px solid rgba(255,255,255,.06);
+      background: linear-gradient(180deg, rgba(15,23,34,.65), rgba(15,23,34,.25));
+      backdrop-filter: blur(8px);
+      position: sticky;
+      top: 0;
+      z-index: 5;
+    }
+    .brand{
+      display:flex;
+      gap:12px;
+      align-items:center;
+      min-width: 180px;
+    }
+    .logo{
+      width:34px;height:34px;border-radius:10px;
+      background: linear-gradient(135deg, rgba(90,169,255,.9), rgba(255,190,85,.45));
+      display:flex;align-items:center;justify-content:center;
+      color:#06101b;font-weight:900;
+      box-shadow: 0 10px 22px rgba(0,0,0,.35);
+      flex:0 0 auto;
+    }
+    .brand-title{
+      display:flex;flex-direction:column;line-height:1.1;
+    }
+    .brand-title strong{font-size:14px}
+    .brand-title span{font-size:12px;color:var(--muted)}
+    nav a{
+      color:var(--text);
+      text-decoration:none;
+      margin-left:14px;
+      font-size:13px;
+      opacity:.9;
+    }
+    nav a:hover{opacity:1;color:var(--brand)}
+    nav a.active{color:var(--brand);font-weight:700}
+
+    .wrap{
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 22px 16px 34px;
+    }
+
+    .hero{
+      padding: 18px 16px 10px;
+    }
+    .hero h1{
+      margin: 0;
+      font-size: 26px;
+      letter-spacing:.2px;
+      display:flex;align-items:center;gap:10px;
+    }
+    .hero p{
+      margin: 8px 0 0;
+      color: var(--muted);
+      font-size: 13px;
+    }
+    .subline{
+      margin-top:10px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .toggle{
+      margin: 14px 0 14px;
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+    }
+    .toggle button{
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(22,35,52,.55);
+      color: var(--text);
+      padding: 8px 12px;
+      border-radius: 999px;
+      cursor:pointer;
+      font-size: 13px;
+    }
+    .toggle button.active{
+      background: rgba(90,169,255,.95);
+      color:#07101b;
+      border-color: rgba(90,169,255,.95);
+      font-weight:800;
+    }
+
+    .panel{
+      background: linear-gradient(180deg, rgba(15,23,34,.78), rgba(12,20,32,.68));
+      border:1px solid rgba(255,255,255,.08);
+      border-radius:16px;
+      overflow:hidden;
+      box-shadow: 0 16px 40px rgba(0,0,0,.35);
+    }
+
+    /* Make table mobile friendly: horizontal scroll container */
+    .table-scroll{
+      width:100%;
+      overflow-x:auto;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    table{
+      width:100%;
+      min-width: 940px; /* prevents skew on mobile; allows scroll */
+      border-collapse: collapse;
+    }
+    thead th{
+      text-align:left;
+      font-size: 12px;
+      color: var(--muted);
+      font-weight: 700;
+      padding: 14px 14px;
+      border-bottom:1px solid rgba(255,255,255,.08);
+      background: rgba(10,16,26,.35);
+      white-space:nowrap;
+    }
+    tbody td{
+      padding: 12px 14px;
+      border-bottom: 1px solid rgba(255,255,255,.06);
+      font-size: 13px;
+      vertical-align: top;
+    }
+    tbody tr:hover{
+      background: rgba(90,169,255,.06);
+    }
+    tbody tr:last-child td{border-bottom:none;}
+
+    .rank{color:var(--muted); width:56px;}
+    .match{font-weight:700; white-space:nowrap;}
+    .cell{
+      color: var(--text);
+      white-space:nowrap;
+    }
+    .muted{color:var(--muted);}
+
+    .delta-pill{
+      display:inline-block;
+      font-weight:900;
+      letter-spacing:.2px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(0,0,0,.18);
+      min-width: 58px;
+      text-align:center;
+    }
+    .d0{background: rgba(43,52,65,.55); color:#d6deea;}
+    .d1{background: rgba(26,47,71,.70); color: var(--blue);}
+    .d2{background: rgba(58,42,16,.78); color: var(--amber);}
+    .d3{background: rgba(74,22,22,.78); color: var(--red);}
+
+    .signal{font-size: 18px;}
+
+    .foot{
+      padding: 10px 14px 14px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    /* Responsive tweaks */
+    @media (max-width: 560px){
+      .hero h1{font-size:22px;}
+      nav{display:none;} /* keeps demo clean on tiny screens */
+      .brand{min-width: auto;}
+    }
+  </style>
 </head>
 
 <body>
 
-<!-- ================= HEADER (MATCHES INDEX) ================= -->
-<header class="nav">
-  <div class="nav-left">
-    <div class="logo">A</div>
+  <div class="topbar">
     <div class="brand">
-      <div class="name">Arbstack</div>
-      <div class="tagline">Markets. Disagreement. Edge.</div>
-    </div>
-  </div>
-
-  <nav class="nav-right">
-    <a href="index.html">Home</a>
-    <a href="sports.html" class="active">Sports</a>
-    <a href="#">Politics</a>
-    <a href="#">Climate</a>
-    <a href="about.html">About</a>
-  </nav>
-</header>
-
-<!-- ================= PAGE WRAPPER (CRITICAL FIX) ================= -->
-<main class="page">
-
-<section class="section">
-
-  <h1>⚽ EPL Market Disagreement Board</h1>
-  <p class="muted">Markets that disagree the most today</p>
-
-  <!-- Toggle -->
-  <div class="arb-toggle">
-    <button class="arb-btn active">Today</button>
-    <button class="arb-btn">Yesterday</button>
-    <button class="arb-btn">Change</button>
-  </div>
-
-  <!-- ================= TABLE ================= -->
-  <div class="arb-board">
-    <table class="arb-table">
-      <thead>
-        <tr>
-          <th>Rank</th>
-          <th>Match</th>
-          <th>Kalshi</th>
-          <th>Polymarket</th>
-          <th>SportsLine</th>
-          <th>Spread Δ</th>
-          <th>Signal</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>1</td>
-          <td>Leeds vs Fulham</td>
-          <td>LEE 43¢ / FUL 29¢</td>
-          <td>LEE 44% / DRAW 30% / FUL 30%</td>
-          <td>LEE +124</td>
-          <td><span class="arbscore arb-red">0.18</span></td>
-          <td>🔥</td>
-        </tr>
-        <tr>
-          <td>2</td>
-          <td>Wolves vs Newcastle</td>
-          <td>WOL 22¢ / NEW 56¢</td>
-          <td>WOL 23% / DRAW 22% / NEW 56%</td>
-          <td>NEW −139</td>
-          <td><span class="arbscore arb-amber">0.13</span></td>
-          <td>🔥</td>
-        </tr>
-        <tr>
-          <td>3</td>
-          <td>Nottingham vs Arsenal</td>
-          <td>NFO 15¢ / ARS 65¢</td>
-          <td>NFO 16% / DRAW 20% / ARS 66%</td>
-          <td>ARS −182</td>
-          <td><span class="arbscore arb-amber">0.11</span></td>
-          <td>👀</td>
-        </tr>
-        <tr>
-          <td>4</td>
-          <td>Man Utd vs Man City</td>
-          <td>MUN 26¢ / MCI 52¢</td>
-          <td>MUN 27% / DRAW 24% / MCI 52%</td>
-          <td>MCI −119</td>
-          <td><span class="arbscore arb-gray">0.04</span></td>
-          <td>⚪</td>
-        </tr>
-        <tr>
-          <td>5</td>
-          <td>Liverpool vs Burnley</td>
-          <td>LIV 81¢ / BUR 7¢</td>
-          <td>LIV 81% / DRAW 14% / BUR 7%</td>
-          <td>LIV −474</td>
-          <td><span class="arbscore arb-gray">0.03</span></td>
-          <td>⚪</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-</section>
-
-<!-- ================= FEATURED ARBCARD ================= -->
-<section class="section">
-
-  <h2>🔥 Featured ArbCard</h2>
-  <p class="muted">Highest belief divergence across markets</p>
-
-  <div class="arbcard-fut">
-
-    <div class="arbcard-header">
-      <span class="arb-badge hot">HOT</span>
-      <span class="arb-league">EPL</span>
-    </div>
-
-    <div class="arbcard-body">
-      <div class="team left">
-        <div class="team-name">Leeds</div>
-        <div class="team-odds">43¢ → 44%</div>
+      <div class="logo">A</div>
+      <div class="brand-title">
+        <strong>Arbstack</strong>
+        <span>Markets · Disagreement · Edge</span>
       </div>
+    </div>
+    <nav>
+      <a href="/index.html">Home</a>
+      <a class="active" href="/sports.html">Sports</a>
+      <a href="/politics.html">Politics</a>
+      <a href="/climate.html">Climate</a>
+      <a href="/about.html">About</a>
+    </nav>
+  </div>
 
-      <div class="arb-vs">VS</div>
+  <div class="wrap">
+    <div class="hero">
+      <h1>⚽ EPL Market Disagreement Board</h1>
+      <p>Kalshi + Polymarket + SportsLine (SportsLine converted to split probabilities)</p>
+      <div class="subline"><strong>Markets that disagree the most today</strong></div>
 
-      <div class="team right">
-        <div class="team-name">Fulham</div>
-        <div class="team-odds">29¢ → 30%</div>
+      <div class="toggle">
+        <button id="btnToday" class="active" onclick="setView('today')">Today</button>
+        <button id="btnYesterday" onclick="setView('yesterday')">Yesterday</button>
+        <button id="btnChange" onclick="setView('change')">Change</button>
       </div>
     </div>
 
-    <div class="arbcard-footer">
-      <div>Kalshi +3¢</div>
-      <div>Polymarket +4%</div>
-      <div>SportsLine +22 pts</div>
-      <div class="arbscore-big">Δ 0.18</div>
+    <div class="panel">
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr>
+              <th>Rank</th>
+              <th>Match</th>
+              <th>Kalshi</th>
+              <th>Polymarket</th>
+              <th>SportsLine</th>
+              <th>Spread Δ</th>
+              <th>Signal</th>
+            </tr>
+          </thead>
+          <tbody id="board"></tbody>
+        </table>
+      </div>
+      <div class="foot">Snapshot demo · Static data from your screenshots · Not live trading · Not betting advice</div>
     </div>
-
   </div>
-</section>
 
-</main>
+<script>
+/**
+ * Core idea:
+ * - Keep Kalshi as cents split
+ * - Keep Polymarket as % split (3-way if available)
+ * - Convert SportsLine American odds into split % between the two teams (normalized)
+ *
+ * Spread Δ definition (for “who’s wrong?”):
+ * - Take the *favorite side* probability for each market (max side probability)
+ * - Spread Δ = max(favoriteProb across markets) - min(favoriteProb across markets)
+ * This highlights where the “confidence gap” is widest.
+ */
 
-<!-- ================= LOCAL UI STYLES ================= -->
-<style>
-.arb-toggle { display:flex; gap:10px; margin:14px 0; }
+// ---------- helpers ----------
+function clamp01(x){ return Math.max(0, Math.min(1, x)); }
 
-.arb-btn {
-  padding:6px 14px;
-  border-radius:20px;
-  background:#141821;
-  border:1px solid #2a2f3a;
-  color:#cfd6df;
+function americanToImpliedProb(odds){
+  // odds: -119 or +124
+  if (odds < 0) return Math.abs(odds) / (Math.abs(odds) + 100);
+  return 100 / (odds + 100);
 }
 
-.arb-btn.active {
-  background:#1f6fff;
-  border-color:#1f6fff;
-  color:white;
+function twoWayNormalize(pA, pB){
+  const s = pA + pB;
+  if (!s) return [0.5,0.5];
+  return [pA/s, pB/s];
 }
 
-.arb-board {
-  background:rgba(255,255,255,0.03);
-  border-radius:16px;
-  padding:14px;
+function pct(x){ return Math.round(clamp01(x) * 100); }
+
+function deltaClass(d){
+  // d is 0..1 range
+  if (d >= 0.15) return "d3";
+  if (d >= 0.10) return "d2";
+  if (d >= 0.05) return "d1";
+  return "d0";
 }
 
-.arb-table {
-  width:100%;
-  border-collapse:collapse;
-  font-size:14px;
+function signalEmoji(d){
+  if (d >= 0.15) return "🔥";
+  if (d >= 0.10) return "👀";
+  if (d >= 0.05) return "👀";
+  return "⚪";
 }
 
-.arb-table th, .arb-table td {
-  padding:10px;
-  border-bottom:1px solid rgba(255,255,255,0.08);
-  text-align:center;
+// ---------- DATASETS ----------
+// Note: Put your “yesterday” snapshot here too. I’m keeping the same set of matches you already used
+// (from your screenshots), and preserving Kalshi/Poly formats.
+const DATA = {
+  today: [
+    {
+      match: "Leeds vs Fulham",
+      kalshi: { A:"LEE", aCents:43, B:"FUL", bCents:29 },
+      poly:   { A:"LEE", aPct:44, D:"DRAW", dPct:30, B:"FUL", bPct:30 },
+      sport:  { A:"LEE", aOdds:+124, B:"FUL", bOdds:-124 }
+    },
+    {
+      match: "Wolves vs Newcastle",
+      kalshi: { A:"WOL", aCents:22, B:"NEW", bCents:56 },
+      poly:   { A:"WOL", aPct:23, D:"DRAW", dPct:22, B:"NEW", bPct:56 },
+      sport:  { A:"WOL", aOdds:+346, B:"NEW", bOdds:-139 }
+    },
+    {
+      match: "Nottingham vs Arsenal",
+      kalshi: { A:"NFO", aCents:15, B:"ARS", bCents:65 },
+      poly:   { A:"NFO", aPct:16, D:"DRAW", dPct:20, B:"ARS", bPct:66 },
+      sport:  { A:"NFO", aOdds:+488, B:"ARS", bOdds:-182 }
+    },
+    {
+      match: "Man Utd vs Man City",
+      kalshi: { A:"MUN", aCents:26, B:"MCI", bCents:52 },
+      poly:   { A:"MUN", aPct:27, D:"DRAW", dPct:24, B:"MCI", bPct:52 },
+      sport:  { A:"MUN", aOdds:+284, B:"MCI", bOdds:-119 }
+    },
+    {
+      match: "Liverpool vs Burnley",
+      kalshi: { A:"LIV", aCents:81, B:"BUR", bCents:7 },
+      poly:   { A:"LIV", aPct:81, D:"DRAW", dPct:14, B:"BUR", bPct:7 },
+      sport:  { A:"LIV", aOdds:-474, B:"BUR", bOdds:+1063 }
+    }
+  ],
+
+  // Fill with your yesterday snapshot values (from Jan 10 screenshots).
+  // If any differ, update these numbers only — rendering + scoring stays identical.
+  yesterday: [
+    {
+      match: "Leeds vs Fulham",
+      kalshi: { A:"LEE", aCents:43, B:"FUL", bCents:29 },
+      poly:   { A:"LEE", aPct:43, D:"DRAW", dPct:29, B:"FUL", bPct:29 }, // <-- update if your screenshot differs
+      sport:  { A:"LEE", aOdds:+130, B:"FUL", bOdds:-130 }              // <-- update if your screenshot differs
+    },
+    {
+      match: "Wolves vs Newcastle",
+      kalshi: { A:"WOL", aCents:22, B:"NEW", bCents:56 },
+      poly:   { A:"WOL", aPct:22, D:"DRAW", dPct:25, B:"NEW", bPct:56 }, // <-- update if differs
+      sport:  { A:"WOL", aOdds:+360, B:"NEW", bOdds:-145 }               // <-- update if differs
+    },
+    {
+      match: "Nottingham vs Arsenal",
+      kalshi: { A:"NFO", aCents:15, B:"ARS", bCents:65 },
+      poly:   { A:"NFO", aPct:16, D:"DRAW", dPct:22, B:"ARS", bPct:65 }, // <-- update if differs
+      sport:  { A:"NFO", aOdds:+500, B:"ARS", bOdds:-190 }               // <-- update if differs
+    },
+    {
+      match: "Man Utd vs Man City",
+      kalshi: { A:"MUN", aCents:26, B:"MCI", bCents:52 },
+      poly:   { A:"MUN", aPct:26, D:"DRAW", dPct:24, B:"MCI", bPct:52 }, // <-- update if differs
+      sport:  { A:"MUN", aOdds:+275, B:"MCI", bOdds:-115 }               // <-- update if differs
+    },
+    {
+      match: "Liverpool vs Burnley",
+      kalshi: { A:"LIV", aCents:80, B:"BUR", bCents:8 },
+      poly:   { A:"LIV", aPct:80, D:"DRAW", dPct:14, B:"BUR", bPct:8 },  // <-- update if differs
+      sport:  { A:"LIV", aOdds:-460, B:"BUR", bOdds:+980 }               // <-- update if differs
+    }
+  ]
+};
+
+// ---------- compute row (render-ready) ----------
+function buildRows(view){
+  const base = (view === "today") ? DATA.today
+            : (view === "yesterday") ? DATA.yesterday
+            : null;
+
+  if(view !== "change"){
+    return base.map(x => decorateRow(x));
+  }
+
+  // CHANGE view: compare today vs yesterday by match name
+  const yMap = new Map(DATA.yesterday.map(r => [r.match, r]));
+  return DATA.today.map(t => {
+    const y = yMap.get(t.match);
+    const dt = decorateRow(t);
+    const dy = y ? decorateRow(y) : null;
+
+    // For display, show Δ changes per market in the same “split” style
+    // We show favorite-side probability change (pp = percentage points)
+    // and SpreadΔ change.
+    return decorateChangeRow(dt, dy);
+  })
+  .sort((a,b)=>b.spreadDelta - a.spreadDelta);
 }
 
-.arbscore {
-  padding:4px 8px;
-  border-radius:8px;
-  font-weight:600;
+function decorateRow(r){
+  // SportsLine: convert odds to two-way split
+  const pA = americanToImpliedProb(r.sport.aOdds);
+  const pB = americanToImpliedProb(r.sport.bOdds);
+  const [nA, nB] = twoWayNormalize(pA, pB);
+
+  // Market favorite probabilities:
+  // Kalshi uses 2 teams shown; pick max cents as favorite prob estimate
+  const kalFav = Math.max(r.kalshi.aCents, r.kalshi.bCents) / 100;
+
+  // Polymarket is 3-way in your view; favorite is max(team A, draw, team B)
+  const polyFav = Math.max(r.poly.aPct ?? 0, r.poly.dPct ?? 0, r.poly.bPct ?? 0) / 100;
+
+  // SportsLine favorite is max(nA, nB)
+  const slFav = Math.max(nA, nB);
+
+  const spreadDelta = Math.max(kalFav, polyFav, slFav) - Math.min(kalFav, polyFav, slFav);
+
+  return {
+    match: r.match,
+
+    // display strings exactly like you want
+    kalshiStr: `${r.kalshi.A} ${r.kalshi.aCents}¢ / ${r.kalshi.B} ${r.kalshi.bCents}¢`,
+    polyStr: `${r.poly.A} ${r.poly.aPct}% / ${r.poly.D} ${r.poly.dPct}% / ${r.poly.B} ${r.poly.bPct}%`,
+    sportStr: `${r.sport.A} ${pct(nA)}% / ${r.sport.B} ${pct(nB)}%`,
+
+    // for ranking/scoring
+    spreadDelta,
+    deltaClass: deltaClass(spreadDelta),
+    signal: signalEmoji(spreadDelta),
+
+    // keep internals for change view
+    _kalFav: kalFav,
+    _polyFav: polyFav,
+    _slFav: slFav
+  };
 }
 
-.arb-gray { background:#2a2f3a; }
-.arb-amber { background:#92400e; color:#fef3c7; }
-.arb-red { background:#7f1d1d; color:#fee2e2; }
+function decorateChangeRow(todayRow, yRow){
+  if(!yRow){
+    return {
+      match: todayRow.match,
+      kalshiStr: todayRow.kalshiStr,
+      polyStr: todayRow.polyStr,
+      sportStr: todayRow.sportStr,
+      spreadDelta: todayRow.spreadDelta,
+      deltaClass: todayRow.deltaClass,
+      signal: todayRow.signal
+    };
+  }
 
-/* ===== FIFA-STYLE ARBCARD ===== */
-.arbcard-fut {
-  margin-top:16px;
-  background:linear-gradient(135deg,#111827,#020617);
-  border-radius:18px;
-  padding:18px;
-  max-width:520px;
-  border:1px solid rgba(255,255,255,0.08);
+  const kalPP = Math.round((todayRow._kalFav - yRow._kalFav) * 100);
+  const polyPP = Math.round((todayRow._polyFav - yRow._polyFav) * 100);
+  const slPP = Math.round((todayRow._slFav - yRow._slFav) * 100);
+
+  const dPP = Math.round((todayRow.spreadDelta - yRow.spreadDelta) * 100);
+
+  const fmt = (n) => (n>0?`+${n}`:`${n}`);
+
+  return {
+    match: todayRow.match,
+    kalshiStr: `Fav shift ${fmt(kalPP)}pp`,
+    polyStr: `Fav shift ${fmt(polyPP)}pp`,
+    sportStr: `Fav shift ${fmt(slPP)}pp`,
+    spreadDelta: Math.abs(dPP)/100, // display magnitude as 0.xx
+    deltaClass: deltaClass(Math.abs(dPP)/100),
+    signal: signalEmoji(Math.abs(dPP)/100),
+    _sort: Math.abs(dPP)/100
+  };
 }
 
-.arbcard-header {
-  display:flex;
-  justify-content:space-between;
-  font-size:12px;
-  opacity:0.85;
+// ---------- render ----------
+let currentView = "today";
+
+function setView(view){
+  currentView = view;
+  document.getElementById("btnToday").classList.toggle("active", view==="today");
+  document.getElementById("btnYesterday").classList.toggle("active", view==="yesterday");
+  document.getElementById("btnChange").classList.toggle("active", view==="change");
+  render();
 }
 
-.arb-badge.hot {
-  background:#7f1d1d;
-  padding:4px 8px;
-  border-radius:10px;
-  font-weight:700;
+function render(){
+  const tbody = document.getElementById("board");
+  tbody.innerHTML = "";
+
+  let rows = buildRows(currentView);
+
+  // rank by spread delta (hotness)
+  rows = rows
+    .sort((a,b)=>{
+      const av = a._sort ?? a.spreadDelta;
+      const bv = b._sort ?? b.spreadDelta;
+      return bv - av;
+    });
+
+  rows.forEach((r, idx)=>{
+    const tr = document.createElement("tr");
+    tr.innerHTML = `
+      <td class="rank">${idx+1}</td>
+      <td class="match">${r.match}</td>
+      <td class="cell">${r.kalshiStr}</td>
+      <td class="cell">${r.polyStr}</td>
+      <td class="cell">${r.sportStr}</td>
+      <td><span class="delta-pill ${r.deltaClass}">${r.spreadDelta.toFixed(2)}</span></td>
+      <td class="signal">${r.signal}</td>
+    `;
+    tbody.appendChild(tr);
+  });
 }
 
-.arbcard-body {
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  margin:18px 0;
-}
-
-.team-name {
-  font-size:20px;
-  font-weight:700;
-}
-
-.team-odds {
-  font-size:13px;
-  opacity:0.8;
-}
-
-.arb-vs {
-  font-weight:800;
-  opacity:0.6;
-}
-
-.arbcard-footer {
-  display:flex;
-  justify-content:space-between;
-  font-size:13px;
-  opacity:0.9;
-}
-
-.arbscore-big {
-  font-weight:800;
-  color:#fca5a5;
-}
-</style>
+// initial
+render();
+</script>
 
 </body>
 </html>
