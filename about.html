@@ -2,9 +2,11 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>About · Arbstack</title>
   <link rel="stylesheet" href="css/style.css" />
 </head>
+
 <body>
 
 <header class="nav">
@@ -12,7 +14,7 @@
     <div class="logo">A</div>
     <div class="brand">
       <div class="name">Arbstack</div>
-      <div class="tagline">Ranked edges across markets</div>
+      <div class="tagline">Market disagreement, made visible</div>
     </div>
   </div>
   <nav class="nav-right">
@@ -21,42 +23,154 @@
     <a href="#">Politics</a>
     <a href="#">Climate</a>
     <a href="premium.html">Premium</a>
-    <a href="about.html">About</a>
+    <a class="active" href="about.html">About</a>
   </nav>
 </header>
 
-
 <main class="page">
+
   <section class="section">
     <h1>About Arbstack</h1>
     <p class="lead">
-      What this project is, what it is not, and why it exists.
-    </p>
-
-    <h2>What is Arbstack?</h2>
-    <p><strong>Edges exist when markets misprice reality.</strong></p>
-    <ul>
-      <li>Rank outcomes by expected edge, not hype</li>
-      <li>Surface uncertainty instead of hiding it</li>
-      <li>Separate signal from fan bias</li>
-    </ul>
-
-    <h2>Philosophy</h2>
-    <p>
-      Inspired by probability theory, Kelly sizing, and market microstructure,
-      Arbstack treats every decision as a trade-off between risk, reward, and survival.
-    </p>
-
-    <h2>Status</h2>
-    <p class="muted">
-      Static demo. No execution. No advice. No guarantees.
+      Arbstack is a market-intelligence layer that helps users understand
+      <strong>where markets disagree</strong> — before they bet, trade, or predict.
     </p>
   </section>
+
+  <section class="section">
+    <h2>The Problem</h2>
+    <p>
+      Sports betting and prediction markets all price the same events,
+      but they speak different languages.
+    </p>
+
+    <ul>
+      <li>Prediction markets quote probabilities in cents or percentages</li>
+      <li>Sportsbooks quote American odds with built-in margin (vig)</li>
+      <li>Fans are forced to compare numbers that were never designed to align</li>
+    </ul>
+
+    <p>
+      As a result, users see odds — but they do not see
+      <strong>confidence gaps</strong>, <strong>bias</strong>, or
+      <strong>mispricing</strong>.
+      The most valuable information lives in the disagreement between markets,
+      and it is usually invisible.
+    </p>
+  </section>
+
+  <section class="section">
+    <h2>Arbstack’s Insight</h2>
+    <p>
+      <strong>Disagreement itself is information.</strong>
+    </p>
+
+    <p>
+      When independent markets price the same outcome differently,
+      at least one of them is wrong — or early.
+      Arbstack does not predict outcomes.
+      It surfaces where confidence diverges so users can ask better questions.
+    </p>
+  </section>
+
+  <section class="section">
+    <h2>The EPL Board</h2>
+    <p>
+      The English Premier League page is the first live demonstration of Arbstack.
+      For every match, it shows three independent market views side-by-side:
+    </p>
+
+    <ul>
+      <li>
+        <strong>Kalshi</strong> — prediction market pricing shown as team-vs-team probability (cents)
+      </li>
+      <li>
+        <strong>Polymarket</strong> — crowd-driven three-way probabilities (win / draw / loss)
+      </li>
+      <li>
+        <strong>SportsLine</strong> — bookmaker odds converted into clean split probabilities
+      </li>
+    </ul>
+
+    <p>
+      All formats are normalized so they can be compared directly.
+      No odds are hidden. No numbers are averaged away.
+    </p>
+  </section>
+
+  <section class="section">
+    <h2>What Users Learn</h2>
+    <p>
+      Before placing a bet or making a prediction, a user can immediately see:
+    </p>
+
+    <ul>
+      <li>Which matches markets broadly agree on</li>
+      <li>Which matches show strong disagreement</li>
+      <li>Whether bookmakers or crowds are more confident</li>
+      <li>Where bias, overreaction, or delayed information may exist</li>
+    </ul>
+
+    <p>
+      Arbstack shifts the question from:
+    </p>
+
+    <blockquote>
+      “Who should I bet on?”
+    </blockquote>
+
+    <p>
+      to:
+    </p>
+
+    <blockquote>
+      “Why do these markets disagree — and who is most likely wrong?”
+    </blockquote>
+  </section>
+
+  <section class="section">
+    <h2>What Arbstack Is — and Is Not</h2>
+    <ul>
+      <li><strong>Not</strong> a betting platform</li>
+      <li><strong>Not</strong> a tipster or prediction engine</li>
+      <li><strong>Not</strong> an odds aggregator</li>
+    </ul>
+
+    <p>
+      Arbstack is a <strong>decision-quality tool</strong>.
+      It makes uncertainty explicit and lets users decide how to act.
+    </p>
+  </section>
+
+  <section class="section">
+    <h2>Vision</h2>
+    <p>
+      Arbstack’s long-term vision is to become the place users visit each day to ask:
+    </p>
+
+    <blockquote>
+      “Where does the market disagree today — and why?”
+    </blockquote>
+
+    <p>
+      Sports are the starting point.
+      The same framework applies to politics, economics, and any domain
+      where probabilities are traded and belief diverges from reality.
+    </p>
+  </section>
+
+  <section class="section muted">
+    <p>
+      This site is a static demo.
+      No execution. No guarantees. No financial advice.
+    </p>
+  </section>
+
 </main>
 
 <footer class="footer">
-  <span>Arbstack · Static demo</span>
-  <span>No logins · No tracking</span>
+  <span>Arbstack · Market Disagreement Engine</span>
+  <span>Static demo · No tracking</span>
 </footer>
 
 </body>
