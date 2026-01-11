@@ -1,115 +1,147 @@
-<!-- =============================== -->
-<!-- STAGE-1 ARBSTACK EPL BOARD -->
-<!-- =============================== -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Arbstack · Sports</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
 
-<section id="epl-arbstack-board" style="margin:40px auto; max-width:1200px;">
-
-  <h2 style="text-align:center; font-size:28px; margin-bottom:10px;">
-    ⚽ Stage-1 Arbstack EPL Board
-  </h2>
-
-  <p style="text-align:center; color:#aaa; margin-bottom:20px;">
-    Cross-market odds comparison · Disagreement signals · Pre-match snapshot
-  </p>
-
-  <div style="overflow-x:auto;">
-    <table style="
-      width:100%;
-      border-collapse:collapse;
-      background:#111;
-      color:#eee;
-      font-size:14px;
-    ">
-
-      <thead>
-        <tr style="background:#1a1a1a;">
-          <th style="padding:10px;">Match</th>
-          <th>Kalshi</th>
-          <th>Polymarket</th>
-          <th>SportsLine</th>
-          <th>ArbScore</th>
-          <th>Signal</th>
-        </tr>
-      </thead>
-
-      <tbody>
-
-        <!-- Man Utd vs Man City -->
-        <tr>
-          <td style="padding:10px;">Man Utd vs Man City</td>
-          <td>MUN 26¢ / MCI 52¢</td>
-          <td>MUN 27% / MCI 52%</td>
-          <td>MCI −119</td>
-          <td><strong>0.26</strong></td>
-          <td>👀</td>
-        </tr>
-
-        <!-- Liverpool vs Burnley -->
-        <tr style="background:#151515;">
-          <td style="padding:10px;">Liverpool vs Burnley</td>
-          <td>LIV 81¢ / BUR 7¢</td>
-          <td>LIV 81% / BUR 7%</td>
-          <td>LIV −474</td>
-          <td><strong>0.04</strong></td>
-          <td>⚪</td>
-        </tr>
-
-        <!-- Chelsea vs Brentford -->
-        <tr>
-          <td style="padding:10px;">Chelsea vs Brentford</td>
-          <td>CHE 58¢ / BRE 20¢</td>
-          <td>CHE 58% / BRE 21%</td>
-          <td>CHE −152</td>
-          <td><strong>0.03</strong></td>
-          <td>⚪</td>
-        </tr>
-
-        <!-- Sunderland vs Crystal Palace -->
-        <tr style="background:#151515;">
-          <td style="padding:10px;">Sunderland vs Crystal Palace</td>
-          <td>SUN 37¢ / CRY 35¢</td>
-          <td>SUN 37% / CRY 33%</td>
-          <td>CRY +165</td>
-          <td><strong>0.07</strong></td>
-          <td>👀</td>
-        </tr>
-
-        <!-- Nottingham Forest vs Arsenal -->
-        <tr>
-          <td style="padding:10px;">Nottingham vs Arsenal</td>
-          <td>NFO 15¢ / ARS 65¢</td>
-          <td>NFO 16% / ARS 66%</td>
-          <td>ARS −182</td>
-          <td><strong>0.05</strong></td>
-          <td>⚪</td>
-        </tr>
-
-        <!-- Wolves vs Newcastle -->
-        <tr style="background:#151515;">
-          <td style="padding:10px;">Wolves vs Newcastle</td>
-          <td>WOL 22¢ / NEW 56¢</td>
-          <td>WOL 23% / NEW 56%</td>
-          <td>NEW −139</td>
-          <td><strong>0.04</strong></td>
-          <td>⚪</td>
-        </tr>
-
-        <!-- Leeds vs Fulham -->
-        <tr>
-          <td style="padding:10px;">Leeds vs Fulham</td>
-          <td>LEE 43¢ / FUL 29¢</td>
-          <td>LEE 44% / FUL 30%</td>
-          <td>LEE +124</td>
-          <td><strong>0.15</strong></td>
-          <td>🔥</td>
-        </tr>
-
-      </tbody>
-    </table>
+<header class="nav">
+  <div class="nav-left">
+    <div class="logo">A</div>
+    <div class="brand">
+      <div class="name">Arbstack</div>
+      <div class="tagline">Ranked edges across markets</div>
+    </div>
   </div>
+  <nav class="nav-right">
+    <a href="index.html">Home</a>
+    <a href="sports.html" class="active">Sports</a>
+    <a href="#">Politics</a>
+    <a href="#">Climate</a>
+    <a href="premium.html">Premium</a>
+    <a href="about.html">About</a>
+  </nav>
+</header>
 
-  <p style="margin-top:12px; color:#888; font-size:12px;">
-    ⚠ Snapshot odds · Manual Stage-1 board · Not live trading advice
+<main class="page">
+
+<!-- HERO -->
+<section class="section">
+  <h1>⚽ Stage-1 Arbstack EPL Board</h1>
+  <p class="muted">
+    Cross-market disagreement snapshot · Kalshi vs Polymarket vs SportsLine
   </p>
-
 </section>
+
+<!-- EPL BOARD -->
+<section class="section">
+
+<div style="
+  background: rgba(255,255,255,0.02);
+  border-radius: 14px;
+  padding: 20px;
+  overflow-x: auto;
+">
+
+<table style="
+  width:100%;
+  border-collapse: collapse;
+  font-size: 14px;
+">
+  <thead>
+    <tr style="border-bottom:1px solid rgba(255,255,255,0.1)">
+      <th align="left">Match</th>
+      <th>Kalshi</th>
+      <th>Polymarket</th>
+      <th>SportsLine</th>
+      <th>ArbScore</th>
+      <th>Signal</th>
+    </tr>
+  </thead>
+  <tbody>
+
+    <tr>
+      <td>Man Utd vs Man City</td>
+      <td>MUN 26¢ / MCI 52¢</td>
+      <td>MUN 27% / MCI 52%</td>
+      <td>MCI −119</td>
+      <td>0.26</td>
+      <td>👀</td>
+    </tr>
+
+    <tr>
+      <td>Liverpool vs Burnley</td>
+      <td>LIV 81¢ / BUR 7¢</td>
+      <td>LIV 81% / BUR 7%</td>
+      <td>LIV −474</td>
+      <td>0.04</td>
+      <td>⚪</td>
+    </tr>
+
+    <tr>
+      <td>Chelsea vs Brentford</td>
+      <td>CHE 58¢ / BRE 20¢</td>
+      <td>CHE 58% / BRE 21%</td>
+      <td>CHE −152</td>
+      <td>0.03</td>
+      <td>⚪</td>
+    </tr>
+
+    <tr>
+      <td>Sunderland vs Crystal Palace</td>
+      <td>SUN 37¢ / CRY 35¢</td>
+      <td>SUN 37% / CRY 33%</td>
+      <td>CRY +165</td>
+      <td>0.07</td>
+      <td>👀</td>
+    </tr>
+
+    <tr>
+      <td>Nottingham vs Arsenal</td>
+      <td>NFO 15¢ / ARS 65¢</td>
+      <td>NFO 16% / ARS 66%</td>
+      <td>ARS −182</td>
+      <td>0.05</td>
+      <td>⚪</td>
+    </tr>
+
+    <tr>
+      <td>Wolves vs Newcastle</td>
+      <td>WOL 22¢ / NEW 56¢</td>
+      <td>WOL 23% / NEW 56%</td>
+      <td>NEW −139</td>
+      <td>0.04</td>
+      <td>⚪</td>
+    </tr>
+
+    <tr>
+      <td>Leeds vs Fulham</td>
+      <td>LEE 43¢ / FUL 29¢</td>
+      <td>LEE 44% / FUL 30%</td>
+      <td>LEE +124</td>
+      <td><strong>0.15</strong></td>
+      <td>🔥</td>
+    </tr>
+
+  </tbody>
+</table>
+
+<p style="margin-top:12px;font-size:12px;opacity:0.7">
+⚠ Snapshot odds · Manual Stage-1 board · Not trading advice
+</p>
+
+</div>
+</section>
+
+</main>
+
+<footer class="footer">
+  <span>Arbstack · Static demo</span>
+  <span>No logins · No tracking</span>
+</footer>
+
+</body>
+</html>
