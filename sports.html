@@ -1,147 +1,225 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <title>Arbstack · Sports</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="css/style.css" />
-</head>
-<body>
+<!-- ========================= -->
+<!-- STAGE-2 ARBSTACK EPL BOARD -->
+<!-- ========================= -->
 
-<header class="nav">
-  <div class="nav-left">
-    <div class="logo">A</div>
-    <div class="brand">
-      <div class="name">Arbstack</div>
-      <div class="tagline">Ranked edges across markets</div>
-    </div>
-  </div>
-  <nav class="nav-right">
-    <a href="index.html">Home</a>
-    <a href="sports.html" class="active">Sports</a>
-    <a href="#">Politics</a>
-    <a href="#">Climate</a>
-    <a href="premium.html">Premium</a>
-    <a href="about.html">About</a>
-  </nav>
-</header>
+<section class="section" id="arbstack-epl-composite">
 
-<main class="page">
-
-<!-- HERO -->
-<section class="section">
-  <h1>⚽ Stage-1 Arbstack EPL Board</h1>
-  <p class="muted">
-    Cross-market disagreement snapshot · Kalshi vs Polymarket vs SportsLine
+  <h1 style="margin-bottom:4px;">⚽ EPL Market Disagreement Board</h1>
+  <p style="color:#9aa4b2;font-size:0.95rem;margin-bottom:14px;">
+    Markets that disagree the most today
   </p>
+
+  <!-- Toggle -->
+  <div class="arb-toggle">
+    <button class="arb-btn active" data-view="today">Today</button>
+    <button class="arb-btn" data-view="yesterday">Yesterday</button>
+    <button class="arb-btn" data-view="change">Change</button>
+  </div>
+
+  <!-- Board -->
+  <div class="arb-board">
+    <table class="arb-table">
+      <thead>
+        <tr>
+          <th>Match</th>
+          <th>Kalshi</th>
+          <th>Polymarket</th>
+          <th>SportsLine</th>
+          <th>Composite</th>
+          <th>Signal</th>
+        </tr>
+      </thead>
+      <tbody>
+
+        <!-- Man Utd vs Man City -->
+        <tr>
+          <td>Man Utd vs Man City</td>
+
+          <td data-today="MUN 26¢ / MCI 52¢"
+              data-yesterday="MUN 27¢ / MCI 51¢"
+              data-change="-1¢ / +1¢">
+            MUN 26¢ / MCI 52¢
+          </td>
+
+          <td data-today="MUN 27% / DRAW 24% / MCI 52%"
+              data-yesterday="MUN 27% / DRAW 25% / MCI 51%"
+              data-change="0 / -1 / +1">
+            MUN 27% / DRAW 24% / MCI 52%
+          </td>
+
+          <td data-today="MCI −119"
+              data-yesterday="MCI −113"
+              data-change="−6">
+            MCI −119
+          </td>
+
+          <td>
+            <span class="arbscore arb-gray"
+                  data-today="0.04"
+                  data-yesterday="0.03"
+                  data-change="+0.01">0.04</span>
+          </td>
+
+          <td>⚪</td>
+        </tr>
+
+        <!-- Leeds vs Fulham -->
+        <tr>
+          <td>Leeds vs Fulham</td>
+
+          <td data-today="LEE 43¢ / FUL 29¢"
+              data-yesterday="LEE 40¢ / FUL 32¢"
+              data-change="+3¢ / -3¢">
+            LEE 43¢ / FUL 29¢
+          </td>
+
+          <td data-today="LEE 44% / DRAW 30% / FUL 30%"
+              data-yesterday="LEE 40% / DRAW 30% / FUL 32%"
+              data-change="+4 / 0 / -2">
+            LEE 44% / DRAW 30% / FUL 30%
+          </td>
+
+          <td data-today="LEE +124"
+              data-yesterday="LEE +146"
+              data-change="+22">
+            LEE +124
+          </td>
+
+          <td>
+            <span class="arbscore arb-red"
+                  data-today="0.18"
+                  data-yesterday="0.13"
+                  data-change="+0.05">0.18</span>
+          </td>
+
+          <td>🔥</td>
+        </tr>
+
+        <!-- Nottingham vs Arsenal -->
+        <tr>
+          <td>Nottingham vs Arsenal</td>
+
+          <td data-today="NFO 15¢ / ARS 65¢"
+              data-yesterday="NFO 16¢ / ARS 64¢"
+              data-change="-1¢ / +1¢">
+            NFO 15¢ / ARS 65¢
+          </td>
+
+          <td data-today="NFO 16% / DRAW 20% / ARS 66%"
+              data-yesterday="NFO 16% / DRAW 21% / ARS 65%"
+              data-change="0 / -1 / +1">
+            NFO 16% / DRAW 20% / ARS 66%
+          </td>
+
+          <td data-today="ARS −182"
+              data-yesterday="ARS −164"
+              data-change="−18">
+            ARS −182
+          </td>
+
+          <td>
+            <span class="arbscore arb-amber"
+                  data-today="0.11"
+                  data-yesterday="0.09"
+                  data-change="+0.02">0.11</span>
+          </td>
+
+          <td>👀</td>
+        </tr>
+
+      </tbody>
+    </table>
+  </div>
 </section>
 
-<!-- EPL BOARD -->
-<section class="section">
+<!-- ================= -->
+<!-- LOCAL STYLES ONLY -->
+<!-- ================= -->
+<style>
+#arbstack-epl-composite { margin-top:30px; }
 
-<div style="
-  background: rgba(255,255,255,0.02);
-  border-radius: 14px;
-  padding: 20px;
-  overflow-x: auto;
-">
+.arb-toggle {
+  display:flex;
+  gap:10px;
+  margin-bottom:14px;
+}
 
-<table style="
+.arb-btn {
+  padding:6px 14px;
+  border-radius:16px;
+  border:1px solid #2a2f3a;
+  background:#141821;
+  color:#b6c0cc;
+  cursor:pointer;
+  font-size:0.85rem;
+}
+
+.arb-btn.active {
+  background:#1f6fff;
+  border-color:#1f6fff;
+  color:#fff;
+}
+
+.arb-board {
+  background:rgba(255,255,255,0.02);
+  border-radius:14px;
+  padding:14px;
+  overflow-x:auto;
+}
+
+.arb-table {
   width:100%;
-  border-collapse: collapse;
-  font-size: 14px;
-">
-  <thead>
-    <tr style="border-bottom:1px solid rgba(255,255,255,0.1)">
-      <th align="left">Match</th>
-      <th>Kalshi</th>
-      <th>Polymarket</th>
-      <th>SportsLine</th>
-      <th>ArbScore</th>
-      <th>Signal</th>
-    </tr>
-  </thead>
-  <tbody>
+  border-collapse:collapse;
+  font-size:14px;
+}
 
-    <tr>
-      <td>Man Utd vs Man City</td>
-      <td>MUN 26¢ / MCI 52¢</td>
-      <td>MUN 27% / MCI 52%</td>
-      <td>MCI −119</td>
-      <td>0.26</td>
-      <td>👀</td>
-    </tr>
+.arb-table th,
+.arb-table td {
+  padding:10px 8px;
+  text-align:center;
+  border-bottom:1px solid rgba(255,255,255,0.08);
+  white-space:nowrap;
+}
 
-    <tr>
-      <td>Liverpool vs Burnley</td>
-      <td>LIV 81¢ / BUR 7¢</td>
-      <td>LIV 81% / BUR 7%</td>
-      <td>LIV −474</td>
-      <td>0.04</td>
-      <td>⚪</td>
-    </tr>
+.arb-table th {
+  color:#cfd8e3;
+  font-weight:600;
+}
 
-    <tr>
-      <td>Chelsea vs Brentford</td>
-      <td>CHE 58¢ / BRE 20¢</td>
-      <td>CHE 58% / BRE 21%</td>
-      <td>CHE −152</td>
-      <td>0.03</td>
-      <td>⚪</td>
-    </tr>
+.arbscore {
+  font-weight:600;
+  border-radius:6px;
+  padding:4px 8px;
+  display:inline-block;
+  min-width:52px;
+}
 
-    <tr>
-      <td>Sunderland vs Crystal Palace</td>
-      <td>SUN 37¢ / CRY 35¢</td>
-      <td>SUN 37% / CRY 33%</td>
-      <td>CRY +165</td>
-      <td>0.07</td>
-      <td>👀</td>
-    </tr>
+.arb-gray { background:#2a2f3a; color:#cfd6df; }
+.arb-blue { background:#1e3a8a; color:#dbeafe; }
+.arb-amber { background:#92400e; color:#fef3c7; }
+.arb-red { background:#7f1d1d; color:#fee2e2; }
+</style>
 
-    <tr>
-      <td>Nottingham vs Arsenal</td>
-      <td>NFO 15¢ / ARS 65¢</td>
-      <td>NFO 16% / ARS 66%</td>
-      <td>ARS −182</td>
-      <td>0.05</td>
-      <td>⚪</td>
-    </tr>
+<!-- ============== -->
+<!-- TOGGLE SCRIPT -->
+<!-- ============== -->
+<script>
+document.querySelectorAll(".arb-btn").forEach(btn => {
+  btn.addEventListener("click", () => {
+    document.querySelectorAll(".arb-btn").forEach(b => b.classList.remove("active"));
+    btn.classList.add("active");
 
-    <tr>
-      <td>Wolves vs Newcastle</td>
-      <td>WOL 22¢ / NEW 56¢</td>
-      <td>WOL 23% / NEW 56%</td>
-      <td>NEW −139</td>
-      <td>0.04</td>
-      <td>⚪</td>
-    </tr>
+    const view = btn.dataset.view;
 
-    <tr>
-      <td>Leeds vs Fulham</td>
-      <td>LEE 43¢ / FUL 29¢</td>
-      <td>LEE 44% / FUL 30%</td>
-      <td>LEE +124</td>
-      <td><strong>0.15</strong></td>
-      <td>🔥</td>
-    </tr>
+    document.querySelectorAll("#arbstack-epl-composite td[data-" + view + "]")
+      .forEach(cell => {
+        cell.textContent = cell.dataset[view];
+      });
 
-  </tbody>
-</table>
-
-<p style="margin-top:12px;font-size:12px;opacity:0.7">
-⚠ Snapshot odds · Manual Stage-1 board · Not trading advice
-</p>
-
-</div>
-</section>
-
-</main>
-
-<footer class="footer">
-  <span>Arbstack · Static demo</span>
-  <span>No logins · No tracking</span>
-</footer>
-
-</body>
-</html>
+    document.querySelectorAll("#arbstack-epl-composite .arbscore")
+      .forEach(score => {
+        score.textContent = score.dataset[view];
+      });
+  });
+});
+</script>
