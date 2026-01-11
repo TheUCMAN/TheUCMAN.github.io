@@ -1,123 +1,115 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <title>Arbstack · Sports</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="css/style.css" />
-</head>
-<body>
+<!-- =============================== -->
+<!-- STAGE-1 ARBSTACK EPL BOARD -->
+<!-- =============================== -->
 
-<header class="nav">
-  <div class="nav-left">
-    <div class="logo">A</div>
-    <div class="brand">
-      <div class="name">Arbstack</div>
-      <div class="tagline">Sports edges (demo)</div>
-    </div>
-  </div>
-  <nav class="nav-right">
-    <a href="index.html">Home</a>
-    <a href="sports.html" class="active">Sports</a>
-    <a href="#">Politics</a>
-    <a href="#">Climate</a>
-    <a href="premium.html">Premium</a>
-    <a href="about.html">About</a>
-  </nav>
-</header>
+<section id="epl-arbstack-board" style="margin:40px auto; max-width:1200px;">
 
-<main class="page">
+  <h2 style="text-align:center; font-size:28px; margin-bottom:10px;">
+    ⚽ Stage-1 Arbstack EPL Board
+  </h2>
 
-<section class="section">
-  <h1>Sports</h1>
-  <p class="muted">
-    Cards ranked by <strong>ArbScore</strong>. Premium features locked.
+  <p style="text-align:center; color:#aaa; margin-bottom:20px;">
+    Cross-market odds comparison · Disagreement signals · Pre-match snapshot
   </p>
 
-  <div class="pill-row">
-    <span class="pill">AFCON + EPL</span>
-    <span class="pill">Cricket tournaments</span>
-    <span class="pill">NFL weekly slate</span>
-    <span class="pill muted">Updated —</span>
+  <div style="overflow-x:auto;">
+    <table style="
+      width:100%;
+      border-collapse:collapse;
+      background:#111;
+      color:#eee;
+      font-size:14px;
+    ">
+
+      <thead>
+        <tr style="background:#1a1a1a;">
+          <th style="padding:10px;">Match</th>
+          <th>Kalshi</th>
+          <th>Polymarket</th>
+          <th>SportsLine</th>
+          <th>ArbScore</th>
+          <th>Signal</th>
+        </tr>
+      </thead>
+
+      <tbody>
+
+        <!-- Man Utd vs Man City -->
+        <tr>
+          <td style="padding:10px;">Man Utd vs Man City</td>
+          <td>MUN 26¢ / MCI 52¢</td>
+          <td>MUN 27% / MCI 52%</td>
+          <td>MCI −119</td>
+          <td><strong>0.26</strong></td>
+          <td>👀</td>
+        </tr>
+
+        <!-- Liverpool vs Burnley -->
+        <tr style="background:#151515;">
+          <td style="padding:10px;">Liverpool vs Burnley</td>
+          <td>LIV 81¢ / BUR 7¢</td>
+          <td>LIV 81% / BUR 7%</td>
+          <td>LIV −474</td>
+          <td><strong>0.04</strong></td>
+          <td>⚪</td>
+        </tr>
+
+        <!-- Chelsea vs Brentford -->
+        <tr>
+          <td style="padding:10px;">Chelsea vs Brentford</td>
+          <td>CHE 58¢ / BRE 20¢</td>
+          <td>CHE 58% / BRE 21%</td>
+          <td>CHE −152</td>
+          <td><strong>0.03</strong></td>
+          <td>⚪</td>
+        </tr>
+
+        <!-- Sunderland vs Crystal Palace -->
+        <tr style="background:#151515;">
+          <td style="padding:10px;">Sunderland vs Crystal Palace</td>
+          <td>SUN 37¢ / CRY 35¢</td>
+          <td>SUN 37% / CRY 33%</td>
+          <td>CRY +165</td>
+          <td><strong>0.07</strong></td>
+          <td>👀</td>
+        </tr>
+
+        <!-- Nottingham Forest vs Arsenal -->
+        <tr>
+          <td style="padding:10px;">Nottingham vs Arsenal</td>
+          <td>NFO 15¢ / ARS 65¢</td>
+          <td>NFO 16% / ARS 66%</td>
+          <td>ARS −182</td>
+          <td><strong>0.05</strong></td>
+          <td>⚪</td>
+        </tr>
+
+        <!-- Wolves vs Newcastle -->
+        <tr style="background:#151515;">
+          <td style="padding:10px;">Wolves vs Newcastle</td>
+          <td>WOL 22¢ / NEW 56¢</td>
+          <td>WOL 23% / NEW 56%</td>
+          <td>NEW −139</td>
+          <td><strong>0.04</strong></td>
+          <td>⚪</td>
+        </tr>
+
+        <!-- Leeds vs Fulham -->
+        <tr>
+          <td style="padding:10px;">Leeds vs Fulham</td>
+          <td>LEE 43¢ / FUL 29¢</td>
+          <td>LEE 44% / FUL 30%</td>
+          <td>LEE +124</td>
+          <td><strong>0.15</strong></td>
+          <td>🔥</td>
+        </tr>
+
+      </tbody>
+    </table>
   </div>
-</section>
 
-<section class="section">
-  <div class="tabs">
-    <button class="tab active">Soccer</button>
-    <button class="tab">Cricket</button>
-    <button class="tab">NFL</button>
-  </div>
-</section>
-
-<section class="section">
-  <h2>EPL · Matchday (Jan 4)</h2>
-
-  <div class="match-list">
- <a class="arbcard" href="#" title="Concept preview">
-  <div class="arbcard-main">
-    <div class="arbcard-match">
-      <div class="arbcard-teams">
-        <strong>Manchester City</strong>
-        <span class="vs">vs</span>
-        <strong>Chelsea</strong>
-      </div>
-      <div class="arbcard-meta">
-        Jan 4 · 12:30pm ET · EPL
-      </div>
-    </div>
-
-    <div class="arbcard-score">
-      <span class="score">82</span>
-      <span class="label">ArbScore</span>
-    </div>
-  </div>
-
-  <div class="arbcard-details">
-    <ul>
-      <li>Market bias toward City (fan skew)</li>
-      <li>Draw underpriced relative to xG spread</li>
-      <li>Liquidity strong on 1X2 markets</li>
-    </ul>
-  </div>
-</a>
-
-
-    <div class="match-row">
-      <div>
-        <div class="match-teams">Tottenham vs Sunderland</div>
-        <div class="match-meta">Jan 4 · 10:00am ET</div>
-      </div>
-      <div class="arbscore">78</div>
-    </div>
-
-    <div class="match-row">
-      <div>
-        <div class="match-teams">Newcastle vs Crystal Palace</div>
-        <div class="match-meta">Jan 4 · 10:00am ET</div>
-      </div>
-      <div class="arbscore">74</div>
-    </div>
-  </div>
-</section>
-
-<section class="section">
-  <h2>Sample ArbCard (Concept Preview)</h2>
-  <p class="muted">
-    Visual example only. Not live odds.
+  <p style="margin-top:12px; color:#888; font-size:12px;">
+    ⚠ Snapshot odds · Manual Stage-1 board · Not live trading advice
   </p>
 
-  <div class="arbcard-preview">
-    <img src="assets/sample-arbcard.png" alt="Sample ArbCard">
-  </div>
 </section>
-
-</main>
-
-<footer class="footer">
-  <span>Arbstack · Sports demo</span>
-  <span>No execution · No advice</span>
-</footer>
-
-</body>
-</html>
