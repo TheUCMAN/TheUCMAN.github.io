@@ -1,238 +1,258 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<title>Arbstack · EPL Market Disagreement</title>
+  <meta charset="UTF-8" />
+  <title>Arbstack | Sports</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<style>
-:root {
-  --bg: #0e141b;
-  --panel: #121a22;
-  --text: #e8edf2;
-  --muted: #9aa4af;
-  --accent: #4da3ff;
-  --hot: #ff4d4d;
-  --amber: #ffb020;
-  --cool: #4da3ff;
-}
-
-* { box-sizing: border-box; }
-
-body {
-  margin: 0;
-  font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-  background: linear-gradient(180deg, #0b1118, #0e141b);
-  color: var(--text);
-}
-
-header {
-  padding: 24px 40px;
-  border-bottom: 1px solid #1f2a36;
-}
-
-header h1 {
-  margin: 0;
-  font-size: 26px;
-  font-weight: 600;
-}
-
-header p {
-  margin: 6px 0 0;
-  color: var(--muted);
-}
-
-main {
-  padding: 32px 40px;
-}
-
-.toggle {
-  margin: 16px 0 24px;
-}
-
-.toggle button {
-  background: #18222d;
-  border: 1px solid #223040;
-  color: var(--text);
-  padding: 6px 14px;
-  margin-right: 6px;
-  border-radius: 14px;
-  cursor: pointer;
-}
-
-.toggle button.active {
-  background: var(--accent);
-  color: #000;
-  font-weight: 600;
-}
-
-table {
-  width: 100%;
-  border-collapse: collapse;
-  background: var(--panel);
-  border-radius: 12px;
-  overflow: hidden;
-}
-
-th, td {
-  padding: 14px 14px;
-  text-align: left;
-  border-bottom: 1px solid #1f2a36;
-  font-size: 14px;
-}
-
-th {
-  color: var(--muted);
-  font-weight: 600;
-}
-
-tr:last-child td {
-  border-bottom: none;
-}
-
-.rank {
-  color: var(--muted);
-}
-
-.delta {
-  font-weight: 700;
-  padding: 4px 10px;
-  border-radius: 999px;
-  display: inline-block;
-}
-
-.delta.low { background: #2a313a; }
-.delta.mid { background: #1d3550; color: #6bb6ff; }
-.delta.high { background: #3b2a10; color: var(--amber); }
-.delta.hot { background: #4a1616; color: var(--hot); }
-
-.signal {
-  font-size: 18px;
-}
-
-.footer-note {
-  margin-top: 16px;
-  color: var(--muted);
-  font-size: 12px;
-}
-</style>
+  <!-- SAME stylesheet as index -->
+  <link rel="stylesheet" href="style.css" />
 </head>
 
 <body>
 
-<header>
-  <h1>⚽ EPL Market Disagreement Board</h1>
-  <p>Kalshi · Polymarket · SportsLine (converted to probabilities)</p>
+<!-- ================= HEADER (MATCHES INDEX) ================= -->
+<header class="nav">
+  <div class="nav-left">
+    <div class="logo">A</div>
+    <div class="brand">
+      <div class="name">Arbstack</div>
+      <div class="tagline">Markets. Disagreement. Edge.</div>
+    </div>
+  </div>
+
+  <nav class="nav-right">
+    <a href="index.html">Home</a>
+    <a href="sports.html" class="active">Sports</a>
+    <a href="#">Politics</a>
+    <a href="#">Climate</a>
+    <a href="about.html">About</a>
+  </nav>
 </header>
 
-<main>
+<!-- ================= PAGE WRAPPER (CRITICAL FIX) ================= -->
+<main class="page">
 
-<div class="toggle">
-  <button class="active">Today</button>
-  <button>Yesterday</button>
-  <button>Change</button>
-</div>
+<section class="section">
 
-<table>
-<thead>
-<tr>
-  <th>Rank</th>
-  <th>Match</th>
-  <th>Kalshi (%)</th>
-  <th>Polymarket (%)</th>
-  <th>SportsLine (%)</th>
-  <th>Spread Δ</th>
-  <th>Signal</th>
-</tr>
-</thead>
-<tbody id="board"></tbody>
-</table>
+  <h1>⚽ EPL Market Disagreement Board</h1>
+  <p class="muted">Markets that disagree the most today</p>
 
-<div class="footer-note">
-  Snapshot demo · SportsLine odds converted to vig-adjusted probabilities · Not betting advice
-</div>
+  <!-- Toggle -->
+  <div class="arb-toggle">
+    <button class="arb-btn active">Today</button>
+    <button class="arb-btn">Yesterday</button>
+    <button class="arb-btn">Change</button>
+  </div>
+
+  <!-- ================= TABLE ================= -->
+  <div class="arb-board">
+    <table class="arb-table">
+      <thead>
+        <tr>
+          <th>Rank</th>
+          <th>Match</th>
+          <th>Kalshi</th>
+          <th>Polymarket</th>
+          <th>SportsLine</th>
+          <th>Spread Δ</th>
+          <th>Signal</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td>Leeds vs Fulham</td>
+          <td>LEE 43¢ / FUL 29¢</td>
+          <td>LEE 44% / DRAW 30% / FUL 30%</td>
+          <td>LEE +124</td>
+          <td><span class="arbscore arb-red">0.18</span></td>
+          <td>🔥</td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>Wolves vs Newcastle</td>
+          <td>WOL 22¢ / NEW 56¢</td>
+          <td>WOL 23% / DRAW 22% / NEW 56%</td>
+          <td>NEW −139</td>
+          <td><span class="arbscore arb-amber">0.13</span></td>
+          <td>🔥</td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td>Nottingham vs Arsenal</td>
+          <td>NFO 15¢ / ARS 65¢</td>
+          <td>NFO 16% / DRAW 20% / ARS 66%</td>
+          <td>ARS −182</td>
+          <td><span class="arbscore arb-amber">0.11</span></td>
+          <td>👀</td>
+        </tr>
+        <tr>
+          <td>4</td>
+          <td>Man Utd vs Man City</td>
+          <td>MUN 26¢ / MCI 52¢</td>
+          <td>MUN 27% / DRAW 24% / MCI 52%</td>
+          <td>MCI −119</td>
+          <td><span class="arbscore arb-gray">0.04</span></td>
+          <td>⚪</td>
+        </tr>
+        <tr>
+          <td>5</td>
+          <td>Liverpool vs Burnley</td>
+          <td>LIV 81¢ / BUR 7¢</td>
+          <td>LIV 81% / DRAW 14% / BUR 7%</td>
+          <td>LIV −474</td>
+          <td><span class="arbscore arb-gray">0.03</span></td>
+          <td>⚪</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ================= FEATURED ARBCARD ================= -->
+<section class="section">
+
+  <h2>🔥 Featured ArbCard</h2>
+  <p class="muted">Highest belief divergence across markets</p>
+
+  <div class="arbcard-fut">
+
+    <div class="arbcard-header">
+      <span class="arb-badge hot">HOT</span>
+      <span class="arb-league">EPL</span>
+    </div>
+
+    <div class="arbcard-body">
+      <div class="team left">
+        <div class="team-name">Leeds</div>
+        <div class="team-odds">43¢ → 44%</div>
+      </div>
+
+      <div class="arb-vs">VS</div>
+
+      <div class="team right">
+        <div class="team-name">Fulham</div>
+        <div class="team-odds">29¢ → 30%</div>
+      </div>
+    </div>
+
+    <div class="arbcard-footer">
+      <div>Kalshi +3¢</div>
+      <div>Polymarket +4%</div>
+      <div>SportsLine +22 pts</div>
+      <div class="arbscore-big">Δ 0.18</div>
+    </div>
+
+  </div>
+</section>
 
 </main>
 
-<script>
-// ---------- ODDS CONVERSION ----------
-function americanToProb(odds) {
-  if (odds < 0) return Math.abs(odds) / (Math.abs(odds) + 100);
-  return 100 / (odds + 100);
+<!-- ================= LOCAL UI STYLES ================= -->
+<style>
+.arb-toggle { display:flex; gap:10px; margin:14px 0; }
+
+.arb-btn {
+  padding:6px 14px;
+  border-radius:20px;
+  background:#141821;
+  border:1px solid #2a2f3a;
+  color:#cfd6df;
 }
 
-function normalize(probs) {
-  const sum = probs.reduce((a,b)=>a+b,0);
-  return probs.map(p => p / sum);
+.arb-btn.active {
+  background:#1f6fff;
+  border-color:#1f6fff;
+  color:white;
 }
 
-// ---------- DATA (STATIC DEMO) ----------
-const matches = [
-  {
-    match: "Leeds vs Fulham",
-    kalshi: 0.43,
-    poly: 0.44,
-    sportsline: [+124, -124] // Leeds, Fulham
-  },
-  {
-    match: "Wolves vs Newcastle",
-    kalshi: 0.22,
-    poly: 0.23,
-    sportsline: [+346, -139]
-  },
-  {
-    match: "Nottingham vs Arsenal",
-    kalshi: 0.15,
-    poly: 0.16,
-    sportsline: [+488, -182]
-  },
-  {
-    match: "Man Utd vs Man City",
-    kalshi: 0.26,
-    poly: 0.27,
-    sportsline: [+284, -119]
-  },
-  {
-    match: "Liverpool vs Burnley",
-    kalshi: 0.81,
-    poly: 0.81,
-    sportsline: [-474, +1063]
-  }
-];
+.arb-board {
+  background:rgba(255,255,255,0.03);
+  border-radius:16px;
+  padding:14px;
+}
 
-// ---------- BUILD TABLE ----------
-const rows = matches.map(m => {
-  const slRaw = m.sportsline.map(americanToProb);
-  const slNorm = normalize(slRaw);
+.arb-table {
+  width:100%;
+  border-collapse:collapse;
+  font-size:14px;
+}
 
-  const probs = [m.kalshi, m.poly, slNorm[0]];
-  const spread = Math.max(...probs) - Math.min(...probs);
+.arb-table th, .arb-table td {
+  padding:10px;
+  border-bottom:1px solid rgba(255,255,255,0.08);
+  text-align:center;
+}
 
-  let cls = "low", sig = "⚪";
-  if (spread >= 0.05) { cls = "mid"; sig = "👀"; }
-  if (spread >= 0.10) { cls = "high"; sig = "👀"; }
-  if (spread >= 0.15) { cls = "hot"; sig = "🔥"; }
+.arbscore {
+  padding:4px 8px;
+  border-radius:8px;
+  font-weight:600;
+}
 
-  return { ...m, spread, cls, sig, sl: slNorm[0] };
-})
-.sort((a,b)=>b.spread - a.spread);
+.arb-gray { background:#2a2f3a; }
+.arb-amber { background:#92400e; color:#fef3c7; }
+.arb-red { background:#7f1d1d; color:#fee2e2; }
 
-// ---------- RENDER ----------
-const tbody = document.getElementById("board");
+/* ===== FIFA-STYLE ARBCARD ===== */
+.arbcard-fut {
+  margin-top:16px;
+  background:linear-gradient(135deg,#111827,#020617);
+  border-radius:18px;
+  padding:18px;
+  max-width:520px;
+  border:1px solid rgba(255,255,255,0.08);
+}
 
-rows.forEach((r,i)=>{
-  const tr = document.createElement("tr");
-  tr.innerHTML = `
-    <td class="rank">${i+1}</td>
-    <td>${r.match}</td>
-    <td>${(r.kalshi*100).toFixed(0)}%</td>
-    <td>${(r.poly*100).toFixed(0)}%</td>
-    <td>${(r.sl*100).toFixed(0)}%</td>
-    <td><span class="delta ${r.cls}">${r.spread.toFixed(2)}</span></td>
-    <td class="signal">${r.sig}</td>
-  `;
-  tbody.appendChild(tr);
-});
-</script>
+.arbcard-header {
+  display:flex;
+  justify-content:space-between;
+  font-size:12px;
+  opacity:0.85;
+}
+
+.arb-badge.hot {
+  background:#7f1d1d;
+  padding:4px 8px;
+  border-radius:10px;
+  font-weight:700;
+}
+
+.arbcard-body {
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin:18px 0;
+}
+
+.team-name {
+  font-size:20px;
+  font-weight:700;
+}
+
+.team-odds {
+  font-size:13px;
+  opacity:0.8;
+}
+
+.arb-vs {
+  font-weight:800;
+  opacity:0.6;
+}
+
+.arbcard-footer {
+  display:flex;
+  justify-content:space-between;
+  font-size:13px;
+  opacity:0.9;
+}
+
+.arbscore-big {
+  font-weight:800;
+  color:#fca5a5;
+}
+</style>
 
 </body>
 </html>
