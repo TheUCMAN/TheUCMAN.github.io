@@ -1,12 +1,461 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>About · Arbstack</title>
-  <link rel="stylesheet" href="css/style.css" />
-</head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Arbstack · About</title>
+  <style>
+    /* =====================
+       RESET & BASE
+    ===================== */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: radial-gradient(
+        ellipse at top,
+        #0f2a3a 0%,
+        #0b1623 40%,
+        #070d16 100%
+      );
+      color: #e5e7eb;
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    /* =====================
+       NAVIGATION
+    ===================== */
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 28px;
+      border-bottom: 1px solid rgba(148,163,184,0.1);
+      background: rgba(11,22,35,0.5);
+      backdrop-filter: blur(10px);
+    }
+
+    .nav-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .logo {
+      width: 42px;
+      height: 42px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, #6dd5ed, #2193b0);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #000;
+      font-weight: 700;
+      font-size: 20px;
+    }
+
+    .brand .name {
+      font-weight: 600;
+      font-size: 18px;
+      color: #fff;
+    }
+
+    .brand .tagline {
+      font-size: 0.8rem;
+      color: #94a3b8;
+    }
+
+    .nav-right {
+      display: flex;
+      gap: 24px;
+      align-items: center;
+    }
+
+    .nav-right a {
+      text-decoration: none;
+      color: #cbd5e1;
+      font-size: 0.9rem;
+      transition: color 0.2s ease;
+      position: relative;
+    }
+
+    .nav-right a:hover {
+      color: #fff;
+    }
+
+    .nav-right a.active {
+      color: #6dd5ed;
+      font-weight: 600;
+    }
+
+    .nav-right a.active::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, #6dd5ed, #2193b0);
+      border-radius: 2px;
+    }
+
+    /* =====================
+       PAGE LAYOUT
+    ===================== */
+    .page {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 60px 24px 80px;
+    }
+
+    .hero {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+
+    .hero h1 {
+      font-size: 3rem;
+      margin-bottom: 16px;
+      background: linear-gradient(135deg, #fff, #6dd5ed);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero .subtitle {
+      font-size: 1.3rem;
+      color: #6dd5ed;
+      margin-bottom: 12px;
+      font-weight: 600;
+    }
+
+    .hero p {
+      font-size: 1.15rem;
+      color: #94a3b8;
+      max-width: 800px;
+      margin: 0 auto 24px;
+      line-height: 1.7;
+    }
+
+    h2 {
+      font-size: 2rem;
+      margin: 60px 0 24px;
+      color: #fff;
+    }
+
+    h3 {
+      font-size: 1.4rem;
+      margin: 32px 0 16px;
+      color: #6dd5ed;
+    }
+
+    /* =====================
+       CONTENT SECTIONS
+    ===================== */
+    .content-section {
+      margin-bottom: 48px;
+    }
+
+    .content-section p {
+      font-size: 1.05rem;
+      color: #cbd5e1;
+      line-height: 1.8;
+      margin-bottom: 16px;
+    }
+
+    .content-section ul {
+      list-style: none;
+      padding: 0;
+      margin: 20px 0;
+    }
+
+    .content-section ul li {
+      padding: 10px 0;
+      color: #cbd5e1;
+      font-size: 1.05rem;
+      padding-left: 28px;
+      position: relative;
+      line-height: 1.6;
+    }
+
+    .content-section ul li::before {
+      content: '→';
+      position: absolute;
+      left: 0;
+      color: #6dd5ed;
+      font-weight: 700;
+    }
+
+    /* =====================
+       HIGHLIGHT BLOCKS
+    ===================== */
+    .highlight-block {
+      background: linear-gradient(135deg, rgba(109,213,237,0.08), rgba(33,147,176,0.08));
+      border: 1px solid rgba(109,213,237,0.3);
+      border-radius: 16px;
+      padding: 32px;
+      margin: 40px 0;
+    }
+
+    .highlight-block h3 {
+      margin-top: 0;
+    }
+
+    .highlight-block p {
+      font-size: 1.1rem;
+      color: #e5e7eb;
+      line-height: 1.8;
+    }
+
+    blockquote {
+      border-left: 4px solid #6dd5ed;
+      padding-left: 24px;
+      margin: 24px 0;
+      font-style: italic;
+      color: #94a3b8;
+      font-size: 1.15rem;
+    }
+
+    /* =====================
+       PROCESS STEPS
+    ===================== */
+    .process-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+      margin: 32px 0;
+    }
+
+    .process-step {
+      background: rgba(15,23,48,0.6);
+      border: 1px solid rgba(148,163,184,0.15);
+      border-radius: 14px;
+      padding: 24px;
+    }
+
+    .process-step h4 {
+      color: #6dd5ed;
+      font-size: 1.2rem;
+      margin-bottom: 12px;
+    }
+
+    .process-step p {
+      color: #cbd5e1;
+      font-size: 0.95rem;
+      line-height: 1.6;
+      margin: 0;
+    }
+
+    /* =====================
+       COMPARISON TABLE
+    ===================== */
+    .comparison-table {
+      background: rgba(15,23,48,0.6);
+      border: 1px solid rgba(148,163,184,0.15);
+      border-radius: 16px;
+      overflow: hidden;
+      margin: 32px 0;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    th, td {
+      padding: 16px;
+      text-align: left;
+      border-bottom: 1px solid rgba(148,163,184,0.1);
+    }
+
+    th {
+      background: rgba(11,16,32,0.9);
+      color: #6dd5ed;
+      font-weight: 600;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    td {
+      color: #cbd5e1;
+      font-size: 0.95rem;
+    }
+
+    tbody tr:hover {
+      background: rgba(109,213,237,0.05);
+    }
+
+    /* =====================
+       EXAMPLES GRID
+    ===================== */
+    .examples-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+      margin: 32px 0;
+    }
+
+    .example-card {
+      background: rgba(15,23,48,0.6);
+      border: 1px solid rgba(148,163,184,0.15);
+      border-radius: 14px;
+      padding: 24px;
+    }
+
+    .example-card h4 {
+      color: #fff;
+      font-size: 1.1rem;
+      margin-bottom: 12px;
+    }
+
+    .example-card p {
+      color: #94a3b8;
+      font-size: 0.95rem;
+      line-height: 1.6;
+      margin: 0;
+    }
+
+    /* =====================
+       VISION SECTION
+    ===================== */
+    .vision-section {
+      background: linear-gradient(135deg, rgba(109,213,237,0.12), rgba(139,92,246,0.12));
+      border: 2px solid rgba(109,213,237,0.3);
+      border-radius: 20px;
+      padding: 48px;
+      margin: 60px 0;
+      text-align: center;
+    }
+
+    .vision-section h2 {
+      margin-top: 0;
+      font-size: 2.2rem;
+    }
+
+    .vision-section p {
+      font-size: 1.2rem;
+      color: #e5e7eb;
+      line-height: 1.8;
+      max-width: 900px;
+      margin: 0 auto 20px;
+    }
+
+    .vision-section .closing-line {
+      font-size: 1.3rem;
+      color: #6dd5ed;
+      font-weight: 600;
+      margin-top: 32px;
+    }
+
+    /* =====================
+       DISCLAIMER
+    ===================== */
+    .disclaimer {
+      background: rgba(239,68,68,0.08);
+      border: 1px solid rgba(239,68,68,0.2);
+      border-radius: 12px;
+      padding: 20px;
+      margin: 48px 0;
+      text-align: center;
+    }
+
+    .disclaimer p {
+      color: #94a3b8;
+      font-size: 0.9rem;
+      margin: 0;
+    }
+
+    /* =====================
+       FOOTER
+    ===================== */
+    .footer {
+      margin-top: 80px;
+      padding: 32px 0;
+      border-top: 1px solid rgba(148,163,184,0.1);
+      text-align: center;
+    }
+
+    .footer-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .footer-text {
+      font-size: 0.85rem;
+      color: #64748b;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 24px;
+    }
+
+    .footer-links a {
+      color: #64748b;
+      text-decoration: none;
+      font-size: 0.85rem;
+      transition: color 0.2s ease;
+    }
+
+    .footer-links a:hover {
+      color: #6dd5ed;
+    }
+
+    /* =====================
+       RESPONSIVE
+    ===================== */
+    @media (max-width: 768px) {
+      .nav {
+        flex-direction: column;
+        gap: 16px;
+        text-align: center;
+      }
+
+      .nav-right {
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      .hero h1 {
+        font-size: 2rem;
+      }
+
+      .hero .subtitle {
+        font-size: 1.1rem;
+      }
+
+      h2 {
+        font-size: 1.6rem;
+      }
+
+      .process-grid,
+      .examples-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .vision-section {
+        padding: 32px 20px;
+      }
+
+      .footer-content {
+        flex-direction: column;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
 <body>
 
 <header class="nav">
@@ -14,163 +463,239 @@
     <div class="logo">A</div>
     <div class="brand">
       <div class="name">Arbstack</div>
-      <div class="tagline">Market disagreement, made visible</div>
+      <div class="tagline">Market Intelligence Platform</div>
     </div>
   </div>
   <nav class="nav-right">
     <a href="index.html">Home</a>
-    <a href="sports.html">Sports</a>
-    <a href="#">Politics</a>
-    <a href="#">Climate</a>
-    <a href="premium.html">Premium</a>
-    <a class="active" href="about.html">About</a>
+    <a href="epl.html">EPL</a>
+    <a href="afcon.html">AFCON</a>
+    <a href="cricket.html">Cricket</a>
+    <a href="about.html" class="active">About</a>
   </nav>
 </header>
 
 <main class="page">
 
-  <section class="section">
+  <!-- HERO -->
+  <div class="hero">
     <h1>About Arbstack</h1>
-    <p class="lead">
-      Arbstack is a market-intelligence layer that helps users understand
-      <strong>where markets disagree</strong> — before they bet, trade, or predict.
-    </p>
-  </section>
-
-  <section class="section">
-    <h2>The Problem</h2>
+    <p class="subtitle">Market Disagreement, Made Visible</p>
     <p>
-      Sports betting and prediction markets all price the same events,
-      but they speak different languages.
+      Arbstack is a market intelligence platform that helps users understand <strong>where markets disagree</strong> — before they bet, trade, or predict. We don't tell you what will happen. We show you what the market is trying to say, but cannot clearly express.
     </p>
+  </div>
 
+  <!-- THE PROBLEM -->
+  <section class="content-section">
+    <h2>🔍 The Problem We Solve</h2>
+    <p>
+      Sports betting markets, prediction markets, and traditional bookmakers all price the same events — but they speak different languages:
+    </p>
     <ul>
-      <li>Prediction markets quote probabilities in cents or percentages</li>
+      <li>Prediction markets quote probabilities in cents or percentages (Kalshi, Polymarket)</li>
       <li>Sportsbooks quote American odds with built-in margin (vig)</li>
-      <li>Fans are forced to compare numbers that were never designed to align</li>
+      <li>Users are forced to compare numbers that were never designed to align</li>
+      <li>The most valuable information lives in the <strong>disagreement between markets</strong>, and it's usually invisible</li>
     </ul>
-
     <p>
-      As a result, users see odds — but they do not see
-      <strong>confidence gaps</strong>, <strong>bias</strong>, or
-      <strong>mispricing</strong>.
-      The most valuable information lives in the disagreement between markets,
-      and it is usually invisible.
+      As a result, you see odds — but you don't see <strong>confidence gaps</strong>, <strong>bias</strong>, or <strong>mispricing</strong>. Arbstack makes these hidden signals visible.
     </p>
   </section>
 
-  <section class="section">
-    <h2>Arbstack’s Insight</h2>
+  <!-- CORE INSIGHT -->
+  <div class="highlight-block">
+    <h3>💡 Arbstack's Core Insight</h3>
     <p>
-      <strong>Disagreement itself is information.</strong>
+      <strong>Disagreement itself is information.</strong> When independent markets price the same outcome differently, at least one of them is wrong — or early. Arbstack surfaces where confidence diverges so you can ask better questions.
     </p>
+    <blockquote>
+      We shift the question from "Who should I bet on?" to "Why do these markets disagree — and who is most likely wrong?"
+    </blockquote>
+  </div>
 
+  <!-- WHAT WE DO -->
+  <section class="content-section">
+    <h2>📊 What Arbstack Does</h2>
     <p>
-      When independent markets price the same outcome differently,
-      at least one of them is wrong — or early.
-      Arbstack does not predict outcomes.
-      It surfaces where confidence diverges so users can ask better questions.
+      For every market we cover (EPL, AFCON, Cricket), Arbstack shows you multiple independent views side-by-side:
     </p>
-  </section>
-
-  <section class="section">
-    <h2>The EPL Board</h2>
-    <p>
-      The English Premier League page is the first live demonstration of Arbstack.
-      For every match, it shows three independent market views side-by-side:
-    </p>
-
     <ul>
-      <li>
-        <strong>Kalshi</strong> — prediction market pricing shown as team-vs-team probability (cents)
-      </li>
-      <li>
-        <strong>Polymarket</strong> — crowd-driven three-way probabilities (win / draw / loss)
-      </li>
-      <li>
-        <strong>SportsLine</strong> — bookmaker odds converted into clean split probabilities
-      </li>
+      <li><strong>Kalshi</strong> — Prediction market pricing shown as probability percentages</li>
+      <li><strong>Polymarket</strong> — Crowd-driven three-way probabilities (win / draw / loss)</li>
+      <li><strong>Traditional Bookmakers</strong> — Professional sportsbook odds converted into clean probabilities</li>
     </ul>
-
     <p>
-      All formats are normalized so they can be compared directly.
-      No odds are hidden. No numbers are averaged away.
-    </p>
-  </section>
-
-  <section class="section">
-    <h2>What Users Learn</h2>
-    <p>
-      Before placing a bet or making a prediction, a user can immediately see:
+      All formats are normalized so they can be compared directly. No odds are hidden. No numbers are averaged away. You see the full picture.
     </p>
 
+    <h3>What You Learn</h3>
+    <p>Before placing a bet or making a prediction, you can immediately see:</p>
     <ul>
-      <li>Which matches markets broadly agree on</li>
-      <li>Which matches show strong disagreement</li>
-      <li>Whether bookmakers or crowds are more confident</li>
+      <li>Which matches markets broadly agree on (efficient pricing)</li>
+      <li>Which matches show strong disagreement (potential edges)</li>
+      <li>Whether bookmakers or crowds are more confident on each outcome</li>
       <li>Where bias, overreaction, or delayed information may exist</li>
     </ul>
-
-    <p>
-      Arbstack shifts the question from:
-    </p>
-
-    <blockquote>
-      “Who should I bet on?”
-    </blockquote>
-
-    <p>
-      to:
-    </p>
-
-    <blockquote>
-      “Why do these markets disagree — and who is most likely wrong?”
-    </blockquote>
   </section>
 
-  <section class="section">
-    <h2>What Arbstack Is — and Is Not</h2>
+  <!-- SIGNAL ARCHEOLOGY -->
+  <section class="content-section">
+    <h2>⚡ Signal Archaeology™</h2>
+    <p>
+      Arbstack is built on a proprietary framework called <strong>Signal Archaeology™</strong> — a systematic method for uncovering, reconstructing, and interpreting hidden signals across fragmented and narrative-driven markets.
+    </p>
+
+    <div class="highlight-block">
+      <h3>What Is Signal Archaeology?</h3>
+      <p>
+        Modern markets are not clean, rational systems. They are layered environments shaped by human bias, narrative contagion, liquidity distortions, and structural duplication. Prices and odds only show surface behavior. The real signal is often buried.
+      </p>
+      <p>
+        <strong>Signal Archaeology™ is the discipline of excavating and reconstructing these buried signals.</strong> It treats markets not as efficient machines, but as archaeological sites — where valuable information exists in partial traces, overlaps, gaps, and distortions.
+      </p>
+    </div>
+
+    <h3>The Signal Archaeology Process</h3>
+    <div class="process-grid">
+      <div class="process-step">
+        <h4>1. Stratification</h4>
+        <p>Markets are separated into layers: price, volume, narrative, liquidity, timing, and platform structure.</p>
+      </div>
+      <div class="process-step">
+        <h4>2. Excavation</h4>
+        <p>Data is collected across prediction markets, sportsbooks, derivatives, and news — not for answers, but for traces.</p>
+      </div>
+      <div class="process-step">
+        <h4>3. Correlation</h4>
+        <p>Overlapping contracts, duplicated outcomes, and narrative echoes are linked to reveal hidden structure.</p>
+      </div>
+      <div class="process-step">
+        <h4>4. Reconstruction</h4>
+        <p>Arbstack rebuilds the underlying reality behind fragmented signals, exposing misalignment and inefficiency.</p>
+      </div>
+      <div class="process-step">
+        <h4>5. Interpretation</h4>
+        <p>Structure is translated into insight: not just what is priced, but why it is mispriced.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW ARBSTACK IMPLEMENTS -->
+  <section class="content-section">
+    <h2>🔧 How Arbstack Implements Signal Archaeology</h2>
+    <div class="comparison-table">
+      <table>
+        <thead>
+          <tr>
+            <th>Arbstack Feature</th>
+            <th>Signal Archaeology Function</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Cross-market views</td>
+            <td>Correlating overlapping price structures across platforms</td>
+          </tr>
+          <tr>
+            <td>ArbScore</td>
+            <td>Signal quality grading based on market disagreement</td>
+          </tr>
+          <tr>
+            <td>Delta Analysis</td>
+            <td>Measuring confidence gaps between retail and sharp money</td>
+          </tr>
+          <tr>
+            <td>Market Efficiency Indicators</td>
+            <td>Visual signals (HOT/WATCH/OK) showing strength of disagreement</td>
+          </tr>
+          <tr>
+            <td>Volume Tracking</td>
+            <td>Layer disturbance detection showing informed flow</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="text-align: center; font-size: 1.1rem; color: #6dd5ed; margin-top: 24px;">
+      Arbstack doesn't ask "Where is the best price?" — It asks <strong>"What hidden structure is this price revealing?"</strong>
+    </p>
+  </section>
+
+  <!-- REAL WORLD EXAMPLES -->
+  <section class="content-section">
+    <h2>🌍 Real-World Applications</h2>
+    <div class="examples-grid">
+      <div class="example-card">
+        <h4>Sports Odds vs Prediction Markets</h4>
+        <p>Bookmakers move on sharp money, prediction markets lag on crowd belief. The gap between them is a buried signal revealing where informed money is positioned.</p>
+      </div>
+      <div class="example-card">
+        <h4>Tournament Structure Edges</h4>
+        <p>AFCON knockout matches show draw pricing consensus around 32% — not noise, but structural reality. Signal Archaeology reveals this is the core asset, not the outcome bets.</p>
+      </div>
+      <div class="example-card">
+        <h4>Format Variance in Cricket</h4>
+        <p>T20 markets behave like options (high variance), ODI like equities (low variance), IPL like league futures (system > stars). Different formats create different edges.</p>
+      </div>
+      <div class="example-card">
+        <h4>National Bias Detection</h4>
+        <p>India T20 World Cup pricing consistently inflated 3-5% above fair value due to retail patriot premium. Signal Archaeology isolates and quantifies this systematic bias.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHAT WE'RE NOT -->
+  <section class="content-section">
+    <h2>🚫 What Arbstack Is — and Is Not</h2>
+    <p>Let's be clear about what we don't do:</p>
     <ul>
-      <li><strong>Not</strong> a betting platform</li>
-      <li><strong>Not</strong> a tipster or prediction engine</li>
-      <li><strong>Not</strong> an odds aggregator</li>
+      <li><strong>Not</strong> a betting platform — we don't take bets or facilitate transactions</li>
+      <li><strong>Not</strong> a tipster or prediction engine — we don't tell you who will win</li>
+      <li><strong>Not</strong> an odds aggregator — we don't just collect prices, we analyze disagreement</li>
+      <li><strong>Not</strong> financial advice — all analysis is for educational and informational purposes only</li>
     </ul>
-
-    <p>
-      Arbstack is a <strong>decision-quality tool</strong>.
-      It makes uncertainty explicit and lets users decide how to act.
+    <p style="margin-top: 24px;">
+      Arbstack is a <strong>decision-quality tool</strong>. We make uncertainty explicit and let you decide how to act.
     </p>
   </section>
 
-  <section class="section">
-    <h2>Vision</h2>
+  <!-- VISION -->
+  <div class="vision-section">
+    <h2>🚀 The Arbstack Vision</h2>
     <p>
-      Arbstack’s long-term vision is to become the place users visit each day to ask:
+      Arbstack is not just an analytics platform. It is a <strong>cognitive interface for understanding modern markets.</strong>
     </p>
-
-    <blockquote>
-      “Where does the market disagree today — and why?”
-    </blockquote>
-
     <p>
-      Sports are the starting point.
-      The same framework applies to politics, economics, and any domain
-      where probabilities are traded and belief diverges from reality.
+      Our long-term vision is to become the place users visit each day to ask: <em>"Where does the market disagree today — and why?"</em>
     </p>
-  </section>
-
-  <section class="section muted">
     <p>
-      This site is a static demo.
-      No execution. No guarantees. No financial advice.
+      Sports are the starting point. The same framework applies to politics, economics, and any domain where probabilities are traded and belief diverges from reality.
     </p>
-  </section>
+    <p class="closing-line">
+      Arbstack is the world's first Signal Archaeology engine for belief-driven markets.
+    </p>
+  </div>
+
+  <!-- DISCLAIMER -->
+  <div class="disclaimer">
+    <p>
+      <strong>Disclaimer:</strong> This site is a static demonstration platform. No execution. No guarantees. No financial advice. All analysis is for educational and informational purposes only. Users are responsible for their own decisions and risk management.
+    </p>
+  </div>
 
 </main>
 
 <footer class="footer">
-  <span>Arbstack · Market Disagreement Engine</span>
-  <span>Static demo · No tracking</span>
+  <div class="footer-content">
+    <div class="footer-text">
+      © 2026 Arbstack · Market Intelligence Platform · No Financial Advice
+    </div>
+    <div class="footer-links">
+      <a href="#methodology">Methodology</a>
+      <a href="#disclaimer">Disclaimer</a>
+      <a href="index.html">Back to Home</a>
+    </div>
+  </div>
 </footer>
 
 </body>
