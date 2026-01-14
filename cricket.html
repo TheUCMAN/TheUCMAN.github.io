@@ -1,0 +1,811 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Arbstack · Cricket Markets</title>
+  <style>
+    /* =====================
+       RESET & BASE
+    ===================== */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: radial-gradient(
+        ellipse at top,
+        #0f2a3a 0%,
+        #0b1623 40%,
+        #070d16 100%
+      );
+      color: #e5e7eb;
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    /* =====================
+       NAVIGATION
+    ===================== */
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 28px;
+      border-bottom: 1px solid rgba(148,163,184,0.1);
+      background: rgba(11,22,35,0.5);
+      backdrop-filter: blur(10px);
+    }
+
+    .nav-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .logo {
+      width: 42px;
+      height: 42px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, #6dd5ed, #2193b0);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #000;
+      font-weight: 700;
+      font-size: 20px;
+    }
+
+    .brand .name {
+      font-weight: 600;
+      font-size: 18px;
+      color: #fff;
+    }
+
+    .brand .tagline {
+      font-size: 0.8rem;
+      color: #94a3b8;
+    }
+
+    .nav-right {
+      display: flex;
+      gap: 24px;
+      align-items: center;
+    }
+
+    .nav-right a {
+      text-decoration: none;
+      color: #cbd5e1;
+      font-size: 0.9rem;
+      transition: color 0.2s ease;
+      position: relative;
+    }
+
+    .nav-right a:hover {
+      color: #fff;
+    }
+
+    .nav-right a.active {
+      color: #6dd5ed;
+      font-weight: 600;
+    }
+
+    .nav-right a.active::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, #6dd5ed, #2193b0);
+      border-radius: 2px;
+    }
+
+    /* =====================
+       PAGE LAYOUT
+    ===================== */
+    .page {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 40px 24px 80px;
+    }
+
+    .page-header {
+      margin-bottom: 40px;
+    }
+
+    .page-header h1 {
+      font-size: 2.4rem;
+      margin-bottom: 12px;
+      color: #fff;
+    }
+
+    .page-header p {
+      font-size: 1.05rem;
+      color: #94a3b8;
+      line-height: 1.6;
+    }
+
+    h2 {
+      font-size: 1.8rem;
+      margin: 48px 0 24px;
+      color: #fff;
+    }
+
+    h3 {
+      font-size: 1.2rem;
+      margin: 24px 0 12px;
+      color: #6dd5ed;
+    }
+
+    /* =====================
+       CARDS
+    ===================== */
+    .card {
+      background: rgba(15,23,48,0.6);
+      border: 1px solid rgba(148,163,184,0.15);
+      border-radius: 16px;
+      overflow: hidden;
+      margin-bottom: 24px;
+    }
+
+    .card-content {
+      padding: 24px;
+    }
+
+    /* =====================
+       INSIGHTS GRID
+    ===================== */
+    .insights-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+      margin-bottom: 40px;
+    }
+
+    .insight-card {
+      background: rgba(15,23,48,0.6);
+      border: 1px solid rgba(148,163,184,0.15);
+      border-radius: 14px;
+      padding: 20px;
+    }
+
+    .insight-label {
+      font-size: 0.75rem;
+      color: #64748b;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 8px;
+    }
+
+    .insight-value {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: #6dd5ed;
+      margin-bottom: 8px;
+    }
+
+    .insight-desc {
+      font-size: 0.9rem;
+      color: #94a3b8;
+      line-height: 1.4;
+    }
+
+    /* =====================
+       FORMAT INFO SECTION
+    ===================== */
+    .format-section {
+      background: linear-gradient(135deg, rgba(250,204,21,0.08), rgba(234,179,8,0.08));
+      border: 1px solid rgba(250,204,21,0.2);
+      border-radius: 16px;
+      padding: 28px;
+      margin: 32px 0;
+    }
+
+    .format-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 16px;
+      margin-top: 20px;
+    }
+
+    .format-item {
+      background: rgba(11,22,35,0.8);
+      padding: 16px;
+      border-radius: 10px;
+      border-left: 3px solid #facc15;
+    }
+
+    .format-item strong {
+      color: #facc15;
+      display: block;
+      margin-bottom: 8px;
+      font-size: 1.05rem;
+    }
+
+    .format-item p {
+      color: #cbd5e1;
+      font-size: 0.9rem;
+      line-height: 1.5;
+      margin: 0;
+    }
+
+    /* =====================
+       TABLES
+    ===================== */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    th, td {
+      padding: 12px;
+      text-align: left;
+      border-bottom: 1px solid rgba(148,163,184,0.1);
+    }
+
+    thead th {
+      background: rgba(11,16,32,0.9);
+      color: #cbd5e1;
+      font-weight: 600;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    tbody tr:hover {
+      background: rgba(109,213,237,0.05);
+    }
+
+    td.num {
+      text-align: center;
+      font-variant-numeric: tabular-nums;
+      font-size: 0.9rem;
+    }
+
+    td.team {
+      font-weight: 600;
+      color: #fff;
+    }
+
+    /* =====================
+       BADGES & INDICATORS
+    ===================== */
+    .badge {
+      display: inline-block;
+      padding: 5px 12px;
+      border-radius: 999px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .badge.anchor {
+      background: rgba(59,130,246,0.2);
+      color: #93c5fd;
+      border: 1px solid rgba(59,130,246,0.4);
+    }
+
+    .badge.danger {
+      background: rgba(239,68,68,0.2);
+      color: #fca5a5;
+      border: 1px solid rgba(239,68,68,0.4);
+    }
+
+    .badge.synth {
+      background: rgba(34,197,94,0.2);
+      color: #bbf7d0;
+      border: 1px solid rgba(34,197,94,0.4);
+    }
+
+    .badge.value {
+      background: rgba(250,204,21,0.2);
+      color: #fde68a;
+      border: 1px solid rgba(250,204,21,0.4);
+    }
+
+    .price-yes { color: #86efac; font-weight: 600; }
+    .price-no { color: #fca5a5; font-weight: 600; }
+
+    .arb-high { background: rgba(34,197,94,0.08); }
+    .arb-mid { background: rgba(250,204,21,0.05); }
+    .arb-low { background: rgba(239,68,68,0.05); }
+
+    /* =====================
+       ARBCARDS
+    ===================== */
+    .arbcards-grid {
+      display: grid;
+      gap: 20px;
+      margin-top: 24px;
+    }
+
+    .arbcard {
+      background: rgba(15,23,48,0.6);
+      border: 1px solid rgba(148,163,184,0.15);
+      border-radius: 14px;
+      padding: 24px;
+    }
+
+    .arbcard h4 {
+      font-size: 1.2rem;
+      color: #fff;
+      margin-bottom: 12px;
+    }
+
+    .arbcard p {
+      color: #cbd5e1;
+      font-size: 0.95rem;
+      line-height: 1.6;
+      margin: 8px 0;
+    }
+
+    .arbcard-score {
+      display: inline-block;
+      background: rgba(250,204,21,0.2);
+      color: #facc15;
+      padding: 4px 12px;
+      border-radius: 6px;
+      font-weight: 700;
+      font-size: 0.9rem;
+      margin-left: 8px;
+    }
+
+    /* =====================
+       KEY POINTS LIST
+    ===================== */
+    .key-points {
+      list-style: none;
+      padding: 0;
+      margin: 20px 0;
+    }
+
+    .key-points li {
+      padding: 10px 0;
+      color: #cbd5e1;
+      font-size: 0.95rem;
+      padding-left: 24px;
+      position: relative;
+    }
+
+    .key-points li::before {
+      content: '→';
+      position: absolute;
+      left: 0;
+      color: #6dd5ed;
+      font-weight: 700;
+    }
+
+    /* =====================
+       METHODOLOGY GRID
+    ===================== */
+    .methodology-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+      margin-top: 24px;
+    }
+
+    .methodology-card {
+      background: rgba(11,22,35,0.6);
+      border: 1px solid rgba(148,163,184,0.1);
+      border-radius: 12px;
+      padding: 20px;
+    }
+
+    .methodology-card h4 {
+      color: #6dd5ed;
+      margin-bottom: 12px;
+      font-size: 1.05rem;
+    }
+
+    .methodology-card p {
+      color: #94a3b8;
+      font-size: 0.9rem;
+      line-height: 1.6;
+      margin: 0;
+    }
+
+    /* =====================
+       FOOTER
+    ===================== */
+    .footer {
+      margin-top: 60px;
+      padding: 32px 0;
+      border-top: 1px solid rgba(148,163,184,0.1);
+      text-align: center;
+    }
+
+    .footer-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 24px;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .footer-text {
+      font-size: 0.85rem;
+      color: #64748b;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 24px;
+    }
+
+    .footer-links a {
+      color: #64748b;
+      text-decoration: none;
+      font-size: 0.85rem;
+      transition: color 0.2s ease;
+    }
+
+    .footer-links a:hover {
+      color: #6dd5ed;
+    }
+
+    /* =====================
+       RESPONSIVE
+    ===================== */
+    @media (max-width: 768px) {
+      .nav {
+        flex-direction: column;
+        gap: 16px;
+        text-align: center;
+      }
+
+      .nav-right {
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      .page-header h1 {
+        font-size: 1.8rem;
+      }
+
+      h2 {
+        font-size: 1.4rem;
+      }
+
+      .insights-grid,
+      .format-grid,
+      .methodology-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-content {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      table {
+        font-size: 0.75rem;
+      }
+
+      th, td {
+        padding: 8px 6px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="nav-left">
+    <div class="logo">A</div>
+    <div class="brand">
+      <div class="name">Arbstack</div>
+      <div class="tagline">Market Intelligence Platform</div>
+    </div>
+  </div>
+  <nav class="nav-right">
+    <a href="index.html">Home</a>
+    <a href="epl.html">EPL</a>
+    <a href="afcon.html">AFCON</a>
+    <a href="cricket.html" class="active">Cricket</a>
+    <a href="#about">About</a>
+  </nav>
+</header>
+
+<main class="page">
+
+  <div class="page-header">
+    <h1>🏏 Cricket Market Intelligence</h1>
+    <p>Cricket markets exhibit unique dynamics driven by format variance, national bias, and tournament structure. This analysis covers ODI match markets, T20 World Cup outrights, and IPL futures across Kalshi and traditional bookmakers.</p>
+  </div>
+
+  <!-- INSIGHTS OVERVIEW -->
+  <div class="insights-grid">
+    <div class="insight-card">
+      <div class="insight-label">Active Markets</div>
+      <div class="insight-value">8</div>
+      <div class="insight-desc">Across ODI, T20 World Cup, and IPL formats</div>
+    </div>
+    
+    <div class="insight-card">
+      <div class="insight-label">Top ArbScore</div>
+      <div class="insight-value">72</div>
+      <div class="insight-desc">Mumbai Indians IPL outright - franchise pedigree underpriced</div>
+    </div>
+    
+    <div class="insight-card">
+      <div class="insight-label">Format Risk</div>
+      <div class="insight-value">High</div>
+      <div class="insight-desc">T20 variance creates convex tournament opportunities</div>
+    </div>
+  </div>
+
+  <!-- FORMAT CONTEXT -->
+  <div class="format-section">
+    <h3>🎯 Cricket Format Dynamics</h3>
+    <div class="format-grid">
+      <div class="format-item">
+        <strong>ODI Markets → Low Volatility</strong>
+        <p>50-over format rewards team depth and consistency. Behaves like low-vol equities with predictable favorite pricing.</p>
+      </div>
+      <div class="format-item">
+        <strong>T20 Markets → High Convexity</strong>
+        <p>20-over chaos creates option-like payoffs. Variance is the asset class—tournament structure punishes favorites.</p>
+      </div>
+      <div class="format-item">
+        <strong>IPL Outrights → League Futures</strong>
+        <p>Franchise league structure where form and squad depth matter more than star power. System beats individuals.</p>
+      </div>
+      <div class="format-item">
+        <strong>National Bias Premium</strong>
+        <p>Home country markets (especially India) consistently overprice domestic teams due to retail patriot premium.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ODI MARKETS -->
+  <h2>📊 ODI Match Market (Kalshi)</h2>
+  <p style="color: #94a3b8; margin-bottom: 20px;">One Day International format - lower variance, predictable favorites</p>
+
+  <div class="card">
+    <table>
+      <thead>
+        <tr>
+          <th>Match</th>
+          <th>Outcome</th>
+          <th>Yes Price</th>
+          <th>Implied %</th>
+          <th>ArbScore</th>
+          <th>Interpretation</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="arb-mid">
+          <td class="team">India vs New Zealand</td>
+          <td>India Win</td>
+          <td class="num price-yes">83¢</td>
+          <td class="num">76%</td>
+          <td class="num"><span class="arbcard-score">58</span></td>
+          <td style="font-size: 0.85rem; color: #cbd5e1;">ODI format rewards depth; priced fairly, limited upside</td>
+        </tr>
+        <tr class="arb-mid">
+          <td class="team">India vs New Zealand</td>
+          <td>New Zealand Win</td>
+          <td class="num price-yes">24¢</td>
+          <td class="num">24%</td>
+          <td class="num"><span class="arbcard-score">61</span></td>
+          <td style="font-size: 0.85rem; color: #cbd5e1;">Convex hedge if early wickets / swing conditions</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- T20 WORLD CUP -->
+  <h2>🏆 T20 World Cup Outright Winner (Kalshi)</h2>
+  <p style="color: #94a3b8; margin-bottom: 20px;">Tournament format creates variance premium - favorites are systematically overpriced</p>
+
+  <div class="card">
+    <table>
+      <thead>
+        <tr>
+          <th>Team</th>
+          <th>Yes Price</th>
+          <th>Implied %</th>
+          <th>Format Risk</th>
+          <th>ArbScore</th>
+          <th>Signal</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="arb-low">
+          <td class="team">India</td>
+          <td class="num price-yes">55¢</td>
+          <td class="num">~52%</td>
+          <td class="num">Very High</td>
+          <td class="num"><span class="arbcard-score">32</span></td>
+          <td style="font-size: 0.85rem; color: #cbd5e1;">Overpriced favorite (retail + patriot bias)</td>
+        </tr>
+        <tr class="arb-high">
+          <td class="team">Australia</td>
+          <td class="num price-yes">26¢</td>
+          <td class="num">26%</td>
+          <td class="num">High</td>
+          <td class="num"><span class="arbcard-score">69</span></td>
+          <td style="font-size: 0.85rem; color: #cbd5e1;">Tournament pedigree + knockout efficiency</td>
+        </tr>
+        <tr class="arb-high">
+          <td class="team">South Africa</td>
+          <td class="num price-yes">24¢</td>
+          <td class="num">24%</td>
+          <td class="num">High</td>
+          <td class="num"><span class="arbcard-score">67</span></td>
+          <td style="font-size: 0.85rem; color: #cbd5e1;">Strong squad depth, market underweights consistency</td>
+        </tr>
+        <tr class="arb-high">
+          <td class="team">England</td>
+          <td class="num price-yes">96¢</td>
+          <td class="num">~4%</td>
+          <td class="num">High</td>
+          <td class="num"><span class="arbcard-score">63</span></td>
+          <td style="font-size: 0.85rem; color: #cbd5e1;">Mispriced tail - live hedge optionality</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- IPL OUTRIGHTS -->
+  <h2>💎 IPL Outright Winner (Oddschecker)</h2>
+  <p style="color: #94a3b8; margin-bottom: 20px;">Indian Premier League futures - franchise league structure favors system over stars</p>
+
+  <div class="card">
+    <table>
+      <thead>
+        <tr>
+          <th>Team</th>
+          <th>Decimal Odds</th>
+          <th>Implied %</th>
+          <th>ArbScore</th>
+          <th>Notes</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="arb-high">
+          <td class="team">Mumbai Indians</td>
+          <td class="num">+400</td>
+          <td class="num">20%</td>
+          <td class="num"><span class="arbcard-score">72</span></td>
+          <td style="font-size: 0.85rem; color: #cbd5e1;">Franchise pedigree + playoff execution</td>
+        </tr>
+        <tr class="arb-mid">
+          <td class="team">RCB</td>
+          <td class="num">+500</td>
+          <td class="num">16.7%</td>
+          <td class="num"><span class="arbcard-score">61</span></td>
+          <td style="font-size: 0.85rem; color: #cbd5e1;">High batting ceiling, bowling volatility</td>
+        </tr>
+        <tr class="arb-mid">
+          <td class="team">Gujarat Titans</td>
+          <td class="num">+600</td>
+          <td class="num">14.3%</td>
+          <td class="num"><span class="arbcard-score">64</span></td>
+          <td style="font-size: 0.85rem; color: #cbd5e1;">System-driven consistency</td>
+        </tr>
+        <tr class="arb-low">
+          <td class="team">Chennai Super Kings</td>
+          <td class="num">+950</td>
+          <td class="num">9.5%</td>
+          <td class="num"><span class="arbcard-score">55</span></td>
+          <td style="font-size: 0.85rem; color: #cbd5e1;">Legacy premium priced in</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- TOP ARBCARDS -->
+  <h2>🎴 Top ArbCards - Cricket Edition</h2>
+  
+  <div class="arbcards-grid">
+    
+    <div class="arbcard">
+      <h4>India ODI — Anchor Bet <span class="badge anchor">STABLE</span></h4>
+      <p><strong>Strategy:</strong> Low variance, suitable as hedge leg or capital preserver in multi-leg strategies.</p>
+      <p><strong>Use Case:</strong> ODI format's 50-over structure reduces variance. India's depth makes 76% probability reasonable, offering stable returns for bankroll management.</p>
+      <p><strong>Risk:</strong> Limited upside at 83¢ price. Only suitable for portfolio anchoring, not standalone value.</p>
+    </div>
+
+    <div class="arbcard">
+      <h4>India T20 WC — Fade Favorite <span class="badge danger">DANGER</span></h4>
+      <p><strong>Strategy:</strong> T20 knockout structure systematically punishes favorites. Avoid heavy exposure to India at 52% implied.</p>
+      <p><strong>Edge Analysis:</strong> Retail patriot bias + recency bias inflates India pricing. T20 variance creates mean reversion opportunity.</p>
+      <p><strong>Recommendation:</strong> Fade or take opposing positions in Australia/South Africa basket for structural edge.</p>
+    </div>
+
+    <div class="arbcard">
+      <h4>T20 WC Basket (AUS + SA + ENG) <span class="badge synth">SYNTHETIC EDGE</span></h4>
+      <p><strong>Strategy:</strong> Convex tournament exposure with multiple live hedge paths. Combined probability exceeds India alone with better risk-adjusted returns.</p>
+      <p><strong>Structure:</strong> Australia (69 ArbScore) + South Africa (67) + England (63) creates diversified tournament exposure.</p>
+      <p><strong>Upside:</strong> Live hedging optionality as tournament progresses. One qualifier to finals creates profitable exit paths.</p>
+    </div>
+
+    <div class="arbcard">
+      <h4>Mumbai Indians IPL <span class="badge value">VALUE</span></h4>
+      <p><strong>Strategy:</strong> Franchise pedigree and playoff execution history underpriced at 20% implied (72 ArbScore).</p>
+      <p><strong>Edge Source:</strong> IPL market overweights recent form, underweights systemic franchise advantages and playoff experience.</p>
+      <p><strong>Trade:</strong> Strong value play for IPL outrights. System and depth beat star power in T20 league format.</p>
+    </div>
+
+  </div>
+
+  <!-- FRAMEWORK EXPLANATION -->
+  <h2>📚 Cricket Market Framework</h2>
+  
+  <div class="card">
+    <div class="card-content">
+      <h3 style="margin-top: 0;">How Different Formats Create Different Edges</h3>
+      <ul class="key-points">
+        <li><strong>ODI markets behave like low-volatility equities</strong> — predictable outcomes, favorites usually deliver, limited variance creates anchor bet opportunities</li>
+        <li><strong>T20 markets behave like options</strong> — variance is the asset class, favorites are systematically overpriced due to knockout structure punishing consistency</li>
+        <li><strong>IPL outrights resemble league futures</strong> — form + depth + system beats individual stars; franchise pedigree and playoff experience create structural edges</li>
+        <li><strong>National bias premium</strong> — home country markets (India especially) inflate domestic team pricing 3-5% above fair value due to retail patriot premium</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- METHODOLOGY -->
+  <h2>🔍 Understanding ArbScore in Cricket</h2>
+  
+  <div class="methodology-grid">
+    <div class="methodology-card">
+      <h4>What is ArbScore?</h4>
+      <p>Proprietary metric combining market inefficiency, format-specific variance, and structural edge. Scores above 65 indicate strong value; below 40 suggests overpriced or efficient pricing.</p>
+    </div>
+
+    <div class="methodology-card">
+      <h4>Format Adjustments</h4>
+      <p>ODI scores weighted toward stability (lower variance = lower score ceiling). T20 scores weighted toward convexity (high variance = higher score potential for non-favorites).</p>
+    </div>
+
+    <div class="methodology-card">
+      <h4>National Bias Detection</h4>
+      <p>Indian team markets automatically receive -5 ArbScore adjustment for domestic retail premium. Other home nations receive -2 adjustment for local bias.</p>
+    </div>
+
+    <div class="methodology-card">
+      <h4>Tournament vs League</h4>
+      <p>Knockout tournaments favor underdogs (higher ArbScore for 2nd/3rd tier). League formats favor consistency (higher ArbScore for system-driven franchises).</p>
+    </div>
+  </div>
+
+  <!-- KEY INSIGHT -->
+  <div class="card" style="margin-top: 40px;">
+    <div class="card-content">
+      <h3 style="margin-top: 0; color: #facc15;">💡 Arbstack's Cricket Edge</h3>
+      <p style="font-size: 1.05rem; color: #cbd5e1; margin: 16px 0;">
+        Arbstack's edge in cricket is not prediction—it's understanding how <strong style="color: #facc15;">format, bias, and structure</strong> distort price. Markets overprice favorites in T20, underprice system in IPL, and ignore variance in ODI. These are not bugs—they're exploitable features.
+      </p>
+    </div>
+  </div>
+
+</main>
+
+<footer class="footer">
+  <div class="footer-content">
+    <div class="footer-text">
+      <strong>Data Source:</strong> Market analysis from Kalshi prediction markets and Oddschecker (aggregated bookmaker odds)
+    </div>
+    <div class="footer-links">
+      <a href="#methodology">Methodology</a>
+      <a href="#disclaimer">Disclaimer</a>
+      <a href="index.html">Back to Home</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
