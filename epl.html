@@ -1,232 +1,732 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>Arbstack — EPL</title>
-
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-  <!-- Minimal, clean Arbstack styling -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Arbstack · EPL Markets</title>
   <style>
-    body {
-      background: #0f1214;
-      color: #e6e6e6;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 24px;
+    /* =====================
+       RESET & BASE
+    ===================== */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
     }
 
-    h1 {
-      font-size: 1.8rem;
-      margin-bottom: 4px;
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: radial-gradient(
+        ellipse at top,
+        #0f2a3a 0%,
+        #0b1623 40%,
+        #070d16 100%
+      );
+      color: #e5e7eb;
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    /* =====================
+       NAVIGATION
+    ===================== */
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 28px;
+      border-bottom: 1px solid rgba(148,163,184,0.1);
+      background: rgba(11,22,35,0.5);
+      backdrop-filter: blur(10px);
+    }
+
+    .nav-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .logo {
+      width: 42px;
+      height: 42px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, #6dd5ed, #2193b0);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #000;
+      font-weight: 700;
+      font-size: 20px;
+    }
+
+    .brand .name {
+      font-weight: 600;
+      font-size: 18px;
+      color: #fff;
+    }
+
+    .brand .tagline {
+      font-size: 0.8rem;
+      color: #94a3b8;
+    }
+
+    .nav-right {
+      display: flex;
+      gap: 24px;
+      align-items: center;
+    }
+
+    .nav-right a {
+      text-decoration: none;
+      color: #cbd5e1;
+      font-size: 0.9rem;
+      transition: color 0.2s ease;
+      position: relative;
+    }
+
+    .nav-right a:hover {
+      color: #fff;
+    }
+
+    .nav-right a.active {
+      color: #6dd5ed;
+      font-weight: 600;
+    }
+
+    .nav-right a.active::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, #6dd5ed, #2193b0);
+      border-radius: 2px;
+    }
+
+    /* =====================
+       PAGE LAYOUT
+    ===================== */
+    .page {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 40px 24px 80px;
+    }
+
+    .page-header {
+      margin-bottom: 40px;
+    }
+
+    .page-header h1 {
+      font-size: 2.4rem;
+      margin-bottom: 12px;
+      color: #fff;
+    }
+
+    .page-header p {
+      font-size: 1.05rem;
+      color: #94a3b8;
+      line-height: 1.6;
     }
 
     h2 {
-      margin-top: 36px;
-      font-size: 1.2rem;
-      font-weight: 600;
-      color: #d6d6d6;
+      font-size: 1.8rem;
+      margin: 48px 0 24px;
+      color: #fff;
     }
 
-    #last-updated {
-      color: #9aa4ad;
-      font-size: 0.9rem;
+    h3 {
+      font-size: 1.2rem;
+      margin: 24px 0 12px;
+      color: #6dd5ed;
+    }
+
+    /* =====================
+       CARDS
+    ===================== */
+    .card {
+      background: rgba(15,23,48,0.6);
+      border: 1px solid rgba(148,163,184,0.15);
+      border-radius: 16px;
+      overflow: hidden;
       margin-bottom: 24px;
     }
 
-    /* ArbCards */
-    .arb-cards {
+    .card-content {
+      padding: 24px;
+    }
+
+    /* =====================
+       INSIGHTS GRID
+    ===================== */
+    .insights-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 16px;
-      margin-top: 16px;
+      gap: 20px;
+      margin-bottom: 40px;
     }
 
-    .arb-card {
-      background: #151a1f;
-      border: 1px solid #222;
-      border-radius: 12px;
-      padding: 16px;
+    .insight-card {
+      background: rgba(15,23,48,0.6);
+      border: 1px solid rgba(148,163,184,0.15);
+      border-radius: 14px;
+      padding: 20px;
     }
 
-    .arb-card.rank-1 {
-      border-left: 5px solid gold;
-    }
-
-    .arb-card.rank-2 {
-      border-left: 5px solid silver;
-    }
-
-    .arb-card-title {
-      font-weight: 600;
-      font-size: 1rem;
+    .insight-label {
+      font-size: 0.75rem;
+      color: #64748b;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
       margin-bottom: 8px;
     }
 
-    .arb-score {
-      font-size: 1.4rem;
+    .insight-value {
+      font-size: 2.5rem;
       font-weight: 700;
-      margin: 8px 0;
+      color: #6dd5ed;
+      margin-bottom: 8px;
     }
 
-    .arb-meta {
+    .insight-desc {
       font-size: 0.9rem;
-      color: #b0b7bf;
+      color: #94a3b8;
+      line-height: 1.4;
     }
 
-    /* Table */
+    /* =====================
+       STRATEGY SECTION
+    ===================== */
+    .strategy-section {
+      background: linear-gradient(135deg, rgba(109,213,237,0.08), rgba(33,147,176,0.08));
+      border: 1px solid rgba(109,213,237,0.2);
+      border-radius: 16px;
+      padding: 28px;
+      margin: 32px 0;
+    }
+
+    .strategy-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 16px;
+      margin-top: 20px;
+    }
+
+    .strategy-item {
+      background: rgba(11,22,35,0.8);
+      padding: 16px;
+      border-radius: 10px;
+      border-left: 3px solid #6dd5ed;
+    }
+
+    .strategy-item strong {
+      color: #6dd5ed;
+      display: block;
+      margin-bottom: 8px;
+      font-size: 1.05rem;
+    }
+
+    .strategy-item p {
+      color: #cbd5e1;
+      font-size: 0.9rem;
+      line-height: 1.5;
+      margin: 0;
+    }
+
+    /* =====================
+       TABLES
+    ===================== */
     table {
       width: 100%;
       border-collapse: collapse;
-      margin-top: 16px;
-      background: #111;
-      border-radius: 8px;
-      overflow: hidden;
-    }
-
-    thead {
-      background: #151a1f;
     }
 
     th, td {
-      padding: 12px 10px;
+      padding: 12px;
       text-align: left;
-      font-size: 0.95rem;
+      border-bottom: 1px solid rgba(148,163,184,0.1);
     }
 
-    th {
-      color: #9aa4ad;
-      font-weight: 500;
-    }
-
-    tr {
-      border-bottom: 1px solid #222;
-    }
-
-    tr:hover {
-      background: #151a1f;
-    }
-
-    tr.low-liquidity {
-      opacity: 0.45;
-    }
-
-    .rank {
+    thead th {
+      background: rgba(11,16,32,0.9);
+      color: #cbd5e1;
       font-weight: 600;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      position: sticky;
+      top: 0;
+      z-index: 10;
     }
 
-    footer {
-      margin-top: 48px;
+    tbody tr:hover {
+      background: rgba(109,213,237,0.05);
+    }
+
+    td.num {
+      text-align: right;
+      font-variant-numeric: tabular-nums;
+      font-size: 0.9rem;
+    }
+
+    td.match {
+      font-weight: 600;
+      color: #fff;
+    }
+
+    /* =====================
+       BADGES & INDICATORS
+    ===================== */
+    .badge {
+      display: inline-block;
+      padding: 5px 12px;
+      border-radius: 999px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .badge.hot {
+      background: rgba(239,68,68,0.2);
+      color: #fca5a5;
+      border: 1px solid rgba(239,68,68,0.4);
+    }
+
+    .badge.watch {
+      background: rgba(245,158,11,0.2);
+      color: #fde68a;
+      border: 1px solid rgba(245,158,11,0.4);
+    }
+
+    .badge.ok {
+      background: rgba(34,197,94,0.2);
+      color: #bbf7d0;
+      border: 1px solid rgba(34,197,94,0.4);
+    }
+
+    .edge-indicator {
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      margin-right: 8px;
+    }
+
+    .edge-high { background: #ef4444; }
+    .edge-med { background: #f59e0b; }
+    .edge-low { background: #22c55e; }
+
+    .delta-pos { color: #fca5a5; font-weight: 600; }
+    .delta-neg { color: #93c5fd; font-weight: 600; }
+
+    .highlight-row {
+      background: rgba(109,213,237,0.03);
+    }
+
+    /* =====================
+       ANALYSIS SECTION
+    ===================== */
+    .analysis-block {
+      margin: 24px 0;
+      padding-bottom: 24px;
+      border-bottom: 1px solid rgba(148,163,184,0.1);
+    }
+
+    .analysis-block:last-child {
+      border-bottom: none;
+    }
+
+    .analysis-block h4 {
+      font-size: 1.1rem;
+      color: #fff;
+      margin-bottom: 8px;
+    }
+
+    .analysis-block ul {
+      list-style: none;
+      padding-left: 0;
+      margin: 12px 0;
+    }
+
+    .analysis-block ul li {
+      padding: 6px 0;
+      color: #94a3b8;
+      font-size: 0.9rem;
+      padding-left: 20px;
+      position: relative;
+    }
+
+    .analysis-block ul li::before {
+      content: '→';
+      position: absolute;
+      left: 0;
+      color: #6dd5ed;
+      font-weight: 700;
+    }
+
+    /* =====================
+       METHODOLOGY GRID
+    ===================== */
+    .methodology-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+      margin-top: 24px;
+    }
+
+    .methodology-card {
+      background: rgba(11,22,35,0.6);
+      border: 1px solid rgba(148,163,184,0.1);
+      border-radius: 12px;
+      padding: 20px;
+    }
+
+    .methodology-card h4 {
+      color: #6dd5ed;
+      margin-bottom: 12px;
+      font-size: 1.05rem;
+    }
+
+    .methodology-card p {
+      color: #94a3b8;
+      font-size: 0.9rem;
+      line-height: 1.6;
+      margin: 0;
+    }
+
+    /* =====================
+       FOOTER
+    ===================== */
+    .footer {
+      margin-top: 60px;
+      padding: 32px 0;
+      border-top: 1px solid rgba(148,163,184,0.1);
+      text-align: center;
+    }
+
+    .footer-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 24px;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .footer-text {
       font-size: 0.85rem;
-      color: #7f8790;
-      border-top: 1px solid #222;
-      padding-top: 16px;
+      color: #64748b;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 24px;
+    }
+
+    .footer-links a {
+      color: #64748b;
+      text-decoration: none;
+      font-size: 0.85rem;
+      transition: color 0.2s ease;
+    }
+
+    .footer-links a:hover {
+      color: #6dd5ed;
+    }
+
+    /* =====================
+       RESPONSIVE
+    ===================== */
+    @media (max-width: 768px) {
+      .nav {
+        flex-direction: column;
+        gap: 16px;
+        text-align: center;
+      }
+
+      .nav-right {
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      .page-header h1 {
+        font-size: 1.8rem;
+      }
+
+      h2 {
+        font-size: 1.4rem;
+      }
+
+      .insights-grid,
+      .strategy-grid,
+      .methodology-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-content {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      table {
+        font-size: 0.8rem;
+      }
+
+      th, td {
+        padding: 8px;
+      }
     }
   </style>
 </head>
-
 <body>
 
-  <h1>Arbstack — EPL</h1>
-  <div id="last-updated">Loading…</div>
+<header class="nav">
+  <div class="nav-left">
+    <div class="logo">A</div>
+    <div class="brand">
+      <div class="name">Arbstack</div>
+      <div class="tagline">Market Intelligence Platform</div>
+    </div>
+  </div>
+  <nav class="nav-right">
+    <a href="index.html">Home</a>
+    <a href="epl.html" class="active">EPL</a>
+    <a href="afcon.html">AFCON</a>
+    <a href="cricket.html">Cricket</a>
+    <a href="#about">About</a>
+  </nav>
+</header>
 
-  <h2>Top ArbCards</h2>
-  <div id="arb-cards" class="arb-cards"></div>
+<main class="page">
 
-  <h2>All Matches</h2>
-  <table>
-    <thead>
-      <tr>
-        <th>Match</th>
-        <th>Arb Score</th>
-        <th>Rank</th>
-        <th>Liquidity</th>
-      </tr>
-    </thead>
-    <tbody id="match-table"></tbody>
-  </table>
+  <div class="page-header">
+    <h1>⚽ EPL Market Intelligence</h1>
+    <p>Cross-platform betting market analysis revealing inefficiencies between retail prediction markets and professional bookmakers. Real-time probability comparison across Robinhood, Polymarket, Kalshi, and traditional sportsbooks.</p>
+  </div>
 
-  <footer>
-    Arbstack is a decision-support signal, not betting advice.  
-    Data source: public prediction markets.
-  </footer>
+  <!-- INSIGHTS OVERVIEW -->
+  <div class="insights-grid">
+    <div class="insight-card">
+      <div class="insight-label">Arbitrage Opportunities</div>
+      <div class="insight-value">5</div>
+      <div class="insight-desc">Matches with exploitable market disagreement (WATCH/HOT signals)</div>
+    </div>
+    
+    <div class="insight-card">
+      <div class="insight-label">Strongest Edge</div>
+      <div class="insight-value">5.7%</div>
+      <div class="insight-desc">Man City away win - books significantly more confident than markets</div>
+    </div>
+    
+    <div class="insight-card">
+      <div class="insight-label">Market Efficiency</div>
+      <div class="insight-value">50%</div>
+      <div class="insight-desc">Half of matches show tight alignment, indicating efficient pricing</div>
+    </div>
+  </div>
 
-  <!-- CSV parser -->
-  <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+  <!-- TRADING STRATEGIES -->
+  <div class="strategy-section">
+    <h3>🎯 Trading Strategies Based on This Data</h3>
+    <div class="strategy-grid">
+      <div class="strategy-item">
+        <strong>Fade the Crowd</strong>
+        <p>When prediction markets show positive deltas on home teams, consider backing the opposite at traditional books where sharp money resides.</p>
+      </div>
+      <div class="strategy-item">
+        <strong>Arbitrage Layering</strong>
+        <p>HOT signals indicate potential for risk-free profits by taking opposing positions across platforms, if liquidity allows.</p>
+      </div>
+      <div class="strategy-item">
+        <strong>Information Asymmetry</strong>
+        <p>Large negative deltas on favorites suggest bookmakers have information (injuries, form, lineups) not yet priced into prediction markets.</p>
+      </div>
+      <div class="strategy-item">
+        <strong>Volatility Plays</strong>
+        <p>WATCH-rated matches often see odds movement closer to kickoff as information converges - timing matters.</p>
+      </div>
+    </div>
+  </div>
 
-  <script>
-    const CSV_URL =
-      "https://docs.google.com/spreadsheets/d/1U7UEXH5NIo6tzWO4cVEzKcar6XgtwCbewmkMJLo4th8/export?format=csv&gid=2026462708";
+  <!-- MARKET COMPARISON TABLE -->
+  <h2>📊 Market Probability Comparison</h2>
+  <p style="color: #94a3b8; margin-bottom: 20px;">Normalized implied probabilities (%) across platforms. H=Home Win, D=Draw, A=Away Win</p>
 
-    fetch(CSV_URL)
-      .then(res => res.text())
-      .then(csvText => {
-        const rows = Papa.parse(csvText, {
-          header: true,
-          dynamicTyping: true,
-          skipEmptyLines: true
-        }).data;
+  <div class="card">
+    <table>
+      <thead>
+        <tr>
+          <th rowspan="2">Match</th>
+          <th colspan="3">Prediction Markets Avg</th>
+          <th colspan="3">Oddschecker (Books)</th>
+          <th colspan="3">Delta (Markets - Books)</th>
+        </tr>
+        <tr>
+          <th>H</th><th>D</th><th>A</th>
+          <th>H</th><th>D</th><th>A</th>
+          <th>ΔH</th><th>ΔD</th><th>ΔA</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="highlight-row">
+          <td class="match"><span class="edge-indicator edge-high"></span>Man United vs Man City</td>
+          <td class="num">26.2</td><td class="num">23.2</td><td class="num">50.6</td>
+          <td class="num">22.8</td><td class="num">20.9</td><td class="num">56.3</td>
+          <td class="num delta-pos">+3.4</td><td class="num delta-pos">+2.3</td><td class="num delta-neg">−5.7</td>
+        </tr>
+        <tr>
+          <td class="match"><span class="edge-indicator edge-low"></span>Liverpool vs Burnley</td>
+          <td class="num">78.9</td><td class="num">13.6</td><td class="num">7.5</td>
+          <td class="num">77.9</td><td class="num">14.6</td><td class="num">7.5</td>
+          <td class="num delta-pos">+1.0</td><td class="num delta-neg">−1.0</td><td class="num">0.0</td>
+        </tr>
+        <tr>
+          <td class="match"><span class="edge-indicator edge-low"></span>Chelsea vs Brentford</td>
+          <td class="num">56.3</td><td class="num">24.1</td><td class="num">19.5</td>
+          <td class="num">55.6</td><td class="num">24.0</td><td class="num">20.4</td>
+          <td class="num delta-pos">+0.7</td><td class="num delta-pos">+0.1</td><td class="num delta-neg">−0.9</td>
+        </tr>
+        <tr class="highlight-row">
+          <td class="match"><span class="edge-indicator edge-med"></span>Leeds vs Fulham</td>
+          <td class="num">41.7</td><td class="num">29.0</td><td class="num">29.3</td>
+          <td class="num">41.0</td><td class="num">29.1</td><td class="num">29.9</td>
+          <td class="num delta-pos">+0.7</td><td class="num delta-neg">−0.1</td><td class="num delta-neg">−0.6</td>
+        </tr>
+        <tr class="highlight-row">
+          <td class="match"><span class="edge-indicator edge-med"></span>Tottenham vs West Ham</td>
+          <td class="num">55.8</td><td class="num">24.8</td><td class="num">19.4</td>
+          <td class="num">55.2</td><td class="num">25.2</td><td class="num">19.6</td>
+          <td class="num delta-pos">+0.6</td><td class="num delta-neg">−0.4</td><td class="num delta-neg">−0.2</td>
+        </tr>
+        <tr>
+          <td class="match"><span class="edge-indicator edge-low"></span>Sunderland vs Crystal Palace</td>
+          <td class="num">35.9</td><td class="num">30.8</td><td class="num">33.4</td>
+          <td class="num">35.2</td><td class="num">31.5</td><td class="num">33.3</td>
+          <td class="num delta-pos">+0.7</td><td class="num delta-neg">−0.7</td><td class="num delta-pos">+0.1</td>
+        </tr>
+        <tr class="highlight-row">
+          <td class="match"><span class="edge-indicator edge-med"></span>Nottingham vs Arsenal</td>
+          <td class="num">15.2</td><td class="num">22.0</td><td class="num">62.7</td>
+          <td class="num">15.6</td><td class="num">23.4</td><td class="num">61.0</td>
+          <td class="num delta-neg">−0.4</td><td class="num delta-neg">−1.4</td><td class="num delta-pos">+1.7</td>
+        </tr>
+        <tr>
+          <td class="match"><span class="edge-indicator edge-low"></span>Wolves vs Newcastle</td>
+          <td class="num">21.3</td><td class="num">24.3</td><td class="num">54.4</td>
+          <td class="num">22.6</td><td class="num">24.5</td><td class="num">52.9</td>
+          <td class="num delta-neg">−1.3</td><td class="num delta-neg">−0.2</td><td class="num delta-pos">+1.5</td>
+        </tr>
+        <tr>
+          <td class="match"><span class="edge-indicator edge-low"></span>Aston Villa vs Everton</td>
+          <td class="num">56.9</td><td class="num">24.9</td><td class="num">18.1</td>
+          <td class="num">56.6</td><td class="num">25.3</td><td class="num">18.1</td>
+          <td class="num delta-pos">+0.3</td><td class="num delta-neg">−0.4</td><td class="num">0.0</td>
+        </tr>
+        <tr class="highlight-row">
+          <td class="match"><span class="edge-indicator edge-med"></span>Brighton vs Bournemouth</td>
+          <td class="num">51.8</td><td class="num">24.3</td><td class="num">24.0</td>
+          <td class="num">50.8</td><td class="num">24.9</td><td class="num">24.3</td>
+          <td class="num delta-pos">+1.0</td><td class="num delta-neg">−0.6</td><td class="num delta-neg">−0.3</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 
-        renderPage(rows);
-      });
+  <!-- DETAILED ANALYSIS -->
+  <h2>🔍 Detailed Market Analysis</h2>
+  
+  <div class="card">
+    <div class="card-content">
+      
+      <div class="analysis-block">
+        <h4>🔥 High Priority: Man United vs Man City</h4>
+        <p><strong>Signal Strength:</strong> <span class="badge hot">HOT</span> — Largest disagreement in the dataset</p>
+        <p style="margin: 12px 0; color: #cbd5e1;">Traditional bookmakers are 5.7 percentage points more confident in a Man City away win compared to prediction markets. This represents the most significant pricing inefficiency.</p>
+        <p style="margin: 12px 0 8px; color: #cbd5e1;"><strong>Likely Explanation:</strong></p>
+        <ul>
+          <li>Recent form data showing Man City dominance</li>
+          <li>Team news or injuries not fully priced into retail markets</li>
+          <li>Derby match sentiment causing retail overvaluation of Man United</li>
+        </ul>
+        <p style="margin: 12px 0; color: #6dd5ed; font-weight: 600;">Trading Implication: Strong case for backing Man City at prediction markets (lower price) or fading Man United optimism.</p>
+      </div>
 
-    function renderPage(rows) {
-      rows = rows.filter(r => r.home_team && r.arb_rank !== null);
+      <div class="analysis-block">
+        <h4>⚠️ Medium Priority Watch List</h4>
+        
+        <div style="margin: 16px 0;">
+          <p><strong>Tottenham vs West Ham</strong> — <span class="badge watch">WATCH</span></p>
+          <p style="color: #94a3b8; font-size: 0.9rem; margin-top: 6px;">Prediction markets slightly favor Tottenham more than bookmakers. Small retail premium on the home favorite.</p>
+        </div>
 
-      rows.sort((a, b) => a.arb_rank - b.arb_rank);
+        <div style="margin: 16px 0;">
+          <p><strong>Nottingham vs Arsenal</strong> — <span class="badge watch">WATCH</span></p>
+          <p style="color: #94a3b8; font-size: 0.9rem; margin-top: 6px;">Markets more bullish on Arsenal away win (+1.7%). Books see slightly more draw probability, suggesting caution on Arsenal's road form.</p>
+        </div>
 
-      document.getElementById("last-updated").innerText =
-        "Last updated: " + rows[0].snapshot_time + " ET";
+        <div style="margin: 16px 0;">
+          <p><strong>Leeds vs Fulham</strong> — <span class="badge watch">WATCH</span></p>
+          <p style="color: #94a3b8; font-size: 0.9rem; margin-top: 6px;">Evenly matched fixture with minimal edge. Markets slightly prefer Leeds, books slightly prefer Fulham.</p>
+        </div>
 
-      renderArbCards(rows.slice(0, 2));
-      renderTable(rows);
-    }
+        <div style="margin: 16px 0;">
+          <p><strong>Brighton vs Bournemouth</strong> — <span class="badge watch">WATCH</span></p>
+          <p style="color: #94a3b8; font-size: 0.9rem; margin-top: 6px;">Small home bias in prediction markets. Bookmakers are more balanced across all three outcomes.</p>
+        </div>
+      </div>
 
-    function liquidityLabel(v) {
-      if (v >= 1) return "High";
-      if (v >= 0.7) return "Medium";
-      return "Low";
-    }
+      <div class="analysis-block">
+        <h4>✅ Efficient Markets (Low Opportunity)</h4>
+        <p style="color: #94a3b8; font-size: 0.9rem;">Liverpool, Chelsea, Sunderland, Wolves, and Aston Villa matches show strong consensus across all platforms with deltas under 1.5%. These markets are informationally efficient with limited arbitrage potential.</p>
+      </div>
 
-    function renderArbCards(cards) {
-      const el = document.getElementById("arb-cards");
-      el.innerHTML = "";
+    </div>
+  </div>
 
-      cards.forEach(m => {
-        el.innerHTML += `
-          <div class="arb-card rank-${m.arb_rank}">
-            <div class="arb-card-title">
-              ${m.home_team} vs ${m.away_team}
-            </div>
-            <div class="arb-score">
-              ${m.arb_score_scaled.toFixed(1)}
-            </div>
-            <div class="arb-meta">
-              Favorite: ${m.favorite_side}<br/>
-              Liquidity: ${liquidityLabel(m.liquidity_score)}
-            </div>
-          </div>
-        `;
-      });
-    }
+  <!-- METHODOLOGY -->
+  <h2>📚 Understanding the Methodology</h2>
+  
+  <div class="methodology-grid">
+    <div class="methodology-card">
+      <h4>What Are These Numbers?</h4>
+      <p>These are implied probabilities derived from betting odds. A 50% probability means the market believes that outcome has a 50/50 chance. The "normalized" aspect means we've adjusted for the bookmaker's margin (overround) to show true probabilities.</p>
+    </div>
 
-    function renderTable(rows) {
-      const el = document.getElementById("match-table");
-      el.innerHTML = "";
+    <div class="methodology-card">
+      <h4>Why Compare Different Platforms?</h4>
+      <p>Traditional sportsbooks often have sharper pricing due to professional bettors and higher stakes. Prediction markets reflect broader retail sentiment. Differences between them reveal information asymmetries and potential edges.</p>
+    </div>
 
-      rows.forEach(m => {
-        el.innerHTML += `
-          <tr class="${m.liquidity_score < 0.4 ? 'low-liquidity' : ''}">
-            <td>${m.home_team} vs ${m.away_team}</td>
-            <td>${m.arb_score_scaled.toFixed(1)}</td>
-            <td class="rank">${m.arb_rank}</td>
-            <td>${liquidityLabel(m.liquidity_score)}</td>
-          </tr>
-        `;
-      });
-    }
-  </script>
+    <div class="methodology-card">
+      <h4>How to Read Deltas</h4>
+      <p><strong style="color: #fca5a5;">Positive Δ:</strong> Prediction markets are more optimistic than bookmakers<br><br>
+      <strong style="color: #93c5fd;">Negative Δ:</strong> Bookmakers are more confident than prediction markets<br><br>
+      <strong>Large absolute values:</strong> Significant disagreement = potential opportunity</p>
+    </div>
+
+    <div class="methodology-card">
+      <h4>Risk Considerations</h4>
+      <p>Market disagreements can reflect: (1) information asymmetry, (2) liquidity differences, (3) time lag in odds updates, or (4) genuine uncertainty. Always consider why a gap exists before trading.</p>
+    </div>
+  </div>
+
+</main>
+
+<footer class="footer">
+  <div class="footer-content">
+    <div class="footer-text">
+      <strong>Data Source:</strong> Normalized probabilities from Robinhood, Polymarket, Kalshi, and Oddschecker (aggregated bookmaker odds)
+    </div>
+    <div class="footer-links">
+      <a href="#methodology">Methodology</a>
+      <a href="#disclaimer">Disclaimer</a>
+      <a href="index.html">Back to Home</a>
+    </div>
+  </div>
+</footer>
 
 </body>
 </html>
