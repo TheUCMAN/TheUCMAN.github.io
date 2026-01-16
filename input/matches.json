@@ -1,0 +1,30 @@
+[
+  {
+    "id": "epl-ars-liv-20260120",
+    "as_of": "2026-01-15 20:10",
+    "match": "Arsenal vs Liverpool",
+    "league": "EPL",
+    "kickoff": "Jan 20, 2026",
+    "category": "Sports",
+    "market": "Match Winner",
+    "edge_type": "Standard + Synthetic",
+    "source": "Poly / Books / Kalshi",
+    "arb_score": 82,
+    "execution_risk": "Low",
+    "volatility": "Medium",
+    "confidence": 4.5,
+    "sizing_tier": "Medium",
+    "best_price": "YES @ 0.64",
+    "fair_price": "0.58",
+    "delta": "+6.0%",
+    "drift": "↑ Rising",
+    "reason": "Books drifted slower than PM; liquidity is decent; spread looks manageable.",
+    "slippage": "Low",
+    "liquidity": "Good",
+    "ttr": "5 days",
+    "slippage_meter": 25,
+    "liquidity_meter": 80,
+    "ttr_meter": 55,
+    "note": "Execution matters: use limits, confirm market rules, watch late lineup news."
+  }
+]
