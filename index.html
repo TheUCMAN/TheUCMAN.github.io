@@ -5,380 +5,171 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Arbstack · Market Intelligence Platform</title>
   <style>
-    /* =====================
-       RESET & BASE
-    ===================== */
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
+    * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
       font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-      background: radial-gradient(
-        ellipse at top,
-        #0f2a3a 0%,
-        #0b1623 40%,
-        #070d16 100%
-      );
-      color: #e5e7eb;
-      line-height: 1.6;
-      min-height: 100vh;
+      background: radial-gradient(ellipse at top, #0f2a3a 0%, #0b1623 40%, #070d16 100%);
+      color: #e5e7eb; line-height: 1.6; min-height: 100vh;
     }
-
-    /* =====================
-       NAVIGATION
-    ===================== */
     .nav {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 18px 28px;
-      border-bottom: 1px solid rgba(148,163,184,0.1);
-      background: rgba(11,22,35,0.5);
-      backdrop-filter: blur(10px);
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 18px 28px; border-bottom: 1px solid rgba(148,163,184,0.1);
+      background: rgba(11,22,35,0.5); backdrop-filter: blur(10px);
     }
-
-    .nav-left {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
+    .nav-left { display: flex; align-items: center; gap: 12px; }
     .logo {
-      width: 42px;
-      height: 42px;
-      border-radius: 10px;
+      width: 42px; height: 42px; border-radius: 10px;
       background: linear-gradient(135deg, #6dd5ed, #2193b0);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #000;
-      font-weight: 700;
-      font-size: 20px;
+      display: flex; align-items: center; justify-content: center;
+      color: #000; font-weight: 700; font-size: 20px;
     }
-
-    .brand .name {
-      font-weight: 600;
-      font-size: 18px;
-      color: #fff;
-    }
-
-    .brand .tagline {
-      font-size: 0.8rem;
-      color: #94a3b8;
-    }
-
-    .nav-right {
-      display: flex;
-      gap: 24px;
-      align-items: center;
-    }
-
+    .brand .name { font-weight: 600; font-size: 18px; color: #fff; }
+    .brand .tagline { font-size: 0.8rem; color: #94a3b8; }
+    .nav-right { display: flex; gap: 24px; align-items: center; }
     .nav-right a {
-      text-decoration: none;
-      color: #cbd5e1;
-      font-size: 0.9rem;
-      transition: color 0.2s ease;
-      position: relative;
+      text-decoration: none; color: #cbd5e1; font-size: 0.9rem;
+      transition: color 0.2s ease; position: relative;
     }
-
-    .nav-right a:hover {
-      color: #fff;
-    }
-
-    .nav-right a.active {
-      color: #6dd5ed;
-      font-weight: 600;
-    }
-
+    .nav-right a:hover { color: #fff; }
+    .nav-right a.active { color: #6dd5ed; font-weight: 600; }
     .nav-right a.active::after {
-      content: '';
-      position: absolute;
-      bottom: -4px;
-      left: 0;
-      right: 0;
-      height: 2px;
-      background: linear-gradient(90deg, #6dd5ed, #2193b0);
-      border-radius: 2px;
+      content: ''; position: absolute; bottom: -4px; left: 0; right: 0;
+      height: 2px; background: linear-gradient(90deg, #6dd5ed, #2193b0); border-radius: 2px;
     }
-
-    /* =====================
-       PAGE LAYOUT
-    ===================== */
-    .page {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 60px 24px 80px;
-    }
-
-    .hero {
-      text-align: center;
-      margin-bottom: 60px;
-    }
-
+    .page { max-width: 1100px; margin: 0 auto; padding: 60px 24px 80px; }
+    .hero { text-align: center; margin-bottom: 60px; }
     .hero h1 {
-      font-size: 3rem;
-      margin-bottom: 16px;
+      font-size: 3rem; margin-bottom: 16px;
       background: linear-gradient(135deg, #fff, #6dd5ed);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
       background-clip: text;
     }
-
     .hero p {
-      font-size: 1.1rem;
-      color: #94a3b8;
-      max-width: 600px;
-      margin: 0 auto 24px;
+      font-size: 1.1rem; color: #94a3b8; max-width: 600px;
+      margin: 0 auto 24px; line-height: 1.7;
     }
-
-    .pill-row {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-      justify-content: center;
-      margin-top: 20px;
-    }
-
+    .pill-row { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; margin-top: 20px; }
     .pill {
-      padding: 6px 14px;
-      border-radius: 999px;
-      background: rgba(109,213,237,0.1);
-      border: 1px solid rgba(109,213,237,0.2);
-      font-size: 0.8rem;
-      color: #6dd5ed;
+      padding: 6px 14px; border-radius: 999px;
+      background: rgba(109,213,237,0.1); border: 1px solid rgba(109,213,237,0.2);
+      font-size: 0.8rem; color: #6dd5ed;
     }
-
-    /* =====================
-       MARKET CARDS
-    ===================== */
-    .section {
-      margin-top: 60px;
+    .section { margin-top: 60px; }
+    .section h2 { font-size: 1.8rem; margin-bottom: 24px; color: #fff; }
+    
+    /* Featured Report Section */
+    .featured-report {
+      background: linear-gradient(135deg, rgba(132,204,22,0.12), rgba(34,197,94,0.08));
+      border: 1px solid rgba(132,204,22,0.3); border-radius: 16px;
+      padding: 32px; margin-top: 60px; position: relative; overflow: hidden;
     }
-
-    .section h2 {
-      font-size: 1.8rem;
-      margin-bottom: 24px;
-      color: #fff;
+    .featured-report::before {
+      content: ''; position: absolute; top: 0; right: 0; width: 200px; height: 200px;
+      background: radial-gradient(circle, rgba(132,204,22,0.15), transparent);
+      border-radius: 50%; filter: blur(60px);
     }
-
-    .market-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 20px;
-      margin-top: 24px;
-    }
-
-    .market-card {
-      background: rgba(15,23,48,0.6);
-      border: 1px solid rgba(148,163,184,0.15);
-      border-radius: 16px;
-      padding: 24px;
-      transition: all 0.3s ease;
-      text-decoration: none;
-      color: inherit;
-      display: block;
-    }
-
-    .market-card:hover {
-      transform: translateY(-4px);
-      border-color: rgba(109,213,237,0.4);
-      background: rgba(15,23,48,0.8);
-      box-shadow: 0 10px 40px rgba(109,213,237,0.15);
-    }
-
-    .market-card-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      margin-bottom: 16px;
-    }
-
-    .market-title {
-      font-size: 1.4rem;
-      font-weight: 600;
-      color: #fff;
-      margin-bottom: 6px;
-    }
-
-    .market-status {
-      padding: 6px 12px;
-      border-radius: 999px;
-      font-size: 0.75rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
-
-    .status-live {
-      background: rgba(34,197,94,0.2);
-      color: #86efac;
-      border: 1px solid rgba(34,197,94,0.3);
-    }
-
-    .status-soon {
-      background: rgba(245,158,11,0.2);
-      color: #fcd34d;
-      border: 1px solid rgba(245,158,11,0.3);
-    }
-
-    .market-meta {
-      font-size: 0.9rem;
-      color: #94a3b8;
-      margin-bottom: 16px;
-    }
-
-    .market-stats {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 12px;
-      margin-top: 16px;
-      padding-top: 16px;
-      border-top: 1px solid rgba(148,163,184,0.1);
-    }
-
-    .stat {
-      text-align: center;
-    }
-
-    .stat-value {
-      font-size: 1.5rem;
-      font-weight: 700;
-      color: #6dd5ed;
-    }
-
-    .stat-label {
-      font-size: 0.75rem;
-      color: #64748b;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      margin-top: 4px;
-    }
-
-    .market-features {
-      list-style: none;
-      margin-top: 12px;
-    }
-
-    .market-features li {
-      padding: 6px 0;
-      color: #cbd5e1;
-      font-size: 0.9rem;
-    }
-
-    .market-features li::before {
-      content: '→';
-      color: #6dd5ed;
-      margin-right: 8px;
-      font-weight: 700;
-    }
-
-    /* =====================
-       FEATURES SECTION
-    ===================== */
-    .features-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 20px;
-      margin-top: 32px;
-    }
-
-    .feature-card {
-      background: rgba(15,23,48,0.4);
-      border: 1px solid rgba(148,163,184,0.1);
-      border-radius: 12px;
-      padding: 20px;
-    }
-
-    .feature-icon {
-      font-size: 2rem;
+    .featured-badge {
+      display: inline-block; padding: 6px 14px; border-radius: 999px;
+      background: rgba(132,204,22,0.2); color: #a3e635; border: 1px solid rgba(132,204,22,0.4);
+      font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;
       margin-bottom: 12px;
     }
-
-    .feature-title {
-      font-size: 1.1rem;
-      font-weight: 600;
-      margin-bottom: 8px;
-      color: #fff;
+    .featured-report h3 {
+      font-size: 1.8rem; color: #fff; margin-bottom: 12px; position: relative; z-index: 1;
     }
-
-    .feature-desc {
-      font-size: 0.9rem;
-      color: #94a3b8;
-      line-height: 1.5;
+    .featured-report p {
+      font-size: 1.05rem; color: #cbd5e1; margin-bottom: 24px; line-height: 1.6;
+      position: relative; z-index: 1;
     }
-
-    /* =====================
-       FOOTER
-    ===================== */
+    .featured-cta {
+      display: inline-block; padding: 12px 28px;
+      background: linear-gradient(135deg, #84cc16, #22c55e);
+      color: #000; font-weight: 700; border-radius: 8px; text-decoration: none;
+      transition: all 0.3s ease; position: relative; z-index: 1;
+    }
+    .featured-cta:hover {
+      transform: translateY(-2px); box-shadow: 0 8px 24px rgba(132,204,22,0.3);
+    }
+    
+    .market-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 20px; margin-top: 24px;
+    }
+    .market-card {
+      background: rgba(15,23,48,0.6); border: 1px solid rgba(148,163,184,0.15);
+      border-radius: 16px; padding: 24px; transition: all 0.3s ease;
+      text-decoration: none; color: inherit; display: block;
+    }
+    .market-card:hover {
+      transform: translateY(-4px); border-color: rgba(109,213,237,0.4);
+      background: rgba(15,23,48,0.8); box-shadow: 0 10px 40px rgba(109,213,237,0.15);
+    }
+    .market-card-header {
+      display: flex; justify-content: space-between; align-items: flex-start;
+      margin-bottom: 16px;
+    }
+    .market-title { font-size: 1.4rem; font-weight: 600; color: #fff; margin-bottom: 6px; }
+    .market-meta { font-size: 0.9rem; color: #94a3b8; margin-bottom: 16px; }
+    .market-status {
+      padding: 6px 12px; border-radius: 999px; font-size: 0.75rem;
+      font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;
+    }
+    .status-live {
+      background: rgba(34,197,94,0.2); color: #86efac; border: 1px solid rgba(34,197,94,0.3);
+    }
+    .status-soon {
+      background: rgba(245,158,11,0.2); color: #fcd34d; border: 1px solid rgba(245,158,11,0.3);
+    }
+    .market-stats {
+      display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px;
+      margin-top: 16px; padding-top: 16px; border-top: 1px solid rgba(148,163,184,0.1);
+    }
+    .stat { text-align: center; }
+    .stat-value { font-size: 1.5rem; font-weight: 700; color: #6dd5ed; }
+    .stat-label {
+      font-size: 0.75rem; color: #64748b; text-transform: uppercase;
+      letter-spacing: 0.5px; margin-top: 4px;
+    }
+    .market-features { list-style: none; margin-top: 12px; }
+    .market-features li { padding: 6px 0; color: #cbd5e1; font-size: 0.9rem; }
+    .market-features li::before {
+      content: '→'; color: #6dd5ed; margin-right: 8px; font-weight: 700;
+    }
+    .features-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px; margin-top: 32px;
+    }
+    .feature-card {
+      background: rgba(15,23,48,0.4); border: 1px solid rgba(148,163,184,0.1);
+      border-radius: 12px; padding: 20px;
+    }
+    .feature-icon { font-size: 2rem; margin-bottom: 12px; }
+    .feature-title { font-size: 1.1rem; font-weight: 600; margin-bottom: 8px; color: #fff; }
+    .feature-desc { font-size: 0.9rem; color: #94a3b8; line-height: 1.5; }
     .footer {
-      margin-top: 80px;
-      padding: 32px 0;
-      border-top: 1px solid rgba(148,163,184,0.1);
+      margin-top: 80px; padding: 32px 0; border-top: 1px solid rgba(148,163,184,0.1);
       text-align: center;
     }
-
     .footer-content {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 0 24px;
-      flex-wrap: wrap;
-      gap: 16px;
+      display: flex; justify-content: space-between; align-items: center;
+      max-width: 1100px; margin: 0 auto; padding: 0 24px; flex-wrap: wrap; gap: 16px;
     }
-
-    .footer-text {
-      font-size: 0.85rem;
-      color: #64748b;
-    }
-
-    .footer-links {
-      display: flex;
-      gap: 24px;
-    }
-
+    .footer-text { font-size: 0.85rem; color: #64748b; }
+    .footer-links { display: flex; gap: 24px; flex-wrap: wrap; justify-content: center; }
     .footer-links a {
-      color: #64748b;
-      text-decoration: none;
-      font-size: 0.85rem;
+      color: #64748b; text-decoration: none; font-size: 0.85rem;
       transition: color 0.2s ease;
     }
-
-    .footer-links a:hover {
-      color: #6dd5ed;
-    }
-
-    /* =====================
-       RESPONSIVE
-    ===================== */
+    .footer-links a:hover { color: #6dd5ed; }
     @media (max-width: 768px) {
-      .hero h1 {
-        font-size: 2rem;
-      }
-
-      .nav {
-        flex-direction: column;
-        gap: 16px;
-        text-align: center;
-      }
-
-      .nav-right {
-        flex-wrap: wrap;
-        justify-content: center;
-      }
-
-      .market-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .footer-content {
-        flex-direction: column;
-        text-align: center;
-      }
+      .hero h1 { font-size: 2rem; }
+      .nav { flex-direction: column; gap: 16px; text-align: center; }
+      .nav-right { flex-wrap: wrap; justify-content: center; }
+      .market-grid { grid-template-columns: 1fr; }
+      .footer-content { flex-direction: column; text-align: center; }
+      .page { padding: 40px 16px 60px; }
+      .featured-report { padding: 24px; }
+      .featured-report h3 { font-size: 1.4rem; }
     }
   </style>
 </head>
@@ -395,10 +186,9 @@
   <nav class="nav-right">
     <a href="index.html" class="active">Home</a>
     <a href="epl.html">EPL</a>
-    <a href="ucl.html">UCL</a>
     <a href="afcon.html">AFCON</a>
     <a href="cricket.html">Cricket</a>
-    <a href="about.html">About</a>
+    <a href="intelligence_report.html">Intelligence Report</a>
   </nav>
 </header>
 
@@ -430,7 +220,7 @@
         </div>
         <ul class="market-features">
           <li>Cross-platform probability analysis</li>
-          <li>Arbitrage delta detection</li>
+          <li>Robinhood vs Polymarket vs Books</li>
           <li>Sharp vs retail money tracking</li>
         </ul>
         <div class="market-stats">
@@ -439,33 +229,8 @@
             <div class="stat-label">Matches</div>
           </div>
           <div class="stat">
-            <div class="stat-value">5</div>
+            <div class="stat-value">3</div>
             <div class="stat-label">Hot Signals</div>
-          </div>
-        </div>
-      </a>
-
-      <a href="ucl.html" class="market-card">
-        <div class="market-card-header">
-          <div>
-            <div class="market-title">🏆 UCL Markets</div>
-            <div class="market-meta">UEFA Champions League</div>
-          </div>
-          <span class="market-status status-live">LIVE</span>
-        </div>
-        <ul class="market-features">
-          <li>European competition analysis</li>
-          <li>Draw value identification</li>
-          <li>Favorite tax detection</li>
-        </ul>
-        <div class="market-stats">
-          <div class="stat">
-            <div class="stat-value">16</div>
-            <div class="stat-label">Matches</div>
-          </div>
-          <div class="stat">
-            <div class="stat-value">8</div>
-            <div class="stat-label">High-Value Ops</div>
           </div>
         </div>
       </a>
@@ -479,7 +244,7 @@
           <span class="market-status status-live">LIVE</span>
         </div>
         <ul class="market-features">
-          <li>Knockout stage probability modeling</li>
+          <li>Semifinal probability modeling</li>
           <li>Draw-heavy regulation analysis</li>
           <li>Tournament structure edges</li>
         </ul>
@@ -489,8 +254,8 @@
             <div class="stat-label">Semifinals</div>
           </div>
           <div class="stat">
-            <div class="stat-value">3</div>
-            <div class="stat-label">Edge Signals</div>
+            <div class="stat-value">-4%</div>
+            <div class="stat-label">Top Delta</div>
           </div>
         </div>
       </a>
@@ -522,6 +287,14 @@
 
     </div>
   </section>
+
+  <!-- FEATURED: Intelligence Report - NOW AFTER LIVE MARKETS -->
+  <div class="featured-report">
+    <span class="featured-badge">⭐ Premium Feature</span>
+    <h3>📊 Daily Intelligence Report</h3>
+    <p>Get actionable BET/CAUTION signals delivered to your inbox every morning at 6am EST. Cross-market analysis with clear explanations on where to find edge and where to stay away. Join 2,000+ subscribers making smarter betting decisions.</p>
+    <a href="intelligence_report.html" class="featured-cta">View Sample Report →</a>
+  </div>
 
   <section class="section">
     <h2>Coming Soon</h2>
@@ -596,6 +369,22 @@
         </div>
       </div>
 
+      <div class="feature-card">
+        <div class="feature-icon">📧</div>
+        <div class="feature-title">Daily Intelligence Report</div>
+        <div class="feature-desc">
+          Subscribe to get actionable BET/CAUTION signals delivered to your inbox every morning at 6am EST.
+        </div>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">📱</div>
+        <div class="feature-title">Mobile Optimized</div>
+        <div class="feature-desc">
+          Fully responsive design with horizontal scrolling tables and touch-friendly navigation.
+        </div>
+      </div>
+
     </div>
   </section>
 
@@ -609,7 +398,8 @@
     <div class="footer-links">
       <a href="#methodology">Methodology</a>
       <a href="#disclaimer">Disclaimer</a>
-      <a href="about.html">About</a>
+      <a href="intelligence_report.html">Intelligence Report</a>
+      <a href="#contact">Contact</a>
     </div>
   </div>
 </footer>
