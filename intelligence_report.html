@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Arbstack · Intelligence Report</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: radial-gradient(ellipse at top, #0f2a3a 0%, #0b1623 40%, #070d16 100%);
+      color: #e5e7eb; line-height: 1.6; min-height: 100vh;
+    }
+    .nav {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 18px 28px; border-bottom: 1px solid rgba(148,163,184,0.1);
+      background: rgba(11,22,35,0.5); backdrop-filter: blur(10px);
+    }
+    .nav-left { display: flex; align-items: center; gap: 12px; }
+    .logo {
+      width: 42px; height: 42px; border-radius: 10px;
+      background: linear-gradient(135deg, #6dd5ed, #2193b0);
+      display: flex; align-items: center; justify-content: center;
+      color: #000; font-weight: 700; font-size: 20px;
+    }
+    .brand .name { font-weight: 600; font-size: 18px; color: #fff; }
+    .brand .tagline { font-size: 0.8rem; color: #94a3b8; }
+    .nav-right { display: flex; gap: 24px; align-items: center; }
+    .nav-right a {
+      text-decoration: none; color: #cbd5e1; font-size: 0.9rem;
+      transition: color 0.2s ease; position: relative;
+    }
+    .nav-right a:hover { color: #fff; }
+    .nav-right a.active { color: #6dd5ed; font-weight: 600; }
+    .nav-right a.active::after {
+      content: ''; position: absolute; bottom: -4px; left: 0; right: 0;
+      height: 2px; background: linear-gradient(90deg, #6dd5ed, #2193b0); border-radius: 2px;
+    }
+    .page { max-width: 1200px; margin: 0 auto; padding: 40px 24px 80px; }
+    .page-header { margin-bottom: 40px; text-align: center; }
+    .page-header h1 { font-size: 2.6rem; margin-bottom: 12px; color: #fff; }
+    .page-header p { font-size: 1.05rem; color: #94a3b8; line-height: 1.6; max-width: 700px; margin: 0 auto; }
+    h2 { font-size: 1.8rem; margin: 48px 0 24px; color: #fff; }
+    h3 { font-size: 1.3rem; margin: 32px 0 16px; color: #6dd5ed; }
+    .hero-banner {
+      background: linear-gradient(135deg, rgba(109,213,237,0.15), rgba(33,147,176,0.1));
+      border: 1px solid rgba(109,213,237,0.3); border-radius: 16px;
+      padding: 40px 32px; margin-bottom: 48px; text-align: center;
+    }
+    .hero-banner h2 { margin: 0 0 16px 0; font-size: 2rem; }
+    .hero-banner p { color: #cbd5e1; font-size: 1.05rem; margin-bottom: 24px; line-height: 1.7; }
+    .cta-button {
+      display: inline-block; padding: 14px 32px; background: linear-gradient(135deg, #6dd5ed, #2193b0);
+      color: #000; font-weight: 700; font-size: 1rem; border-radius: 8px;
+      text-decoration: none; transition: all 0.3s ease; border: none; cursor: pointer;
+    }
+    .cta-button:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(109,213,237,0.3); }
+    .features-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px; margin: 32px 0;
+    }
+    .feature-card {
+      background: rgba(15,23,48,0.6); border: 1px solid rgba(148,163,184,0.15);
+      border-radius: 14px; padding: 24px;
+    }
+    .feature-icon { font-size: 2.5rem; margin-bottom: 16px; }
+    .feature-title { font-size: 1.2rem; font-weight: 600; color: #fff; margin-bottom: 12px; }
+    .feature-desc { font-size: 0.95rem; color: #94a3b8; line-height: 1.6; }
+    .sample-section {
+      background: rgba(15,23,48,0.4); border: 1px solid rgba(148,163,184,0.15);
+      border-radius: 16px; padding: 32px; margin: 32px 0;
+    }
+    .sample-header {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1px solid rgba(148,163,184,0.15);
+    }
+    .sample-date { font-size: 0.9rem; color: #6dd5ed; }
+    .signal-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 20px;
+    }
+    .signal-card {
+      background: rgba(11,22,35,0.6); border: 1px solid rgba(148,163,184,0.1);
+      border-radius: 12px; padding: 20px;
+    }
+    .signal-header {
+      display: flex; justify-content: space-between; align-items: flex-start;
+      margin-bottom: 12px; flex-wrap: wrap; gap: 8px;
+    }
+    .signal-match { font-size: 1.1rem; font-weight: 600; color: #fff; }
+    .badge {
+      display: inline-block; padding: 5px 12px; border-radius: 999px;
+      font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;
+    }
+    .badge.action-bet { background: rgba(34,197,94,0.2); color: #bbf7d0; border: 1px solid rgba(34,197,94,0.4); }
+    .badge.action-watch { background: rgba(245,158,11,0.2); color: #fde68a; border: 1px solid rgba(245,158,11,0.4); }
+    .badge.action-caution { background: rgba(239,68,68,0.2); color: #fca5a5; border: 1px solid rgba(239,68,68,0.4); }
+    .signal-market { font-size: 0.85rem; color: #94a3b8; margin-bottom: 12px; }
+    .signal-data {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px;
+      padding: 12px 0; border-top: 1px solid rgba(148,163,184,0.1);
+      border-bottom: 1px solid rgba(148,163,184,0.1); margin: 12px 0;
+    }
+    .data-point { text-align: center; }
+    .data-label { font-size: 0.7rem; color: #64748b; text-transform: uppercase; }
+    .data-value { font-size: 1.1rem; font-weight: 700; color: #6dd5ed; margin-top: 2px; }
+    .signal-action { font-size: 0.9rem; color: #cbd5e1; line-height: 1.5; }
+    .signal-action strong { color: #6dd5ed; }
+    .action-tag {
+      display: inline-block; padding: 4px 10px; border-radius: 6px; font-size: 0.75rem;
+      font-weight: 700; margin-top: 8px;
+    }
+    .action-tag.bet { background: rgba(34,197,94,0.15); color: #86efac; }
+    .action-tag.caution { background: rgba(239,68,68,0.15); color: #fca5a5; }
+    .newsletter-form {
+      background: linear-gradient(135deg, rgba(132,204,22,0.1), rgba(34,197,94,0.08));
+      border: 1px solid rgba(132,204,22,0.3); border-radius: 16px;
+      padding: 32px; margin: 48px 0; text-align: center;
+    }
+    .newsletter-form h3 { margin: 0 0 12px 0; color: #84cc16; }
+    .newsletter-form p { color: #cbd5e1; margin-bottom: 24px; }
+    .form-group {
+      display: flex; gap: 12px; max-width: 500px; margin: 0 auto; flex-wrap: wrap;
+      justify-content: center;
+    }
+    .form-input {
+      flex: 1; min-width: 250px; padding: 12px 16px; background: rgba(11,22,35,0.8);
+      border: 1px solid rgba(148,163,184,0.2); border-radius: 8px; color: #fff;
+      font-size: 0.95rem;
+    }
+    .form-input:focus { outline: none; border-color: #6dd5ed; }
+    .form-submit {
+      padding: 12px 32px; background: linear-gradient(135deg, #84cc16, #22c55e);
+      color: #000; font-weight: 700; border: none; border-radius: 8px;
+      cursor: pointer; transition: all 0.3s ease;
+    }
+    .form-submit:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(132,204,22,0.3); }
+    .info-box {
+      background: rgba(109,213,237,0.05); border: 1px solid rgba(109,213,237,0.2);
+      border-radius: 12px; padding: 24px; margin: 32px 0;
+    }
+    .info-box h4 { color: #6dd5ed; margin-bottom: 12px; font-size: 1.1rem; }
+    .info-box ul { list-style: none; padding-left: 0; margin: 12px 0; }
+    .info-box ul li {
+      padding: 8px 0; color: #cbd5e1; font-size: 0.95rem;
+      padding-left: 24px; position: relative;
+    }
+    .info-box ul li::before {
+      content: '→'; position: absolute; left: 0; color: #6dd5ed; font-weight: 700;
+    }
+    .pricing-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px; margin: 32px 0;
+    }
+    .pricing-card {
+      background: rgba(15,23,48,0.6); border: 1px solid rgba(148,163,184,0.15);
+      border-radius: 14px; padding: 28px; text-align: center;
+    }
+    .pricing-card.featured {
+      border-color: rgba(109,213,237,0.4);
+      box-shadow: 0 8px 32px rgba(109,213,237,0.15);
+    }
+    .plan-name { font-size: 1.3rem; font-weight: 700; color: #fff; margin-bottom: 8px; }
+    .plan-price { font-size: 2.5rem; font-weight: 700; color: #6dd5ed; margin: 16px 0; }
+    .plan-price span { font-size: 1rem; color: #94a3b8; }
+    .plan-features { list-style: none; padding: 0; margin: 24px 0; }
+    .plan-features li {
+      padding: 8px 0; color: #cbd5e1; font-size: 0.9rem; border-bottom: 1px solid rgba(148,163,184,0.1);
+    }
+    .footer {
+      margin-top: 60px; padding: 32px 0; border-top: 1px solid rgba(148,163,184,0.1);
+      text-align: center;
+    }
+    .footer-content {
+      display: flex; justify-content: space-between; align-items: center;
+      max-width: 1200px; margin: 0 auto; padding: 0 24px; flex-wrap: wrap; gap: 16px;
+    }
+    .footer-text { font-size: 0.85rem; color: #64748b; }
+    .footer-links { display: flex; flex-wrap: wrap; gap: 24px; justify-content: center; }
+    .footer-links a {
+      color: #64748b; text-decoration: none; font-size: 0.85rem; transition: color 0.2s ease;
+    }
+    .footer-links a:hover { color: #6dd5ed; }
+    @media (max-width: 768px) {
+      .nav { flex-direction: column; gap: 12px; padding: 16px 20px; }
+      .nav-right { flex-wrap: wrap; justify-content: center; gap: 16px; }
+      .page { padding: 24px 16px 60px; }
+      .page-header h1 { font-size: 1.8rem; }
+      .page-header p { font-size: 0.95rem; }
+      h2 { font-size: 1.4rem; margin: 32px 0 20px; }
+      .hero-banner { padding: 28px 20px; }
+      .hero-banner h2 { font-size: 1.5rem; }
+      .features-grid, .signal-grid, .pricing-grid { grid-template-columns: 1fr; }
+      .footer-content { flex-direction: column; text-align: center; }
+      .form-group { flex-direction: column; }
+      .form-input { min-width: 100%; }
+    }
+  </style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="nav-left">
+    <div class="logo">A</div>
+    <div class="brand">
+      <div class="name">Arbstack</div>
+      <div class="tagline">Market Intelligence Platform</div>
+    </div>
+  </div>
+  <nav class="nav-right">
+    <a href="index.html">Home</a>
+    <a href="epl.html">EPL</a>
+    <a href="afcon.html">AFCON</a>
+    <a href="cricket.html">Cricket</a>
+    <a href="report.html" class="active">Intelligence Report</a>
+  </nav>
+</header>
+
+<main class="page">
+
+  <div class="page-header">
+    <h1>📊 Daily Intelligence Report</h1>
+    <p>Get actionable betting insights delivered to your inbox every morning. Cross-market analysis, edge detection, and clear BET/CAUTION signals across EPL, AFCON, Cricket, and more.</p>
+  </div>
+
+  <div class="hero-banner">
+    <h2>🎯 Make Smarter Bets, Every Day</h2>
+    <p>The Intelligence Report cuts through the noise. We analyze odds across Polymarket, Robinhood, Kalshi, and traditional bookmakers to find genuine market inefficiencies. No fluff—just clear signals on where to bet and where to stay away.</p>
+    <a href="#subscribe" class="cta-button">Subscribe to Daily Report</a>
+  </div>
+
+  <h2>What You Get in Every Report</h2>
+  
+  <div class="features-grid">
+    
+    <div class="feature-card">
+      <div class="feature-icon">🔥</div>
+      <div class="feature-title">Hot Signals</div>
+      <div class="feature-desc">Top 3-5 matches with the biggest market disagreements. These are your highest-probability opportunities where prediction markets and bookmakers strongly disagree.</div>
+    </div>
+
+    <div class="feature-card">
+      <div class="feature-icon">⚠️</div>
+      <div class="feature-title">Caution Zones</div>
+      <div class="feature-desc">Matches to avoid. We flag games where retail sentiment is irrational, odds are moving against you, or variance is too high to justify the bet.</div>
+    </div>
+
+    <div class="feature-card">
+      <div class="feature-icon">📈</div>
+      <div class="feature-title">Cross-Platform Analysis</div>
+      <div class="feature-desc">Side-by-side probability comparison across all major platforms. See exactly where each market stands and which direction the smart money is flowing.</div>
+    </div>
+
+    <div class="feature-card">
+      <div class="feature-icon">💡</div>
+      <div class="feature-title">Plain English Explanations</div>
+      <div class="feature-desc">No jargon. Every signal comes with a clear explanation of why the opportunity exists and what action you should take (or avoid).</div>
+    </div>
+
+    <div class="feature-card">
+      <div class="feature-icon">⏱️</div>
+      <div class="feature-title">Delivered at 6am EST</div>
+      <div class="feature-desc">Report hits your inbox before markets open. Get the data you need to make decisions before odds shift.</div>
+    </div>
+
+    <div class="feature-card">
+      <div class="feature-icon">🌍</div>
+      <div class="feature-title">Multi-Sport Coverage</div>
+      <div class="feature-desc">EPL, AFCON, Cricket, and expanding to US sports, politics, and climate markets. One report covers all active markets.</div>
+    </div>
+
+  </div>
+
+  <h2>Sample Report: January 17, 2026</h2>
+  
+  <div class="sample-section">
+    <div class="sample-header">
+      <h3 style="margin: 0;">Today's Top Signals</h3>
+      <div class="sample-date">Friday, January 17, 2026 · 6:00 AM EST</div>
+    </div>
+
+    <div class="signal-grid">
+      
+      <div class="signal-card">
+        <div class="signal-header">
+          <div class="signal-match">🔥 Man City vs Man United</div>
+          <span class="badge action-bet">BET</span>
+        </div>
+        <div class="signal-market">Premier League · Derby Match</div>
+        <div class="signal-data">
+          <div class="data-point">
+            <div class="data-label">Polymarket</div>
+            <div class="data-value">50%</div>
+          </div>
+          <div class="data-point">
+            <div class="data-label">Bookmakers</div>
+            <div class="data-value">53%</div>
+          </div>
+          <div class="data-point">
+            <div class="data-label">Delta</div>
+            <div class="data-value" style="color: #93c5fd;">-3.0%</div>
+          </div>
+        </div>
+        <div class="signal-action">
+          <strong>Action:</strong> Bookmakers pricing Man City 3 points higher than Polymarket. Professional oddsmakers likely have better intel on City's form and United's defensive injuries. Consider backing City on prediction markets at the lower price.
+        </div>
+        <div class="action-tag bet">✓ EDGE DETECTED</div>
+      </div>
+
+      <div class="signal-card">
+        <div class="signal-header">
+          <div class="signal-match">⚠️ Brighton vs Bournemouth</div>
+          <span class="badge action-watch">WATCH</span>
+        </div>
+        <div class="signal-market">Premier League · Home Fixture</div>
+        <div class="signal-data">
+          <div class="data-point">
+            <div class="data-label">Polymarket</div>
+            <div class="data-value">52%</div>
+          </div>
+          <div class="data-point">
+            <div class="data-label">Bookmakers</div>
+            <div class="data-value">48%</div>
+          </div>
+          <div class="data-point">
+            <div class="data-label">Delta</div>
+            <div class="data-value" style="color: #fca5a5;">+4.0%</div>
+          </div>
+        </div>
+        <div class="signal-action">
+          <strong>Action:</strong> Gap is closing (-2 points since yesterday). Markets converging suggests the edge is fading. If you're already positioned, consider closing. If not, wait for more clarity before entering.
+        </div>
+      </div>
+
+      <div class="signal-card">
+        <div class="signal-header">
+          <div class="signal-match">🏆 Nigeria vs Egypt</div>
+          <span class="badge action-bet">BET</span>
+        </div>
+        <div class="signal-market">AFCON Semifinals · Single Elimination</div>
+        <div class="signal-data">
+          <div class="data-point">
+            <div class="data-label">Polymarket</div>
+            <div class="data-value">46%</div>
+          </div>
+          <div class="data-point">
+            <div class="data-label">Bookmakers</div>
+            <div class="data-value">42%</div>
+          </div>
+          <div class="data-point">
+            <div class="data-label">Delta</div>
+            <div class="data-value" style="color: #fca5a5;">-4.0%</div>
+          </div>
+        </div>
+        <div class="signal-action">
+          <strong>Action:</strong> Strongest directional signal in AFCON. Both Polymarket and Kalshi aligned at 46% vs bookmakers at 42%. Tournament variance remains high, but this is your cleanest favorite play. Size accordingly.
+        </div>
+        <div class="action-tag bet">✓ HIGH CONVICTION</div>
+      </div>
+
+      <div class="signal-card">
+        <div class="signal-header">
+          <div class="signal-match">❌ Sunderland vs Crystal Palace</div>
+          <span class="badge action-caution">CAUTION</span>
+        </div>
+        <div class="signal-market">Premier League · Championship Side</div>
+        <div class="signal-data">
+          <div class="data-point">
+            <div class="data-label">Polymarket</div>
+            <div class="data-value">41%</div>
+          </div>
+          <div class="data-point">
+            <div class="data-label">Bookmakers</div>
+            <div class="data-value">38%</div>
+          </div>
+          <div class="data-point">
+            <div class="data-label">Delta</div>
+            <div class="data-value" style="color: #fca5a5;">+3.0%</div>
+          </div>
+        </div>
+        <div class="signal-action">
+          <strong>Action:</strong> Retail bias forming on home underdog (+1 point movement). This looks like emotional betting on Sunderland rather than value. Books remain skeptical. Avoid or fade the crowd.
+        </div>
+        <div class="action-tag caution">⚠ RETAIL TRAP</div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="info-box">
+    <h4>💡 How to Use the Intelligence Report</h4>
+    <ul>
+      <li><strong>BET signals:</strong> Markets show clear disagreement with 3+ point deltas. Edge exists if you act quickly before convergence.</li>
+      <li><strong>WATCH signals:</strong> Opportunity might exist but requires more confirmation. Check liquidity and line movement before entering.</li>
+      <li><strong>CAUTION signals:</strong> Avoid these matches. Either retail sentiment is irrational or variance is too high to justify the bet.</li>
+      <li><strong>Position sizing:</strong> Use delta magnitude as a guide. Larger deltas = more conviction, but always size for variance (especially in tournaments).</li>
+      <li><strong>Timing matters:</strong> Edges fade as markets converge. Act on morning signals before odds shift mid-day.</li>
+    </ul>
+  </div>
+
+  <h2>Subscription Plans</h2>
+
+  <div class="pricing-grid">
+    
+    <div class="pricing-card">
+      <div class="plan-name">Free Preview</div>
+      <div class="plan-price">$0<span>/month</span></div>
+      <ul class="plan-features">
+        <li>Weekly market summaries</li>
+        <li>3 sample signals per week</li>
+        <li>Access to public dashboard</li>
+        <li>No credit card required</li>
+      </ul>
+      <a href="#subscribe" class="cta-button" style="padding: 10px 24px; font-size: 0.9rem;">Start Free</a>
+    </div>
+
+    <div class="pricing-card featured">
+      <div class="plan-name">Intelligence Report</div>
+      <div class="plan-price">$29<span>/month</span></div>
+      <ul class="plan-features">
+        <li>Daily report at 6am EST</li>
+        <li>Full cross-market analysis</li>
+        <li>BET/WATCH/CAUTION signals</li>
+        <li>Multi-sport coverage</li>
+        <li>Email + dashboard access</li>
+        <li>Cancel anytime</li>
+      </ul>
+      <a href="#subscribe" class="cta-button">Subscribe Now</a>
+    </div>
+
+    <div class="pricing-card">
+      <div class="plan-name">Premium</div>
+      <div class="plan-price">$99<span>/month</span></div>
+      <ul class="plan-features">
+        <li>Everything in Intelligence Report</li>
+        <li>Intraday updates on hot signals</li>
+        <li>Live odds movement alerts</li>
+        <li>API access for automation</li>
+        <li>Historical data exports</li>
+        <li>Priority support</li>
+      </ul>
+      <a href="#subscribe" class="cta-button" style="padding: 10px 24px; font-size: 0.9rem;">Go Premium</a>
+    </div>
+
+  </div>
+
+  <div class="newsletter-form" id="subscribe">
+    <h3>📬 Subscribe to Daily Intelligence Report</h3>
+    <p>Get tomorrow's report delivered to your inbox at 6am EST. Join 2,000+ subscribers finding edge in betting markets.</p>
+    <form class="form-group">
+      <input type="email" class="form-input" placeholder="your@email.com" required>
+      <button type="submit" class="form-submit">Subscribe Now</button>
+    </form>
+    <p style="font-size: 0.8rem; color: #64748b; margin-top: 16px;">No spam. Unsubscribe anytime. We respect your inbox.</p>
+  </div>
+
+</main>
+
+<footer class="footer">
+  <div class="footer-content">
+    <div class="footer-text">
+      © 2026 Arbstack · Market Intelligence Platform · Not Financial Advice
+    </div>
+    <div class="footer-links">
+      <a href="#methodology">Methodology</a>
+      <a href="#disclaimer">Disclaimer</a>
+      <a href="index.html">Back to Home</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
