@@ -46,43 +46,20 @@
       padding: 16px 20px; margin-bottom: 32px; display: flex; flex-wrap: wrap; align-items: center; gap: 8px;
     }
     .update-banner strong { color: #84cc16; }
+    .pillrow { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 16px; }
+    .pill {
+      background: rgba(34,197,94,.12); border: 1px solid rgba(34,197,94,.25); color: #bbf7d0;
+      padding: 6px 12px; border-radius: 999px; font-size: 0.8rem; font-weight: 500;
+    }
+    .pill.gray { background: rgba(148,163,184,.08); border: 1px solid rgba(148,163,184,.18); color: #94a3b8; }
     h2 { font-size: 1.8rem; margin: 48px 0 24px; color: #fff; }
     .card {
       background: rgba(15,23,48,0.6); border: 1px solid rgba(148,163,184,0.15);
       border-radius: 16px; overflow: hidden; margin-bottom: 24px;
     }
     .table-wrapper { overflow-x: auto; -webkit-overflow-scrolling: touch; }
-    .top-picks-grid {
-      display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin-bottom: 40px;
-    }
-    .pick-card {
-      background: rgba(15,23,48,0.6); border: 1px solid rgba(148,163,184,0.15);
-      border-radius: 14px; padding: 20px; transition: all 0.3s ease;
-    }
-    .pick-card:hover {
-      transform: translateY(-2px); border-color: rgba(109,213,237,0.3);
-      box-shadow: 0 8px 30px rgba(109,213,237,0.1);
-    }
-    .pick-header { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
-    .pick-match { font-size: 1.1rem; font-weight: 600; color: #fff; margin-bottom: 4px; }
-    .pick-datetime { font-size: 0.75rem; color: #64748b; margin-bottom: 8px; }
-    .pick-outcome { font-size: 0.85rem; color: #94a3b8; margin-bottom: 12px; }
-    .pick-metrics {
-      display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin: 16px 0; padding: 16px 0;
-      border-top: 1px solid rgba(148,163,184,0.1); border-bottom: 1px solid rgba(148,163,184,0.1);
-    }
-    .metric { text-align: center; }
-    .metric-label { font-size: 0.7rem; color: #64748b; text-transform: uppercase; letter-spacing: 0.5px; }
-    .metric-value { font-size: 1.3rem; font-weight: 700; color: #6dd5ed; margin-top: 4px; }
-    .pick-read { font-size: 0.85rem; color: #cbd5e1; line-height: 1.5; margin-top: 12px; }
-    .pick-read strong { color: #6dd5ed; }
-    .insights-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; margin-bottom: 40px; }
-    .insight-card { background: rgba(15,23,48,0.6); border: 1px solid rgba(148,163,184,0.15); border-radius: 14px; padding: 20px; }
-    .insight-label { font-size: 0.75rem; color: #64748b; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; }
-    .insight-value { font-size: 2.5rem; font-weight: 700; color: #6dd5ed; margin-bottom: 8px; }
-    .insight-desc { font-size: 0.9rem; color: #94a3b8; line-height: 1.4; }
     table { width: 100%; border-collapse: collapse; font-size: 0.9rem; min-width: 900px; }
-    th, td { padding: 10px 8px; text-align: left; border-bottom: 1px solid rgba(148,163,184,0.1); }
+    th, td { padding: 12px 10px; text-align: left; border-bottom: 1px solid rgba(148,163,184,0.1); }
     thead th {
       background: rgba(11,16,32,0.9); color: #cbd5e1; font-weight: 600; font-size: 0.75rem;
       text-transform: uppercase; letter-spacing: 0.5px; position: sticky; top: 0; z-index: 10;
@@ -90,27 +67,31 @@
     tbody tr:hover { background: rgba(109,213,237,0.05); }
     td.num { text-align: center; font-variant-numeric: tabular-nums; }
     td.match-name { font-weight: 600; color: #fff; white-space: normal; min-width: 180px; }
-    .badge {
-      display: inline-block; padding: 5px 10px; border-radius: 999px; font-size: 0.7rem;
-      font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; white-space: nowrap;
+    .sum { font-weight: 700; }
+    .sum.warn { color: #fbbf24; }
+    .tag {
+      display: inline-block; padding: 4px 10px; border-radius: 999px; font-size: 0.7rem;
+      font-weight: 600; text-transform: uppercase; letter-spacing: 0.4px; white-space: nowrap; margin: 2px 4px 2px 0;
     }
-    .badge.hot { background: rgba(239,68,68,0.2); color: #fca5a5; border: 1px solid rgba(239,68,68,0.4); }
-    .badge.watch { background: rgba(245,158,11,0.2); color: #fde68a; border: 1px solid rgba(245,158,11,0.4); }
-    .badge.ok { background: rgba(34,197,94,0.2); color: #bbf7d0; border: 1px solid rgba(34,197,94,0.4); }
-    .signal-dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 8px; flex-shrink: 0; }
-    .dot-hot { background: #ef4444; } .dot-watch { background: #f59e0b; } .dot-ok { background: #22c55e; }
-    .delta-pos { color: #fca5a5; font-weight: 600; }
-    .delta-neg { color: #93c5fd; font-weight: 600; }
-    .delta-neutral { color: #94a3b8; font-weight: 600; }
-    .explainer-box {
-      background: rgba(109,213,237,0.05); border: 1px solid rgba(109,213,237,0.2);
-      border-radius: 12px; padding: 20px; margin: 24px 0;
+    .tag.green { background: rgba(34,197,94,0.15); border: 1px solid rgba(34,197,94,0.3); color: #bbf7d0; }
+    .tag.amber { background: rgba(245,158,11,0.15); border: 1px solid rgba(245,158,11,0.3); color: #fde68a; }
+    .tag.red { background: rgba(239,68,68,0.15); border: 1px solid rgba(239,68,68,0.3); color: #fecaca; }
+    .tag.gray { background: rgba(148,163,184,0.1); border: 1px solid rgba(148,163,184,0.2); color: #cbd5e1; }
+    .notes { padding: 24px; }
+    .notes h3 { margin: 20px 0 12px; font-size: 1.2rem; color: #fff; }
+    .notes h4 { margin: 16px 0 8px; font-size: 1rem; color: #e2e8f0; }
+    .notes p, .notes li { color: #cbd5e1; font-size: 0.9rem; line-height: 1.6; margin: 8px 0; }
+    .notes ul { list-style: none; padding-left: 0; margin: 12px 0; }
+    .notes ul li { padding: 6px 0 6px 20px; position: relative; }
+    .notes ul li::before { content: '→'; position: absolute; left: 0; color: #6dd5ed; font-weight: 700; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; margin-top: 16px; }
+    .mini {
+      background: rgba(15,23,42,0.55); border: 1px solid rgba(31,41,55,0.7);
+      border-radius: 12px; padding: 16px;
     }
-    .explainer-box h4 { color: #6dd5ed; margin-bottom: 12px; font-size: 1.1rem; }
-    .explainer-box p { color: #cbd5e1; font-size: 0.95rem; line-height: 1.6; margin: 8px 0; }
-    .explainer-box ul { list-style: none; padding-left: 0; margin: 12px 0; }
-    .explainer-box ul li { padding: 6px 0; color: #cbd5e1; font-size: 0.9rem; padding-left: 20px; position: relative; }
-    .explainer-box ul li::before { content: '→'; position: absolute; left: 0; color: #6dd5ed; font-weight: 700; }
+    .mini h4 { color: #6dd5ed; margin-bottom: 10px; font-size: 0.95rem; }
+    .mini p { color: #cbd5e1; font-size: 0.85rem; line-height: 1.5; }
+    .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace; }
     .footer { margin-top: 60px; padding: 32px 0; border-top: 1px solid rgba(148,163,184,0.1); text-align: center; }
     .footer-content {
       display: flex; justify-content: space-between; align-items: center;
@@ -121,6 +102,7 @@
     .footer-links a { color: #64748b; text-decoration: none; font-size: 0.85rem; transition: color 0.2s ease; }
     .footer-links a:hover { color: #6dd5ed; }
     .scroll-hint { font-size: 0.8rem; color: #6dd5ed; text-align: center; margin: 12px 0; display: none; }
+    
     @media (max-width: 768px) {
       .nav { flex-direction: column; gap: 12px; padding: 16px 20px; }
       .nav-right { flex-wrap: wrap; justify-content: center; gap: 16px; }
@@ -128,19 +110,17 @@
       .page-header h1 { font-size: 1.8rem; }
       .page-header p { font-size: 0.95rem; }
       h2 { font-size: 1.4rem; margin: 32px 0 20px; }
-      .top-picks-grid { grid-template-columns: 1fr; }
-      .insights-grid { grid-template-columns: 1fr; }
+      .grid { grid-template-columns: 1fr; }
       .scroll-hint { display: block; }
-      .metric-value { font-size: 1.1rem; }
-      .insight-value { font-size: 2rem; }
       table { font-size: 0.8rem; }
       th, td { padding: 8px 6px; }
+      .tag { font-size: 0.65rem; padding: 3px 8px; }
     }
+    
     @media (max-width: 480px) {
       .page-header h1 { font-size: 1.5rem; }
       .nav-right a { font-size: 0.85rem; }
-      .pick-match { font-size: 1rem; }
-      .metric-value { font-size: 1rem; }
+      .pill { font-size: 0.7rem; padding: 5px 10px; }
     }
   </style>
 </head>
@@ -151,123 +131,38 @@
     <div class="logo">A</div>
     <div class="brand">
       <div class="name">Arbstack</div>
-      <div class="tagline">Intelligence Dossier</div>
+      <div class="tagline">Premier League Arbitrage Intel</div>
     </div>
   </div>
   <div class="nav-right">
-    <a href="index.html">Dashboard</a>
+    <a href="index.html">Home</a>
     <a href="#" class="active">EPL Markets</a>
-    <a href="#">Synthetics</a>
-    <a href="#">Tools</a>
+    <a href="#methodology">Methodology</a>
+    <a href="#disclaimer">Disclaimer</a>
   </div>
 </nav>
 
 <main class="page">
   <div class="page-header">
-    <h1>EPL Arbstack – Intelligence Dossier</h1>
-    <p>Cross-market drift analysis: Polymarket vs Bookmakers with synthetic constructions and ranked ArbScores for upcoming English Premier League matches.</p>
+    <h1>EPL Arb Summary (Kalshi Snapshot)</h1>
+    <p>
+      Normalized implied probabilities from <span class="mono">Yes</span> prices in Kalshi markets.
+      <br/>Σ Prob = Home + Draw + Away (mispricing signal; &gt;100% implies overround / ladder inconsistency).
+    </p>
+    <div class="pillrow">
+      <span class="pill">Focus: drift + broken ladders + synthetic hedges</span>
+      <span class="pill gray">Not financial advice • informational only</span>
+    </div>
   </div>
 
   <div class="update-banner">
-    <strong>Live Update:</strong> Analyzing 10 upcoming EPL fixtures with cross-platform mispricing detection
+    <span>📊</span>
+    <span><strong>Last updated:</strong> January 25, 2026</span>
+    <span style="margin-left: auto; color: #94a3b8;">Source: Kalshi market snapshots</span>
   </div>
 
-  <div class="insights-grid">
-    <div class="insight-card">
-      <div class="insight-label">Top ArbScore</div>
-      <div class="insight-value">86</div>
-      <div class="insight-desc">Arsenal vs Man United</div>
-    </div>
-    <div class="insight-card">
-      <div class="insight-label">Highest Drift</div>
-      <div class="insight-value">+7%</div>
-      <div class="insight-desc">Brighton vs Everton (Away)</div>
-    </div>
-    <div class="insight-card">
-      <div class="insight-label">Matches Analyzed</div>
-      <div class="insight-value">10</div>
-      <div class="insight-desc">Premier League fixtures</div>
-    </div>
-  </div>
-
-  <h2>🔥 Top 3 Arbitrage Opportunities</h2>
-
-  <div class="top-picks-grid">
-    
-    <div class="pick-card">
-      <div class="pick-header">
-        <span class="badge hot">RANK #1</span>
-        <span style="font-size: 0.8rem; color: #94a3b8;">ArbScore: <strong style="color: #fca5a5;">86</strong></span>
-      </div>
-      <div class="pick-match">Arsenal vs Man United</div>
-      <div class="pick-datetime">January 25, 2026</div>
-      <div class="pick-outcome">Key Drift: <strong>+2% Arsenal</strong>, <strong>+2% Man Utd</strong></div>
-      <div class="pick-metrics">
-        <div class="metric"><div class="metric-label">Book Implied</div><div class="metric-value">61%</div></div>
-        <div class="metric"><div class="metric-label">PM Price (ARS)</div><div class="metric-value">63%</div></div>
-        <div class="metric"><div class="metric-label">Draw (Book)</div><div class="metric-value">24%</div></div>
-        <div class="metric"><div class="metric-label">Draw (PM)</div><div class="metric-value">24%</div></div>
-      </div>
-      <div class="pick-read">
-        <strong>Strategy:</strong> Classic 3-way distortion. Synthetic Draw ≈ U2.5 + split dogs. Hedge Arsenal with Man Utd +1.5 for optimal execution.
-      </div>
-    </div>
-
-    <div class="pick-card">
-      <div class="pick-header">
-        <span class="badge hot">RANK #2</span>
-        <span style="font-size: 0.8rem; color: #94a3b8;">ArbScore: <strong style="color: #fca5a5;">82</strong></span>
-      </div>
-      <div class="pick-match">Everton vs Leeds</div>
-      <div class="pick-datetime">January 26, 2026</div>
-      <div class="pick-outcome">Key Drift: <strong>+4% Leeds</strong></div>
-      <div class="pick-metrics">
-        <div class="metric"><div class="metric-label">Book Implied</div><div class="metric-value">28%</div></div>
-        <div class="metric"><div class="metric-label">PM Price (LEE)</div><div class="metric-value">32%</div></div>
-        <div class="metric"><div class="metric-label">Home (Book)</div><div class="metric-value">40%</div></div>
-        <div class="metric"><div class="metric-label">Draw (Book)</div><div class="metric-value">32%</div></div>
-      </div>
-      <div class="pick-read">
-        <strong>Strategy:</strong> Leeds undervalued on PM. Synthetic Leeds or Draw via +1.5 spread + Draw construction for clean mispricing capture.
-      </div>
-    </div>
-
-    <div class="pick-card">
-      <div class="pick-header">
-        <span class="badge hot">RANK #3</span>
-        <span style="font-size: 0.8rem; color: #94a3b8;">ArbScore: <strong style="color: #fca5a5;">78</strong></span>
-      </div>
-      <div class="pick-match">Brighton vs Everton</div>
-      <div class="pick-datetime">January 31, 2026</div>
-      <div class="pick-outcome">Key Drift: <strong>+7% Everton</strong></div>
-      <div class="pick-metrics">
-        <div class="metric"><div class="metric-label">Book Implied</div><div class="metric-value">18%</div></div>
-        <div class="metric"><div class="metric-label">PM Price (EVE)</div><div class="metric-value">25%</div></div>
-        <div class="metric"><div class="metric-label">Home (Book)</div><div class="metric-value">52%</div></div>
-        <div class="metric"><div class="metric-label">PM Price (BRI)</div><div class="metric-value">55%</div></div>
-      </div>
-      <div class="pick-read">
-        <strong>Strategy:</strong> Away PM support vs books. Synthetic Everton No-Lose construction offers clean edge with lower risk profile.
-      </div>
-    </div>
-
-  </div>
-
-  <div class="explainer-box">
-    <h4>💡 Understanding ArbScore & Drift</h4>
-    <p><strong>ArbScore (0-100):</strong> Weighted blend of drift magnitude, market disagreement (3-way sum distortion), liquidity, and synthetic optionality. Higher scores indicate cleaner mispricing with easier execution.</p>
-    <p style="margin-top: 12px;"><strong>Drift:</strong> The difference between Prediction Market (PM) probability and Bookmaker implied probability. Positive drift means PM prices are higher than books.</p>
-    <p style="margin-top: 12px;"><strong>Synthetic Constructions:</strong></p>
-    <ul>
-      <li><strong>Synthetic Draw:</strong> Under 2.5 Goals + small Away + small Home</li>
-      <li><strong>No-Lose (Double Chance):</strong> Team +1.5 spread + Draw</li>
-      <li><strong>Favorite with Protection:</strong> Favorite ML − (small) Draw</li>
-    </ul>
-    <p style="margin-top: 12px;"><strong>Execution:</strong> Kelly-lite on ArbScore >75; half-Kelly 65-75. Exit via pre-kick drift capture or live hedge at 60-70′.</p>
-  </div>
-
-  <h2>📊 Full Arbitrage Rankings</h2>
-  <p style="color: #94a3b8; margin-bottom: 12px;">Complete breakdown of all 10 matches with Book vs PM implied probabilities and synthetic strategies</p>
+  <h2>🎯 Top Arbitrage Opportunities</h2>
+  <p style="color: #94a3b8; margin-bottom: 12px;">Matches ranked by mispricing signals and arbitrage potential</p>
   <p class="scroll-hint">👈 Scroll horizontally to see all columns →</p>
 
   <div class="card">
@@ -276,119 +171,183 @@
         <thead>
           <tr>
             <th>Rank</th>
-            <th>Match (Date)</th>
-            <th class="num">Book H/D/A</th>
-            <th class="num">PM H/D/A</th>
-            <th>Key Drift</th>
-            <th class="num">ArbScore</th>
-            <th>Strategy Notes</th>
+            <th>Match</th>
+            <th class="num">Home %</th>
+            <th class="num">Draw %</th>
+            <th class="num">Away %</th>
+            <th class="num">Σ Prob</th>
+            <th>Arb / Pattern Signal</th>
+            <th>Notes</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td class="num"><span class="badge hot">1</span></td>
-            <td class="match-name">Arsenal vs Man United<br><span style="font-size: 0.75rem; color: #64748b;">Jan 25</span></td>
-            <td class="num">61 / 24 / 15</td>
-            <td class="num">63 / 24 / 17</td>
-            <td><span class="delta-pos">+2% ARS</span><br><span class="delta-pos">+2% MUN</span></td>
-            <td class="num"><strong style="color: #fca5a5;">86</strong></td>
-            <td>Classic 3-way distortion. Synthetic Draw ≈ U2.5 + split dogs</td>
+            <td class="num">1</td>
+            <td class="match-name">Liverpool vs Man City</td>
+            <td class="num">41%</td>
+            <td class="num">27%</td>
+            <td class="num">39%</td>
+            <td class="num sum warn">107%</td>
+            <td>
+              <span class="tag amber">3-way overround</span>
+              <span class="tag green">synthetic hedge</span>
+            </td>
+            <td>Strong disagreement → best candidate for synthetic/basket coverage.</td>
           </tr>
           <tr>
-            <td class="num"><span class="badge hot">2</span></td>
-            <td class="match-name">Everton vs Leeds<br><span style="font-size: 0.75rem; color: #64748b;">Jan 26</span></td>
-            <td class="num">40 / 32 / 28</td>
-            <td class="num">39 / 31 / 32</td>
-            <td><span class="delta-pos">+4% LEE</span></td>
-            <td class="num"><strong style="color: #fca5a5;">82</strong></td>
-            <td>Leeds undervalued on PM. Synthetic LEE or Draw via +1.5</td>
+            <td class="num">2</td>
+            <td class="match-name">Man United vs Tottenham</td>
+            <td class="num">57%</td>
+            <td class="num">25%</td>
+            <td class="num">23%</td>
+            <td class="num sum warn">105%</td>
+            <td>
+              <span class="tag green">draw underpriced</span>
+              <span class="tag amber">late-goal risk</span>
+            </td>
+            <td>"Chaos matchup" → draw + opposite-side No often best risk-adjusted.</td>
           </tr>
           <tr>
-            <td class="num"><span class="badge hot">3</span></td>
-            <td class="match-name">Brighton vs Everton<br><span style="font-size: 0.75rem; color: #64748b;">Jan 31</span></td>
-            <td class="num">52 / 30 / 18</td>
-            <td class="num">55 / 27 / 25</td>
-            <td><span class="delta-pos">+7% EVE</span></td>
-            <td class="num"><strong style="color: #fca5a5;">78</strong></td>
-            <td>Away PM support vs books. Synthetic EVE No-Lose</td>
+            <td class="num">3</td>
+            <td class="match-name">Brighton vs Crystal Palace</td>
+            <td class="num">55%</td>
+            <td class="num">26%</td>
+            <td class="num">25%</td>
+            <td class="num sum warn">106%</td>
+            <td>
+              <span class="tag amber">derby draw</span>
+              <span class="tag green">drift-friendly</span>
+            </td>
+            <td>Derby effect: draw tends to stay bid; good for pre-match draw scalps.</td>
           </tr>
           <tr>
-            <td class="num"><span class="badge watch">4</span></td>
-            <td class="match-name">Bournemouth vs Liverpool<br><span style="font-size: 0.75rem; color: #64748b;">Jan 24</span></td>
-            <td class="num">26 / 26 / 48</td>
-            <td class="num">26 / 26 / 52</td>
-            <td><span class="delta-pos">+4% LIV</span></td>
-            <td class="num"><strong style="color: #fde68a;">74</strong></td>
-            <td>Totals align. Synthetic LIV & O2.5 cheaper than straight ML</td>
+            <td class="num">4</td>
+            <td class="match-name">Aston Villa vs Brentford</td>
+            <td class="num">50%</td>
+            <td class="num">27%</td>
+            <td class="num">27%</td>
+            <td class="num sum warn">104%</td>
+            <td>
+              <span class="tag green">balanced ladder</span>
+              <span class="tag amber">soft draw</span>
+            </td>
+            <td>Nice symmetry → synthetic "not-home" / "not-away" combos cleaner.</td>
           </tr>
           <tr>
-            <td class="num"><span class="badge watch">5</span></td>
-            <td class="match-name">Newcastle vs Aston Villa<br><span style="font-size: 0.75rem; color: #64748b;">Jan 25</span></td>
-            <td class="num">51 / 27 / 22</td>
-            <td class="num">50 / 26 / 26</td>
-            <td><span class="delta-pos">+4% AVL</span></td>
-            <td class="num"><strong style="color: #fde68a;">72</strong></td>
-            <td>AVL tail mispriced. Synthetic AVL +1.5 + Draw</td>
+            <td class="num">5</td>
+            <td class="match-name">Fulham vs Everton</td>
+            <td class="num">50%</td>
+            <td class="num">30%</td>
+            <td class="num">26%</td>
+            <td class="num sum warn">106%</td>
+            <td>
+              <span class="tag green">away undervalued</span>
+              <span class="tag amber">public bias</span>
+            </td>
+            <td>Everton often reprices late; watch for pre-match drift down then snap-back.</td>
           </tr>
           <tr>
-            <td class="num"><span class="badge watch">6</span></td>
-            <td class="match-name">Crystal Palace vs Chelsea<br><span style="font-size: 0.75rem; color: #64748b;">Jan 25</span></td>
-            <td class="num">28 / 27 / 45</td>
-            <td class="num">27 / 27 / 49</td>
-            <td><span class="delta-pos">+4% CHE</span></td>
-            <td class="num"><strong style="color: #fde68a;">70</strong></td>
-            <td>Chelsea strength via spread. Synthetic CHE -0.5 via ML+Draw</td>
+            <td class="num">6</td>
+            <td class="match-name">Leeds vs Arsenal</td>
+            <td class="num">16%</td>
+            <td class="num">24%</td>
+            <td class="num">64%</td>
+            <td class="num sum warn">104%</td>
+            <td>
+              <span class="tag red">favorite skew</span>
+              <span class="tag green">hedgeable</span>
+            </td>
+            <td>Favorites can be overpriced → consider Arsenal No + draw/away baskets.</td>
           </tr>
           <tr>
-            <td class="num"><span class="badge ok">7</span></td>
-            <td class="match-name">West Ham vs Sunderland<br><span style="font-size: 0.75rem; color: #64748b;">Jan 24</span></td>
-            <td class="num">38 / 30 / 32</td>
-            <td class="num">38 / 30 / 33</td>
-            <td><span class="delta-pos">+1% SUN</span></td>
-            <td class="num"><strong style="color: #bbf7d0;">64</strong></td>
-            <td>Low edge, draw sticky. Live-only tie adds value</td>
+            <td class="num">7</td>
+            <td class="match-name">Wolves vs Bournemouth</td>
+            <td class="num">31%</td>
+            <td class="num">28%</td>
+            <td class="num">46%</td>
+            <td class="num sum warn">105%</td>
+            <td>
+              <span class="tag amber">mid-table chaos</span>
+              <span class="tag green">basket arb</span>
+            </td>
+            <td>All outcomes live → best for small "3-leg basket" if fills are decent.</td>
           </tr>
           <tr>
-            <td class="num"><span class="badge ok">8</span></td>
-            <td class="match-name">Burnley vs Tottenham<br><span style="font-size: 0.75rem; color: #64748b;">Jan 24</span></td>
-            <td class="num">27 / 29 / 44</td>
-            <td class="num">27 / 28 / 48</td>
-            <td><span class="delta-pos">+4% TOT</span></td>
-            <td class="num"><strong style="color: #bbf7d0;">63</strong></td>
-            <td>Spurs momentum priced late. Use TOT -0.5</td>
+            <td class="num">8</td>
+            <td class="match-name">Sunderland vs Burnley</td>
+            <td class="num">57%</td>
+            <td class="num">28%</td>
+            <td class="num">19%</td>
+            <td class="num sum warn">104%</td>
+            <td>
+              <span class="tag amber">home bias</span>
+              <span class="tag green">draw combo</span>
+            </td>
+            <td>Home inflated → away No + draw Yes is the common synthetic here.</td>
           </tr>
           <tr>
-            <td class="num"><span class="badge ok">9</span></td>
-            <td class="match-name">Fulham vs Brighton<br><span style="font-size: 0.75rem; color: #64748b;">Jan 24</span></td>
-            <td class="num">39 / 30 / 31</td>
-            <td class="num">38 / 29 / 35</td>
-            <td><span class="delta-pos">+4% BRI</span></td>
-            <td class="num"><strong style="color: #bbf7d0;">61</strong></td>
-            <td>Brighton tail. Synthetic BRI + Draw</td>
+            <td class="num">9</td>
+            <td class="match-name">Newcastle vs Brentford</td>
+            <td class="num">56%</td>
+            <td class="num">26%</td>
+            <td class="num">24%</td>
+            <td class="num sum warn">106%</td>
+            <td>
+              <span class="tag amber">public favorite drift</span>
+              <span class="tag green">fade late</span>
+            </td>
+            <td>Watch for public push → best fades occur after volume spikes.</td>
           </tr>
           <tr>
-            <td class="num"><span class="badge ok">10</span></td>
-            <td class="match-name">Man City vs Wolves<br><span style="font-size: 0.75rem; color: #64748b;">Jan 24</span></td>
-            <td class="num">81 / 14 / 5</td>
-            <td class="num">81 / 14 / 7</td>
-            <td><span class="delta-pos">+2% WOL</span></td>
-            <td class="num"><strong style="color: #bbf7d0;">55</strong></td>
-            <td>Heavy favorite compresses arb. Micro-arb via Wolves +2.5</td>
+            <td class="num">10</td>
+            <td class="match-name">Nottingham Forest vs Crystal Palace</td>
+            <td class="num">51%</td>
+            <td class="num">28%</td>
+            <td class="num">25%</td>
+            <td class="num sum warn">104%</td>
+            <td>
+              <span class="tag amber">low-liquidity</span>
+              <span class="tag green">edge-y</span>
+            </td>
+            <td>Thin volume exaggerates moves → good entries, harder exits.</td>
           </tr>
         </tbody>
       </table>
     </div>
-  </div>
 
-  <div class="explainer-box">
-    <h4>📈 Intelligence Summary</h4>
-    <p><strong>Market Characteristics:</strong> This slate is draw-heavy with repeated underpricing of tails. Best edges arise where PM crowd reacts faster than books to form/injuries.</p>
-    <p style="margin-top: 12px;"><strong>Execution Edge:</strong> Synthetics outperform single legs by 3-7¢ effective edge on average.</p>
-    <p style="margin-top: 12px;"><strong>Platforms:</strong></p>
-    <ul>
-      <li><strong>Prediction Markets:</strong> Polymarket (primary), Kalshi (backup)</li>
-      <li><strong>Bookmakers:</strong> Pinnacle / Bet365 / DraftKings for clean spreads & totals</li>
-    </ul>
+    <div class="notes">
+      <h3>📊 Cross-match Pattern Flags</h3>
+      <div class="grid">
+        <div class="mini">
+          <h4>1) Σ Prob ≥ 104% = Arb Zone</h4>
+          <p>Many markets show internal inconsistency; synthetic combinations can dominate single "pick-a-side" bets.</p>
+        </div>
+        <div class="mini">
+          <h4>2) Draws systematically cheap</h4>
+          <p>Strong in derbies, big-club matchups, and mid-table chaos games. Draw + favorite No repeatedly shows better payoff symmetry.</p>
+        </div>
+        <div class="mini">
+          <h4>3) Public favorite overpricing</h4>
+          <p>Arsenal/Newcastle/Chelsea/City often get bid. Alpha is frequently: <span class="mono">sell Yes</span>, <span class="mono">buy Draw</span>, or a <span class="mono">Draw+Away</span> basket.</p>
+        </div>
+        <div class="mini">
+          <h4>4) Low volume = higher edge</h4>
+          <p>Lower liquidity widens misalignments (good entries) but increases exit slippage risk.</p>
+        </div>
+      </div>
+
+      <h3 style="margin-top: 32px;">⚙️ Reusable Synthetic Constructions</h3>
+      <ul>
+        <li><strong>Synthetic Draw Hedge:</strong> buy Draw Yes (~25–30c) + buy underdog Yes (~20–30c); optionally sell favorite Yes if ≥60c.</li>
+        <li><strong>Favorite Fade:</strong> sell favorite Yes; buy Draw + Away Yes; lock profit if favorite drops below ~50c live.</li>
+        <li><strong>Basket Arb (3-way):</strong> equal stake on all 3 when Σ Prob ≥105% and fills are available (best pre-match/early live).</li>
+      </ul>
+
+      <h3 style="margin-top: 32px;">💡 Key Insights</h3>
+      <p><strong>Market Characteristics:</strong> This slate shows persistent overround across most matches, with draw outcomes systematically underpriced relative to their true probability.</p>
+      <p style="margin-top: 12px;"><strong>Execution Strategy:</strong> Focus on pre-match entry for synthetic positions. Monitor for public volume spikes that create additional mispricing opportunities.</p>
+      <p style="margin-top: 12px;"><strong>Risk Management:</strong> Basket strategies work best when Σ Prob ≥ 105%. For lower overround matches, prefer directional synthetics with built-in hedges.</p>
+    </div>
   </div>
 
 </main>
@@ -396,7 +355,7 @@
 <footer class="footer">
   <div class="footer-content">
     <div class="footer-text">
-      <strong>Data Source:</strong> Polymarket, Pinnacle, Bet365, DraftKings
+      Source: Kalshi screenshots (implied probs from "Yes" prices). This page is a snapshot for signal/arb analysis only.
     </div>
     <div class="footer-links">
       <a href="#methodology">Methodology</a>
