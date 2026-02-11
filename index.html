@@ -135,6 +135,23 @@
     .market-features li::before {
       content: '→'; color: #6dd5ed; margin-right: 8px; font-weight: 700;
     }
+    
+    /* Edge Preview Section */
+    .edge-preview {
+      background: rgba(239,68,68,0.08); border: 1px solid rgba(239,68,68,0.2);
+      border-radius: 10px; padding: 12px; margin-top: 16px;
+    }
+    .edge-preview-title {
+      font-size: 0.75rem; color: #fb7185; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px;
+    }
+    .edge-item {
+      font-size: 0.85rem; color: #fecaca; padding: 4px 0;
+      border-bottom: 1px solid rgba(239,68,68,0.1);
+    }
+    .edge-item:last-child { border-bottom: none; }
+    .edge-item strong { color: #fff; }
+    
     .features-grid {
       display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
       gap: 20px; margin-top: 32px;
@@ -161,15 +178,30 @@
       transition: color 0.2s ease;
     }
     .footer-links a:hover { color: #6dd5ed; }
+    
     @media (max-width: 768px) {
       .hero h1 { font-size: 2rem; }
-      .nav { flex-direction: column; gap: 16px; text-align: center; }
-      .nav-right { flex-wrap: wrap; justify-content: center; }
+      .nav { flex-direction: column; gap: 12px; padding: 16px 20px; }
+      .nav-left { justify-content: center; }
+      .nav-right { flex-wrap: wrap; justify-content: center; gap: 16px; }
       .market-grid { grid-template-columns: 1fr; }
       .footer-content { flex-direction: column; text-align: center; }
       .page { padding: 40px 16px 60px; }
       .featured-report { padding: 24px; }
       .featured-report h3 { font-size: 1.4rem; }
+      .market-stats { grid-template-columns: 1fr 1fr; }
+      .features-grid { grid-template-columns: 1fr; }
+    }
+    
+    @media (max-width: 480px) {
+      .hero h1 { font-size: 1.6rem; }
+      .hero p { font-size: 1rem; }
+      .nav-right a { font-size: 0.85rem; }
+      .pill { font-size: 0.7rem; padding: 5px 10px; }
+      .market-title { font-size: 1.2rem; }
+      .stat-value { font-size: 1.2rem; }
+      .featured-report h3 { font-size: 1.2rem; }
+      .featured-report p { font-size: 0.95rem; }
     }
   </style>
 </head>
@@ -185,8 +217,8 @@
   </div>
   <nav class="nav-right">
     <a href="index.html" class="active">Home</a>
-    <a href="epl.html">EPL</a>
-    <a href="ucl.html">UCL</a>
+    <a href="epl_updated.html">EPL</a>
+    <a href="cricket.html">Cricket</a>
     <a href="intelligence_report.html">Intelligence Report</a>
     <a href="#about">About</a>
   </nav>
@@ -210,7 +242,7 @@
     <h2>Live Markets</h2>
     <div class="market-grid">
 
-      <a href="epl.html" class="market-card">
+      <a href="epl_updated.html" class="market-card">
         <div class="market-card-header">
           <div>
             <div class="market-title">⚽ EPL Markets</div>
@@ -219,45 +251,61 @@
           <span class="market-status status-live">LIVE</span>
         </div>
         <ul class="market-features">
-          <li>Kalshi snapshot analysis</li>
-          <li>3-way overround detection</li>
-          <li>Synthetic hedge strategies</li>
-          <li>Sharp vs retail money tracking</li>
+          <li>Kalshi vs Oddschecker analysis</li>
+          <li>Favorite overpricing detection</li>
+          <li>Draw + underdog combinations</li>
+          <li>Price difference tracking</li>
         </ul>
+        
+        <div class="edge-preview">
+          <div class="edge-preview-title">🔥 Top Edges Right Now</div>
+          <div class="edge-item"><strong>Man City vs Newcastle:</strong> City -5.8% (Fade favorite)</div>
+          <div class="edge-item"><strong>Tottenham vs Arsenal:</strong> Arsenal -5.6% (NLD derby edge)</div>
+          <div class="edge-item"><strong>Aston Villa vs Leeds:</strong> Villa -4.5% (Home overpriced)</div>
+        </div>
+        
         <div class="market-stats">
           <div class="stat">
-            <div class="stat-value">10</div>
+            <div class="stat-value">16</div>
             <div class="stat-label">Matches</div>
           </div>
           <div class="stat">
-            <div class="stat-value">107%</div>
+            <div class="stat-value">112%</div>
             <div class="stat-label">Top Σ Prob</div>
           </div>
         </div>
       </a>
 
-      <a href="ucl.html" class="market-card">
+      <a href="cricket.html" class="market-card">
         <div class="market-card-header">
           <div>
-            <div class="market-title">⚽ UCL Markets</div>
-            <div class="market-meta">UEFA Champions League</div>
+            <div class="market-title">🏏 Cricket Markets</div>
+            <div class="market-meta">International & T20 Leagues</div>
           </div>
           <span class="market-status status-live">LIVE</span>
         </div>
         <ul class="market-features">
-          <li>Polymarket vs Oddschecker analysis</li>
-          <li>Draw underpricing detection</li>
-          <li>Knockout stage effects</li>
-          <li>Cross-platform arbitrage</li>
+          <li>Match winner value analysis</li>
+          <li>Toss impact pricing</li>
+          <li>Venue-specific edges</li>
+          <li>Form vs odds divergence</li>
         </ul>
+        
+        <div class="edge-preview">
+          <div class="edge-preview-title">🔥 Top Edges Right Now</div>
+          <div class="edge-item"><strong>India vs Australia:</strong> Home advantage underpriced</div>
+          <div class="edge-item"><strong>PSL - Karachi vs Lahore:</strong> Recent form not reflected</div>
+          <div class="edge-item"><strong>IPL - MI vs CSK:</strong> Toss factor mispriced</div>
+        </div>
+        
         <div class="market-stats">
           <div class="stat">
-            <div class="stat-value">18</div>
+            <div class="stat-value">12</div>
             <div class="stat-label">Matches</div>
           </div>
           <div class="stat">
-            <div class="stat-value">1.27</div>
-            <div class="stat-label">Top ArbScore</div>
+            <div class="stat-value">4.8%</div>
+            <div class="stat-label">Avg Edge</div>
           </div>
         </div>
       </a>
@@ -280,30 +328,32 @@
       <div class="market-card" style="opacity: 0.6; cursor: default;">
         <div class="market-card-header">
           <div>
-            <div class="market-title">📊 Options</div>
-            <div class="market-meta">Derivatives & Volatility</div>
+            <div class="market-title">🏀 NBA Markets</div>
+            <div class="market-meta">Basketball Analytics</div>
           </div>
           <span class="market-status status-soon">SOON</span>
         </div>
         <ul class="market-features">
-          <li>Vol surface mispricing</li>
-          <li>Cross-market delta hedging</li>
-          <li>Skew and term structure analysis</li>
+          <li>Player prop mispricing</li>
+          <li>Team total inefficiencies</li>
+          <li>Live betting value spots</li>
+          <li>Injury impact analysis</li>
         </ul>
       </div>
 
       <div class="market-card" style="opacity: 0.6; cursor: default;">
         <div class="market-card-header">
           <div>
-            <div class="market-title">🌡️ Climate</div>
-            <div class="market-meta">Weather Risk & Commodities</div>
+            <div class="market-title">🏈 NFL Markets</div>
+            <div class="market-meta">American Football</div>
           </div>
           <span class="market-status status-soon">SOON</span>
         </div>
         <ul class="market-features">
-          <li>Temperature derivative markets</li>
-          <li>Catastrophe bond analysis</li>
-          <li>Agricultural futures correlation</li>
+          <li>Spread vs moneyline efficiency</li>
+          <li>Weather impact pricing</li>
+          <li>Division game patterns</li>
+          <li>Playoff market analysis</li>
         </ul>
       </div>
 
@@ -324,9 +374,9 @@
 
       <div class="feature-card">
         <div class="feature-icon">🎯</div>
-        <div class="feature-title">Arbitrage Detection</div>
+        <div class="feature-title">Edge Detection</div>
         <div class="feature-desc">
-          Real-time delta calculation showing where retail sentiment diverges from sharp money.
+          Real-time delta calculation showing where prices diverge and opportunities exist.
         </div>
       </div>
 
@@ -340,9 +390,9 @@
 
       <div class="feature-card">
         <div class="feature-icon">⚡</div>
-        <div class="feature-title">Static Architecture</div>
+        <div class="feature-title">Fast & Reliable</div>
         <div class="feature-desc">
-          JSON-powered updates mean fast loading, zero backend complexity, and maximum reliability.
+          Static architecture means lightning-fast loading and maximum uptime reliability.
         </div>
       </div>
 
