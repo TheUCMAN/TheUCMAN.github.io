@@ -66,9 +66,10 @@
     }
     tbody tr:hover { background: rgba(109,213,237,0.05); }
     td.num { text-align: center; font-variant-numeric: tabular-nums; }
-    td.match-name { font-weight: 600; color: #fff; white-space: normal; min-width: 180px; }
+    td.match-name { font-weight: 600; color: #fff; white-space: normal; min-width: 220px; }
     .sum { font-weight: 700; }
     .sum.warn { color: #fbbf24; }
+    .sum.red { color: #fb7185; }
     .tag {
       display: inline-block; padding: 4px 10px; border-radius: 999px; font-size: 0.7rem;
       font-weight: 600; text-transform: uppercase; letter-spacing: 0.4px; white-space: nowrap; margin: 2px 4px 2px 0;
@@ -102,6 +103,8 @@
     .footer-links a { color: #64748b; text-decoration: none; font-size: 0.85rem; transition: color 0.2s ease; }
     .footer-links a:hover { color: #6dd5ed; }
     .scroll-hint { font-size: 0.8rem; color: #6dd5ed; text-align: center; margin: 12px 0; display: none; }
+    .delta-neg { color: #fb7185; }
+    .delta-pos { color: #2dd4bf; }
     
     @media (max-width: 768px) {
       .nav { flex-direction: column; gap: 12px; padding: 16px 20px; }
@@ -131,38 +134,38 @@
     <div class="logo">A</div>
     <div class="brand">
       <div class="name">Arbstack</div>
-      <div class="tagline">Premier League Arbitrage Intel</div>
+      <div class="tagline">Premier League Betting Edge</div>
     </div>
   </div>
   <div class="nav-right">
     <a href="index.html">Home</a>
     <a href="#" class="active">EPL Markets</a>
-    <a href="#methodology">Methodology</a>
+    <a href="#methodology">How It Works</a>
     <a href="#disclaimer">Disclaimer</a>
   </div>
 </nav>
 
 <main class="page">
   <div class="page-header">
-    <h1>EPL Arb Summary (Kalshi Snapshot)</h1>
+    <h1>EPL Betting Opportunities (Kalshi vs Bookies)</h1>
     <p>
-      Normalized implied probabilities from <span class="mono">Yes</span> prices in Kalshi markets.
-      <br/>Σ Prob = Home + Draw + Away (mispricing signal; &gt;100% implies overround / ladder inconsistency).
+      Comparing Kalshi prediction market prices with traditional bookmaker odds to find value.
+      <br/>We look at where the betting market thinks differently from the prediction market.
     </p>
     <div class="pillrow">
-      <span class="pill">Focus: drift + broken ladders + synthetic hedges</span>
-      <span class="pill gray">Not financial advice • informational only</span>
+      <span class="pill">Find better prices • Spot mispriced favorites • Smart betting strategies</span>
+      <span class="pill gray">For entertainment only • Not financial advice</span>
     </div>
   </div>
 
   <div class="update-banner">
     <span>📊</span>
-    <span><strong>Last updated:</strong> January 25, 2026</span>
-    <span style="margin-left: auto; color: #94a3b8;">Source: Kalshi market snapshots</span>
+    <span><strong>Last updated:</strong> February 11, 2026 02:49</span>
+    <span style="margin-left: auto; color: #94a3b8;">Source: Kalshi markets vs Oddschecker</span>
   </div>
 
-  <h2>🎯 Top Arbitrage Opportunities</h2>
-  <p style="color: #94a3b8; margin-bottom: 12px;">Matches ranked by mispricing signals and arbitrage potential</p>
+  <h2>🔥 Top Betting Opportunities</h2>
+  <p style="color: #94a3b8; margin-bottom: 12px;">Matches where Kalshi prices look different from bookmaker odds (sorted by biggest differences)</p>
   <p class="scroll-hint">👈 Scroll horizontally to see all columns →</p>
 
   <div class="card">
@@ -170,183 +173,396 @@
       <table>
         <thead>
           <tr>
-            <th>Rank</th>
             <th>Match</th>
-            <th class="num">Home %</th>
-            <th class="num">Draw %</th>
-            <th class="num">Away %</th>
-            <th class="num">Σ Prob</th>
-            <th>Arb / Pattern Signal</th>
-            <th>Notes</th>
+            <th>Date & Time</th>
+            <th>Biggest Difference</th>
+            <th>What To Do</th>
+            <th>Quick Take</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td class="num">1</td>
-            <td class="match-name">Liverpool vs Man City</td>
-            <td class="num">41%</td>
-            <td class="num">27%</td>
-            <td class="num">39%</td>
-            <td class="num sum warn">107%</td>
+            <td class="match-name">Man City vs Newcastle</td>
+            <td>Feb 21, 3:00 PM</td>
+            <td class="delta-neg">Man City -5.8%</td>
             <td>
-              <span class="tag amber">3-way overround</span>
-              <span class="tag green">synthetic hedge</span>
+              <span class="tag red">FADE FAVORITE</span>
             </td>
-            <td>Strong disagreement → best candidate for synthetic/basket coverage.</td>
+            <td>Man City looks overpriced on Kalshi. Consider betting NO on City, or backing Newcastle + Draw.</td>
           </tr>
           <tr>
-            <td class="num">2</td>
-            <td class="match-name">Man United vs Tottenham</td>
-            <td class="num">57%</td>
-            <td class="num">25%</td>
-            <td class="num">23%</td>
-            <td class="num sum warn">105%</td>
+            <td class="match-name">Tottenham vs Arsenal</td>
+            <td>Feb 22, 11:30 AM</td>
+            <td class="delta-neg">Arsenal -5.6%</td>
             <td>
-              <span class="tag green">draw underpriced</span>
-              <span class="tag amber">late-goal risk</span>
+              <span class="tag red">FADE FAVORITE</span>
             </td>
-            <td>"Chaos matchup" → draw + opposite-side No often best risk-adjusted.</td>
+            <td>Arsenal too expensive on Kalshi. North London derby often tight - consider Spurs + Draw combo.</td>
           </tr>
           <tr>
-            <td class="num">3</td>
-            <td class="match-name">Brighton vs Crystal Palace</td>
-            <td class="num">55%</td>
-            <td class="num">26%</td>
-            <td class="num">25%</td>
-            <td class="num sum warn">106%</td>
+            <td class="match-name">Aston Villa vs Leeds</td>
+            <td>Feb 21, 10:00 AM</td>
+            <td class="delta-neg">Villa -4.5%</td>
             <td>
-              <span class="tag amber">derby draw</span>
-              <span class="tag green">drift-friendly</span>
+              <span class="tag amber">FADE HOME</span>
             </td>
-            <td>Derby effect: draw tends to stay bid; good for pre-match draw scalps.</td>
+            <td>Villa looks rich. Leeds + Draw might offer better value than the market suggests.</td>
           </tr>
           <tr>
-            <td class="num">4</td>
-            <td class="match-name">Aston Villa vs Brentford</td>
-            <td class="num">50%</td>
-            <td class="num">27%</td>
-            <td class="num">27%</td>
-            <td class="num sum warn">104%</td>
+            <td class="match-name">Brentford vs Brighton</td>
+            <td>Feb 21, 10:00 AM</td>
+            <td class="delta-neg">Brentford -4.5%</td>
             <td>
-              <span class="tag green">balanced ladder</span>
-              <span class="tag amber">soft draw</span>
+              <span class="tag amber">FADE HOME</span>
             </td>
-            <td>Nice symmetry → synthetic "not-home" / "not-away" combos cleaner.</td>
+            <td>Brentford overpriced. Brighton can get a result here - consider away or draw.</td>
           </tr>
           <tr>
-            <td class="num">5</td>
-            <td class="match-name">Fulham vs Everton</td>
-            <td class="num">50%</td>
-            <td class="num">30%</td>
-            <td class="num">26%</td>
-            <td class="num sum warn">106%</td>
+            <td class="match-name">West Ham vs Bournemouth</td>
+            <td>Feb 21, 12:30 PM</td>
+            <td class="delta-neg">West Ham -4.4%</td>
             <td>
-              <span class="tag green">away undervalued</span>
-              <span class="tag amber">public bias</span>
+              <span class="tag amber">FADE HOME</span>
             </td>
-            <td>Everton often reprices late; watch for pre-match drift down then snap-back.</td>
+            <td>West Ham too high. This could be closer than Kalshi thinks - Bournemouth + Draw looks decent.</td>
           </tr>
           <tr>
-            <td class="num">6</td>
-            <td class="match-name">Leeds vs Arsenal</td>
-            <td class="num">16%</td>
-            <td class="num">24%</td>
-            <td class="num">64%</td>
-            <td class="num sum warn">104%</td>
+            <td class="match-name">Everton vs Man Utd</td>
+            <td>Feb 23, 3:00 PM</td>
+            <td class="delta-neg">Man Utd -4.3%</td>
             <td>
-              <span class="tag red">favorite skew</span>
-              <span class="tag green">hedgeable</span>
+              <span class="tag red">FADE FAVORITE</span>
             </td>
-            <td>Favorites can be overpriced → consider Arsenal No + draw/away baskets.</td>
+            <td>United overvalued. Everton at home can make it difficult - worth considering the underdog.</td>
           </tr>
           <tr>
-            <td class="num">7</td>
-            <td class="match-name">Wolves vs Bournemouth</td>
-            <td class="num">31%</td>
-            <td class="num">28%</td>
-            <td class="num">46%</td>
-            <td class="num sum warn">105%</td>
+            <td class="match-name">Crystal Palace vs Wolverhampton</td>
+            <td>Feb 22, 2:00 PM</td>
+            <td class="delta-neg">Wolves -4.2%</td>
             <td>
-              <span class="tag amber">mid-table chaos</span>
-              <span class="tag green">basket arb</span>
+              <span class="tag amber">FADE AWAY</span>
             </td>
-            <td>All outcomes live → best for small "3-leg basket" if fills are decent.</td>
-          </tr>
-          <tr>
-            <td class="num">8</td>
-            <td class="match-name">Sunderland vs Burnley</td>
-            <td class="num">57%</td>
-            <td class="num">28%</td>
-            <td class="num">19%</td>
-            <td class="num sum warn">104%</td>
-            <td>
-              <span class="tag amber">home bias</span>
-              <span class="tag green">draw combo</span>
-            </td>
-            <td>Home inflated → away No + draw Yes is the common synthetic here.</td>
-          </tr>
-          <tr>
-            <td class="num">9</td>
-            <td class="match-name">Newcastle vs Brentford</td>
-            <td class="num">56%</td>
-            <td class="num">26%</td>
-            <td class="num">24%</td>
-            <td class="num sum warn">106%</td>
-            <td>
-              <span class="tag amber">public favorite drift</span>
-              <span class="tag green">fade late</span>
-            </td>
-            <td>Watch for public push → best fades occur after volume spikes.</td>
-          </tr>
-          <tr>
-            <td class="num">10</td>
-            <td class="match-name">Nottingham Forest vs Crystal Palace</td>
-            <td class="num">51%</td>
-            <td class="num">28%</td>
-            <td class="num">25%</td>
-            <td class="num sum warn">104%</td>
-            <td>
-              <span class="tag amber">low-liquidity</span>
-              <span class="tag green">edge-y</span>
-            </td>
-            <td>Thin volume exaggerates moves → good entries, harder exits.</td>
+            <td>Wolves look expensive for an away trip. Palace at home is underrated here.</td>
           </tr>
         </tbody>
       </table>
     </div>
 
     <div class="notes">
-      <h3>📊 Cross-match Pattern Flags</h3>
+      <h3>💡 What These Patterns Mean</h3>
       <div class="grid">
         <div class="mini">
-          <h4>1) Σ Prob ≥ 104% = Arb Zone</h4>
-          <p>Many markets show internal inconsistency; synthetic combinations can dominate single "pick-a-side" bets.</p>
+          <h4>1) Favorites often overpriced</h4>
+          <p>Big teams like Man City, Arsenal, and Chelsea tend to get bet up too high on Kalshi compared to what bookies think. That's where the fade opportunities come from.</p>
         </div>
         <div class="mini">
-          <h4>2) Draws systematically cheap</h4>
-          <p>Strong in derbies, big-club matchups, and mid-table chaos games. Draw + favorite No repeatedly shows better payoff symmetry.</p>
+          <h4>2) Draws are your friend</h4>
+          <p>When fading a favorite, combining the underdog with a draw gives you two ways to win. It's like betting against the favorite without as much risk.</p>
         </div>
         <div class="mini">
-          <h4>3) Public favorite overpricing</h4>
-          <p>Arsenal/Newcastle/Chelsea/City often get bid. Alpha is frequently: <span class="mono">sell Yes</span>, <span class="mono">buy Draw</span>, or a <span class="mono">Draw+Away</span> basket.</p>
+          <h4>3) Look for 3%+ differences</h4>
+          <p>Small differences might just be market noise. When you see 3% or more, that's when it gets interesting and worth considering.</p>
         </div>
         <div class="mini">
-          <h4>4) Low volume = higher edge</h4>
-          <p>Lower liquidity widens misalignments (good entries) but increases exit slippage risk.</p>
+          <h4>4) Prices add up over 100%</h4>
+          <p>When Home + Draw + Away totals over 105%, there's serious mispricing happening. These are the best spots to look for opportunities.</p>
         </div>
       </div>
 
-      <h3 style="margin-top: 32px;">⚙️ Reusable Synthetic Constructions</h3>
+      <h3 style="margin-top: 32px;">🎯 Simple Betting Strategies</h3>
       <ul>
-        <li><strong>Synthetic Draw Hedge:</strong> buy Draw Yes (~25–30c) + buy underdog Yes (~20–30c); optionally sell favorite Yes if ≥60c.</li>
-        <li><strong>Favorite Fade:</strong> sell favorite Yes; buy Draw + Away Yes; lock profit if favorite drops below ~50c live.</li>
-        <li><strong>Basket Arb (3-way):</strong> equal stake on all 3 when Σ Prob ≥105% and fills are available (best pre-match/early live).</li>
+        <li><strong>Fade the Favorite:</strong> When a big team is overpriced (3%+ too high), bet NO on them or combine the Draw + Underdog.</li>
+        <li><strong>Watch the Odds:</strong> If bookmaker odds move to match Kalshi, your edge is gone - time to reconsider.</li>
+        <li><strong>Take Profits:</strong> If your bet moves 3-5 cents in your favor, consider cashing out. These edges don't last forever.</li>
+        <li><strong>Live Hedging:</strong> If you bet against the favorite and they score first, you can buy a small amount of favorite YES to limit losses.</li>
       </ul>
 
-      <h3 style="margin-top: 32px;">💡 Key Insights</h3>
-      <p><strong>Market Characteristics:</strong> This slate shows persistent overround across most matches, with draw outcomes systematically underpriced relative to their true probability.</p>
-      <p style="margin-top: 12px;"><strong>Execution Strategy:</strong> Focus on pre-match entry for synthetic positions. Monitor for public volume spikes that create additional mispricing opportunities.</p>
-      <p style="margin-top: 12px;"><strong>Risk Management:</strong> Basket strategies work best when Σ Prob ≥ 105%. For lower overround matches, prefer directional synthetics with built-in hedges.</p>
+      <h3 style="margin-top: 32px;">⚠️ Important Notes</h3>
+      <p><strong>Check Current Prices:</strong> These snapshots are moments in time. Always verify current odds and prices before betting.</p>
+      <p style="margin-top: 12px;"><strong>Liquidity Matters:</strong> Make sure there's enough volume to get your bets filled at the prices you want.</p>
+      <p style="margin-top: 12px;"><strong>Fees Count:</strong> Remember to factor in any platform fees or spread when calculating if a bet is worth it.</p>
+    </div>
+  </div>
+
+  <h2>📊 Full Match Breakdown</h2>
+  <p style="color: #94a3b8; margin-bottom: 12px;">Detailed comparison of bookmaker odds vs Kalshi prices for all upcoming matches</p>
+  <p class="scroll-hint">👈 Scroll horizontally to see all columns →</p>
+
+  <div class="card">
+    <div class="table-wrapper">
+      <table>
+        <thead>
+          <tr>
+            <th>Date & Time</th>
+            <th>Match</th>
+            <th class="num">Book Home</th>
+            <th class="num">Book Draw</th>
+            <th class="num">Book Away</th>
+            <th class="num">Kalshi Home</th>
+            <th class="num">Kalshi Draw</th>
+            <th class="num">Kalshi Away</th>
+            <th class="num">Home Diff</th>
+            <th class="num">Draw Diff</th>
+            <th class="num">Away Diff</th>
+            <th class="num">Total %</th>
+            <th>Market Notes</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Feb 11, 2:30 PM</td>
+            <td class="match-name">Nottingham Forest vs Wolverhampton</td>
+            <td class="num">57.5%</td>
+            <td class="num">25.3%</td>
+            <td class="num">17.2%</td>
+            <td class="num">59.0%</td>
+            <td class="num">25.0%</td>
+            <td class="num">18.0%</td>
+            <td class="num delta-neg">-1.5</td>
+            <td class="num delta-pos">+0.3</td>
+            <td class="num delta-neg">-0.8</td>
+            <td class="num sum warn">102%</td>
+            <td><span class="tag gray">minor edge</span></td>
+          </tr>
+          <tr>
+            <td>Feb 11, 2:30 PM</td>
+            <td class="match-name">Crystal Palace vs Burnley</td>
+            <td class="num">63.3%</td>
+            <td class="num">22.7%</td>
+            <td class="num">14.0%</td>
+            <td class="num">65.0%</td>
+            <td class="num">22.0%</td>
+            <td class="num">14.0%</td>
+            <td class="num delta-neg">-1.7</td>
+            <td class="num delta-pos">+0.7</td>
+            <td class="num">0.0</td>
+            <td class="num sum warn">101%</td>
+            <td><span class="tag gray">minor edge</span></td>
+          </tr>
+          <tr>
+            <td>Feb 11, 2:30 PM</td>
+            <td class="match-name">Man City vs Fulham</td>
+            <td class="num">71.5%</td>
+            <td class="num">17.6%</td>
+            <td class="num">10.9%</td>
+            <td class="num">74.0%</td>
+            <td class="num">17.0%</td>
+            <td class="num">12.0%</td>
+            <td class="num delta-neg">-2.5</td>
+            <td class="num delta-pos">+0.6</td>
+            <td class="num delta-neg">-1.1</td>
+            <td class="num sum warn">103%</td>
+            <td><span class="tag amber">big favorite</span></td>
+          </tr>
+          <tr>
+            <td>Feb 11, 2:30 PM</td>
+            <td class="match-name">Aston Villa vs Brighton</td>
+            <td class="num">47.9%</td>
+            <td class="num">26.6%</td>
+            <td class="num">25.5%</td>
+            <td class="num">49.0%</td>
+            <td class="num">27.0%</td>
+            <td class="num">26.0%</td>
+            <td class="num delta-neg">-1.1</td>
+            <td class="num delta-neg">-0.4</td>
+            <td class="num delta-neg">-0.5</td>
+            <td class="num sum warn">102%</td>
+            <td><span class="tag gray">close match</span></td>
+          </tr>
+          <tr>
+            <td>Feb 11, 3:15 PM</td>
+            <td class="match-name">Sunderland vs Liverpool</td>
+            <td class="num">19.6%</td>
+            <td class="num">24.5%</td>
+            <td class="num">55.9%</td>
+            <td class="num">21.0%</td>
+            <td class="num">25.0%</td>
+            <td class="num">57.0%</td>
+            <td class="num delta-neg">-1.4</td>
+            <td class="num delta-neg">-0.5</td>
+            <td class="num delta-neg">-1.1</td>
+            <td class="num sum warn">103%</td>
+            <td><span class="tag amber">away favorite</span></td>
+          </tr>
+          <tr>
+            <td>Feb 12, 3:00 PM</td>
+            <td class="match-name">Brentford vs Arsenal</td>
+            <td class="num">18.2%</td>
+            <td class="num">24.6%</td>
+            <td class="num">57.2%</td>
+            <td class="num">19.0%</td>
+            <td class="num">24.0%</td>
+            <td class="num">59.0%</td>
+            <td class="num delta-neg">-0.8</td>
+            <td class="num delta-pos">+0.6</td>
+            <td class="num delta-neg">-1.8</td>
+            <td class="num sum warn">102%</td>
+            <td><span class="tag amber">Arsenal slight premium</span></td>
+          </tr>
+          <tr>
+            <td>Feb 18, 3:00 PM</td>
+            <td class="match-name">Wolverhampton vs Arsenal</td>
+            <td class="num">8.1%</td>
+            <td class="num">18.6%</td>
+            <td class="num">73.3%</td>
+            <td class="num">12.0%</td>
+            <td class="num">19.0%</td>
+            <td class="num">77.0%</td>
+            <td class="num delta-neg">-3.9</td>
+            <td class="num delta-neg">-0.4</td>
+            <td class="num delta-neg">-3.7</td>
+            <td class="num sum red">108%</td>
+            <td><span class="tag red">heavy favorite</span> <span class="tag red">major mispricing</span></td>
+          </tr>
+          <tr>
+            <td>Feb 21, 3:00 PM</td>
+            <td class="match-name">Man City vs Newcastle</td>
+            <td class="num">63.2%</td>
+            <td class="num">21.1%</td>
+            <td class="num">15.8%</td>
+            <td class="num">69.0%</td>
+            <td class="num">22.0%</td>
+            <td class="num">19.0%</td>
+            <td class="num delta-neg">-5.8</td>
+            <td class="num delta-neg">-0.9</td>
+            <td class="num delta-neg">-3.2</td>
+            <td class="num sum red">110%</td>
+            <td><span class="tag red">FADE CITY</span> <span class="tag red">major mispricing</span></td>
+          </tr>
+          <tr>
+            <td>Feb 21, 10:00 AM</td>
+            <td class="match-name">Aston Villa vs Leeds</td>
+            <td class="num">53.5%</td>
+            <td class="num">25.5%</td>
+            <td class="num">21.0%</td>
+            <td class="num">58.0%</td>
+            <td class="num">28.0%</td>
+            <td class="num">24.0%</td>
+            <td class="num delta-neg">-4.5</td>
+            <td class="num delta-neg">-2.5</td>
+            <td class="num delta-neg">-3.0</td>
+            <td class="num sum red">110%</td>
+            <td><span class="tag red">all overpriced</span> <span class="tag amber">draw heavy</span></td>
+          </tr>
+          <tr>
+            <td>Feb 21, 10:00 AM</td>
+            <td class="match-name">Chelsea vs Burnley</td>
+            <td class="num">77.1%</td>
+            <td class="num">14.8%</td>
+            <td class="num">8.0%</td>
+            <td class="num">78.0%</td>
+            <td class="num">15.0%</td>
+            <td class="num">10.0%</td>
+            <td class="num delta-neg">-0.9</td>
+            <td class="num delta-neg">-0.2</td>
+            <td class="num delta-neg">-2.0</td>
+            <td class="num sum warn">103%</td>
+            <td><span class="tag amber">heavy favorite</span></td>
+          </tr>
+          <tr>
+            <td>Feb 21, 10:00 AM</td>
+            <td class="match-name">Brentford vs Brighton</td>
+            <td class="num">45.5%</td>
+            <td class="num">25.7%</td>
+            <td class="num">28.8%</td>
+            <td class="num">50.0%</td>
+            <td class="num">29.0%</td>
+            <td class="num">33.0%</td>
+            <td class="num delta-neg">-4.5</td>
+            <td class="num delta-neg">-3.3</td>
+            <td class="num delta-neg">-4.2</td>
+            <td class="num sum red">112%</td>
+            <td><span class="tag red">all overpriced</span> <span class="tag amber">draw heavy</span></td>
+          </tr>
+          <tr>
+            <td>Feb 21, 12:30 PM</td>
+            <td class="match-name">West Ham vs Bournemouth</td>
+            <td class="num">37.6%</td>
+            <td class="num">26.1%</td>
+            <td class="num">36.3%</td>
+            <td class="num">42.0%</td>
+            <td class="num">30.0%</td>
+            <td class="num">38.0%</td>
+            <td class="num delta-neg">-4.4</td>
+            <td class="num delta-neg">-3.9</td>
+            <td class="num delta-neg">-1.7</td>
+            <td class="num sum red">110%</td>
+            <td><span class="tag amber">toss-up</span> <span class="tag red">major mispricing</span></td>
+          </tr>
+          <tr>
+            <td>Feb 22, 2:00 PM</td>
+            <td class="match-name">Crystal Palace vs Wolverhampton</td>
+            <td class="num">58.9%</td>
+            <td class="num">24.3%</td>
+            <td class="num">16.8%</td>
+            <td class="num">58.0%</td>
+            <td class="num">26.0%</td>
+            <td class="num">21.0%</td>
+            <td class="num delta-pos">+0.9</td>
+            <td class="num delta-neg">-1.7</td>
+            <td class="num delta-neg">-4.2</td>
+            <td class="num sum warn">105%</td>
+            <td><span class="tag amber">Wolves overpriced</span></td>
+          </tr>
+          <tr>
+            <td>Feb 22, 9:00 AM</td>
+            <td class="match-name">Sunderland vs Fulham</td>
+            <td class="num">35.9%</td>
+            <td class="num">28.1%</td>
+            <td class="num">35.9%</td>
+            <td class="num">38.0%</td>
+            <td class="num">30.0%</td>
+            <td class="num">38.0%</td>
+            <td class="num delta-neg">-2.1</td>
+            <td class="num delta-neg">-1.9</td>
+            <td class="num delta-neg">-2.1</td>
+            <td class="num sum warn">106%</td>
+            <td><span class="tag amber">toss-up</span> <span class="tag amber">draw heavy</span></td>
+          </tr>
+          <tr>
+            <td>Feb 22, 11:30 AM</td>
+            <td class="match-name">Tottenham vs Arsenal</td>
+            <td class="num">14.9%</td>
+            <td class="num">22.7%</td>
+            <td class="num">62.4%</td>
+            <td class="num">17.0%</td>
+            <td class="num">22.0%</td>
+            <td class="num">68.0%</td>
+            <td class="num delta-neg">-2.1</td>
+            <td class="num delta-pos">+0.7</td>
+            <td class="num delta-neg">-5.6</td>
+            <td class="num sum red">107%</td>
+            <td><span class="tag red">FADE ARSENAL</span> <span class="tag amber">NLD derby</span></td>
+          </tr>
+          <tr>
+            <td>Feb 23, 3:00 PM</td>
+            <td class="match-name">Everton vs Man Utd</td>
+            <td class="num">25.5%</td>
+            <td class="num">24.8%</td>
+            <td class="num">49.7%</td>
+            <td class="num">27.0%</td>
+            <td class="num">27.0%</td>
+            <td class="num">54.0%</td>
+            <td class="num delta-neg">-1.5</td>
+            <td class="num delta-neg">-2.2</td>
+            <td class="num delta-neg">-4.3</td>
+            <td class="num sum red">108%</td>
+            <td><span class="tag red">FADE UNITED</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="notes">
+      <h3>📖 How to Read This Table</h3>
+      <p><strong>Book %:</strong> What traditional bookmakers think (converted to no-vig probabilities)</p>
+      <p style="margin-top: 8px;"><strong>Kalshi %:</strong> What the Kalshi prediction market is pricing in</p>
+      <p style="margin-top: 8px;"><strong>Difference:</strong> Negative (red) = Kalshi is higher than bookies. Positive (green) = Kalshi is lower than bookies.</p>
+      <p style="margin-top: 8px;"><strong>Total %:</strong> When this is over 105%, there's serious mispricing - these are your best opportunities.</p>
+
+      <h3 style="margin-top: 32px;">🧠 Smart Betting Tips</h3>
+      <p>The biggest edges come from fading overpriced favorites. When you see a team 4-6% higher on Kalshi than the bookies, that's a red flag. Either bet NO on that team, or combine the underdog with a draw for better value.</p>
+      <p style="margin-top: 12px;">Remember: These are snapshots. Markets move. Always double-check current prices before placing any bets, and never bet more than you can afford to lose.</p>
     </div>
   </div>
 
@@ -355,10 +571,10 @@
 <footer class="footer">
   <div class="footer-content">
     <div class="footer-text">
-      Source: Kalshi screenshots (implied probs from "Yes" prices). This page is a snapshot for signal/arb analysis only.
+      Comparing Kalshi prediction markets with Oddschecker bookmaker consensus. For informational purposes only.
     </div>
     <div class="footer-links">
-      <a href="#methodology">Methodology</a>
+      <a href="#methodology">How It Works</a>
       <a href="#disclaimer">Disclaimer</a>
       <a href="index.html">Back to Home</a>
     </div>
